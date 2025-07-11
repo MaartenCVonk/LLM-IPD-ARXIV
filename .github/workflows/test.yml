@@ -1,0 +1,52 @@
+name: Test IPD Framework
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run basic tests
+      run: |
+        # Test imports
+        python -c "from ipd_suite import *; print('Imports successful')"
+        
+        # Test classical strategies
+        python -c "
+from ipd_suite import TitForTat, AlwaysCooperate, AlwaysDefect
+tft = TitForTat('TFT')
+ac = AlwaysCooperate('AC')
+ad = AlwaysDefect('AD')
+print('Classical strategies initialized')
+"
+    
+    - name: Run mini tournament (no API calls)
+      run: |
+        python -c "
+from ipd_suite import Tournament, TitForTat, Random, ForgivingGrimTrigger
+agents = [
+    TitForTat('TFT'),
+    Random('Random'),
+    ForgivingGrimTrigger('FGT')
+]
+tournament = Tournament(agents, termination_prob=0.5, max_rounds=10, verbose=False)
+result = tournament.run_tournament()
+print(f'Tournament completed with {len(result.match_results)} matches')
+"
