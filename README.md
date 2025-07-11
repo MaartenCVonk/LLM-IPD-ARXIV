@@ -180,9 +180,10 @@ If you use this extended framework, please cite both the original work and our e
 
 @software{llm_ipd_extended_2025,
   title={Extended LLM-IPD Framework: Temperature Variation and Adaptive Strategies},
-  author={Spiegel, Stephan},
+  author={De Spiegeleire, Stephan},
   year={2025},
-  url={https://github.com/sdspieg/LLM-IPD-ARXIV}
+  url={https://github.com/sdspieg/LLM-IPD-ARXIV},
+  note={ORCID: 0000-0002-8878-5812}
 }
 ```
 
