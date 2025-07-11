@@ -42,6 +42,51 @@ This repository extends the groundbreaking work by [Payne & Alloui-Cros (2025)](
 | Progress Monitoring | None mentioned | Real-time with visual display |
 | Code Availability | Not public | Fully open-source |
 
+## 🧪 Experimental Structure
+
+### Tournament Design
+The experiment consists of **6 tournaments** testing different game horizons:
+
+| Tournament | Shadow of Future | Termination Probability | Expected Cooperation |
+|------------|-----------------|------------------------|---------------------|
+| 1-2 | Long (90% continue) | 10% | High |
+| 3-4 | Medium (75% continue) | 25% | Moderate |
+| 5-6 | Short (25% continue) | 75% | Low |
+
+*Each condition runs twice for statistical reliability*
+
+### Agent Lineup (24 Total)
+
+#### 🤖 LLM Agents (12)
+Each model tested at 3 temperatures (0.2, 0.7, 1.2):
+- **GPT-4o-mini**: OpenAI's efficient model
+- **Claude 3 Sonnet**: Anthropic's balanced model
+- **Gemini 1.5 Flash**: Google's fast model
+- **Mistral Large**: Mistral's flagship model
+
+#### 🎯 Classical & Theoretical Agents (12)
+
+**Basic Strategies (6)**
+- AlwaysCooperate, AlwaysDefect
+- Random, TitForTat
+- GrimTrigger, Pavlov
+
+**Behavioral Strategies (3) - NEW**
+- ForgivingGrimTrigger: Forgives after N mutual defections
+- Detective: Tests with C-D-C-C then adapts
+- SoftGrudger: Graduated punishment with recovery
+
+**Adaptive Learning (3) - NEW**
+- QLearningAgent: Reinforcement learning
+- ThompsonSampling: Bayesian exploration
+- GradientMetaLearner: Policy gradient
+
+### Match Structure
+- **276 matches per tournament** (all unique pairings)
+- **100 rounds per match** (stochastic termination)
+- **1,656 total matches** across all tournaments
+- **~165,600 individual game rounds**
+
 ## 🔬 Current Findings
 
 ### API Behavior Observations
