@@ -188,12 +188,14 @@ If you use this extended framework, please cite both the original work and our e
 
 ## 📊 Status
 
-🔴 **Experiment Running**: Currently processing tournament 1 of 6
-- Progress: 113/276 matches (40.9%) 
-- Estimated completion: ~18 hours
+🔴 **Experiment Running**
+- Currently processing tournament 1 of 6
+- Progress: 117/276 matches (42.4%)
+- Estimated completion: ~18h 13m
 - API errors handled gracefully (Claude temp limits, Gemini quotas)
 - Results saved incrementally
 
+*Last updated: 2025-07-11 02:56:13 UTC*
 ---
 
 *This is an active research project. Results and conclusions are preliminary.*
