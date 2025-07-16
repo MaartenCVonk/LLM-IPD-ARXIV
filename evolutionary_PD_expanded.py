@@ -22,7 +22,7 @@ import requests
 
 # Try to load environment variables from .env file
 try:
-    load_dotenv("Axelrod.env")
+    load_dotenv(".env")
     print("Environment variables loaded from Axelrod.env")
     
     # Set up API keys
@@ -639,7 +639,7 @@ def play_round(agent1, agent2, termination_prob=0.1):
         if isinstance(agent1, (OpenAIAgent, GeminiAgent)):
             move1 = agent1.make_move(agent1.history, agent2.history, termination_prob=termination_prob)
         else:
-        move1 = agent1.make_move(agent1.history, agent2.history)
+            move1 = agent1.make_move(agent1.history, agent2.history)
 
         if not move1 or move1 not in ["C", "D"]:
             print(f"Warning: {agent1.name} returned invalid move '{move1}', defaulting to 'C'")
@@ -652,7 +652,7 @@ def play_round(agent1, agent2, termination_prob=0.1):
         if isinstance(agent2, (OpenAIAgent, GeminiAgent)):
             move2 = agent2.make_move(agent2.history, agent1.history, termination_prob=termination_prob)
         else:
-        move2 = agent2.make_move(agent2.history, agent1.history)
+            move2 = agent2.make_move(agent2.history, agent1.history)
 
         if not move2 or move2 not in ["C", "D"]:
             print(f"Warning: {agent2.name} returned invalid move '{move2}', defaulting to 'C'")

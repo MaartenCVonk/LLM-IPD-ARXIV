@@ -18,7 +18,10 @@ This repository extends the groundbreaking work by [Payne & Alloui-Cros (2025)](
 
 #### Behavioral Strategies (New)
 - `ForgivingGrimTrigger`: Forgives after N mutual defections
-- `Detective`: Tests opponents with C-D-C-C sequence then adapts
+- `Detective`: Tests opponents with C-D-C-C sequence, then classifies based on round 3 response and cooperation rate:
+  - **Sucker**: Doesn't defect in round 3 AND >70% cooperation → Exploit with always defect
+  - **Retaliator**: Defects in round 3 (retaliates to Detective's round 2 defection) → Play Tit-for-Tat  
+  - **Random**: All other cases → Mixed strategy (60% cooperate)
 - `SoftGrudger`: Graduated punishment with recovery
 
 #### Adaptive Learning Strategies (New)
