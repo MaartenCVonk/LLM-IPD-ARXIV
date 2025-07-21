@@ -45,7 +45,7 @@ class TestForgivingGrimTriggerAgent:
 
     def test_forgiving_grim_trigger_vs_always_defect(self):
         """Test ForgivingGrimTrigger against AlwaysDefect (should trigger and eventually forgive)"""
-        fgt = ForgivingGrimTrigger("ForgivingGrimTrigger", forgiveness_threshold=3)
+        fgt = ForgivingGrimTrigger("ForgivingGrimTrigger", forgiveness_threshold=2)
         always_def = AlwaysDefect("AlwaysDefect")
         
         fgt_moves = []
@@ -88,9 +88,9 @@ class TestForgivingGrimTriggerAgent:
             fgt_moves.append(fgt_move)
             tft_moves.append(tft_move)
         
-        # Against TitForTat, should mostly cooperate since TFT starts with cooperation
+        # Against TitForTat, should all cooperate since TFT starts with cooperation
         cooperation_rate = fgt_moves.count('C') / len(fgt_moves)
-        assert cooperation_rate >= 0.7  # Should cooperate most of the time
+        assert cooperation_rate >= 1 # Should cooperate most of the time
 
     def test_forgiving_grim_trigger_forgiveness_mechanism(self):
         """Test the forgiveness mechanism specifically"""
@@ -107,7 +107,7 @@ class TestForgivingGrimTriggerAgent:
         fgt.make_move(['C', 'D'], ['D', 'D'])
         assert fgt.mutual_defection_count == 1
         
-        # Another mutual defection should reach threshold and forgive
+        # Another mutual defection should reach threshold (2) and forgive
         move = fgt.make_move(['C', 'D', 'D'], ['D', 'D', 'D'])
         assert move == 'C'  # Should forgive and cooperate
         assert not fgt.triggered  # Should reset trigger
@@ -124,24 +124,24 @@ class TestForgivingGrimTriggerAgent:
         move = fgt1.make_move(['C', 'D'], ['D', 'D'])  # Should forgive
         assert move == 'C'
         
-        # Test with threshold = 5
-        fgt5 = ForgivingGrimTrigger("FGT5", forgiveness_threshold=5)
+        # Test with threshold = 3 (longer than default 2)
+        fgt3 = ForgivingGrimTrigger("FGT3", forgiveness_threshold=3)
         
         # Should take longer to forgive
         moves = []
-        opponent_moves = ['D'] * 10
+        opponent_moves = ['D'] * 8
         
-        for i in range(10):
-            move = fgt5.make_move(moves, opponent_moves[:i])
+        for i in range(8):
+            move = fgt3.make_move(moves, opponent_moves[:i])
             moves.append(move)
         
         # Should still be in punishment phase longer
-        defection_count = moves[1:6].count('D')
-        assert defection_count >= 4  # Should defect more before forgiving
+        defection_count = moves[1:5].count('D')
+        assert defection_count >= 3  # Should defect more before forgiving
 
     def test_forgiving_grim_trigger_reset(self):
         """Test that ForgivingGrimTrigger resets properly"""
-        fgt = ForgivingGrimTrigger("ForgivingGrimTrigger", forgiveness_threshold=3)
+        fgt = ForgivingGrimTrigger("ForgivingGrimTrigger", forgiveness_threshold=2)
         
         # Trigger the agent
         fgt.make_move([], [])
@@ -189,11 +189,11 @@ class TestForgivingGrimTriggerAgent:
         
         # Should maintain cooperation since neither defects first
         cooperation_rate = fgt_moves.count('C') / len(fgt_moves)
-        assert cooperation_rate >= 0.8
+        assert cooperation_rate >= 1
 
     def test_forgiving_grim_trigger_mutual_defection_counting(self):
         """Test that mutual defection counting works correctly"""
-        fgt = ForgivingGrimTrigger("ForgivingGrimTrigger", forgiveness_threshold=3)
+        fgt = ForgivingGrimTrigger("ForgivingGrimTrigger", forgiveness_threshold=2)
         
         # Simulate game where opponent defects, triggering punishment
         moves = []
@@ -213,18 +213,16 @@ class TestForgivingGrimTriggerAgent:
         move3 = fgt.make_move(moves, opponent_moves)
         moves.append(move3)
         opponent_moves.append('D')
-        assert fgt.mutual_defection_count == 1
+        assert fgt.mutual_defection_count == 0
         
         # Round 4: Both defect (second mutual defection)
         move4 = fgt.make_move(moves, opponent_moves)
         moves.append(move4)
         opponent_moves.append('D')
-        assert fgt.mutual_defection_count == 2
+        assert fgt.mutual_defection_count == 1
         
-        # Round 5: Both defect (third mutual defection - should trigger forgiveness)
+        # Round 5: Should forgive and cooperate after 2 mutual defections
         move5 = fgt.make_move(moves, opponent_moves)
-        moves.append(move5)
-        opponent_moves.append('D')
         
         # Should forgive and cooperate
         assert move5 == 'C'

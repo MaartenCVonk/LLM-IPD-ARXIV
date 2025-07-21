@@ -107,8 +107,8 @@ class Pavlov(Agent):
 
 # Behavioral Strategies
 class ForgivingGrimTrigger(Agent):
-    """Grim Trigger that forgives after N mutual defections"""
-    def __init__(self, name: str, forgiveness_threshold: int = 3):
+    """Grim Trigger that forgives after N mutual defections (optimized for shorter games)"""
+    def __init__(self, name: str, forgiveness_threshold: int = 2):
         super().__init__(name)
         self.triggered = False
         self.forgiveness_threshold = forgiveness_threshold
@@ -119,16 +119,17 @@ class ForgivingGrimTrigger(Agent):
             self.triggered = True
             
         if self.triggered:
-            # Count mutual defections
+            # Count mutual defections from previous round
             if (own_history and opponent_history and 
                 own_history[-1] == 'D' and opponent_history[-1] == 'D'):
                 self.mutual_defection_count += 1
                 
-            # Forgive after threshold
+            # Check if we should forgive (before reaching threshold)
             if self.mutual_defection_count >= self.forgiveness_threshold:
                 self.triggered = False
                 self.mutual_defection_count = 0
                 return 'C'
+                    
             return 'D'
         return 'C'
     
@@ -139,10 +140,10 @@ class ForgivingGrimTrigger(Agent):
 
 
 class Detective(Agent):
-    """Tests opponent with C-D-C-C, then adapts based on response"""
+    """Tests opponent with C-D-C, then adapts based on response (optimized for shorter games)"""
     def __init__(self, name: str):
         super().__init__(name)
-        self.test_sequence = ['C', 'D', 'C', 'C']
+        self.test_sequence = ['C', 'D', 'C']
         self.opponent_type = None  # 'sucker', 'retaliator', 'random'
         
     def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
@@ -167,18 +168,18 @@ class Detective(Agent):
             return 'C' if random.random() < 0.6 else 'D'
     
     def _analyze_opponent(self, opponent_history: List[str]):
-        """Classify opponent based on test response"""
-        if len(opponent_history) < 4:
+        """Classify opponent based on test response (optimized for shorter games)"""
+        if len(opponent_history) < 3:
             self.opponent_type = 'random'
             return
             
-        # Check if opponent retaliated to our defection
+        # Check if opponent retaliated to our defection (position 1 -> response at position 2)
         retaliated = opponent_history[2] == 'D'
         
         # Check cooperation rate
         coop_rate = opponent_history.count('C') / len(opponent_history)
         
-        if not retaliated and coop_rate > 0.7:
+        if not retaliated and coop_rate >= 0.67:  # 2/3 cooperation rate
             self.opponent_type = 'sucker'
         elif retaliated:
             self.opponent_type = 'retaliator'
@@ -191,10 +192,10 @@ class Detective(Agent):
 
 
 class SoftGrudger(Agent):
-    """Retaliates with graduated punishment: D-D-D-D-C-C"""
+    """Retaliates with graduated punishment: D-D-C (optimized for shorter games)"""
     def __init__(self, name: str):
         super().__init__(name)
-        self.punishment_sequence = ['D', 'D', 'D', 'D', 'C', 'C']
+        self.punishment_sequence = ['D', 'D', 'C']
         self.punishment_index = 0
         self.punishing = False
         
@@ -225,8 +226,8 @@ class SoftGrudger(Agent):
 
 # Adaptive Learning Strategies
 class QLearningAgent(Agent):
-    """Q-learning agent with state-action values"""
-    def __init__(self, name: str, alpha: float = 0.1, gamma: float = 0.95, epsilon: float = 0.1):
+    """Q-learning agent with state-action values (default settings optimized for length 4 games)"""
+    def __init__(self, name: str, alpha: float = 0.7, gamma: float = 0.5, epsilon: float = 0.3):
         super().__init__(name)
         self.alpha = alpha  # Learning rate
         self.gamma = gamma  # Discount factor
@@ -235,6 +236,26 @@ class QLearningAgent(Agent):
         self.last_state = None
         self.last_action = None
         
+        # Use optimistic initialization to encourage exploration
+        # This helps the agent try defection early to learn it's better against cooperators
+        self._optimistic_init_value = 10.0
+    
+    @classmethod
+    def for_game_length(cls, name: str, expected_game_length: int):
+        """Factory method to create QLearningAgent with optimal parameters for game length"""
+        if expected_game_length <= 1:
+            # Single-shot games: immediate learning, no future, no exploration
+            return cls(name, alpha=1.0, gamma=0.0, epsilon=0.0)
+        elif expected_game_length <= 4:
+            # Short games: fast learning, short horizon, moderate exploration
+            return cls(name, alpha=0.7, gamma=0.5, epsilon=0.3)
+        elif expected_game_length <= 10:
+            # Moderate games: standard learning, moderate horizon, conservative exploration
+            return cls(name, alpha=0.3, gamma=0.7, epsilon=0.2)
+        else:
+            # Long games: gradual learning, long horizon, minimal exploration
+            return cls(name, alpha=0.1, gamma=0.9, epsilon=0.1)
+        
     def _get_state(self, own_history: List[str], opponent_history: List[str]) -> Tuple:
         """Define state based on last moves"""
         if not own_history:
@@ -242,8 +263,8 @@ class QLearningAgent(Agent):
         return (own_history[-1], opponent_history[-1])
     
     def _get_q_value(self, state: Tuple, action: str) -> float:
-        """Get Q-value for state-action pair"""
-        return self.q_table.get((state, action), 0.0)
+        """Get Q-value for state-action pair with optimistic initialization"""
+        return self.q_table.get((state, action), self._optimistic_init_value)
     
     def _update_q_value(self, state: Tuple, action: str, reward: float, next_state: Tuple):
         """Update Q-value using Q-learning formula"""
@@ -261,13 +282,16 @@ class QLearningAgent(Agent):
             reward = self._calculate_reward(own_history[-1], opponent_history[-1])
             self._update_q_value(self.last_state, self.last_action, reward, state)
         
-        # Epsilon-greedy action selection
-        if random.random() < self.epsilon:
+        # Epsilon-greedy action selection with adaptive exploration
+        # Reduce exploration over time to converge to optimal policy
+        current_epsilon = self.epsilon * (0.99 ** len(own_history))
+        
+        if random.random() < current_epsilon:
             action = random.choice(['C', 'D'])
         else:
             q_c = self._get_q_value(state, 'C')
             q_d = self._get_q_value(state, 'D')
-            action = 'C' if q_c >= q_d else 'D'
+            action = 'C' if q_c > q_d else 'D'  # Changed >= to > for slight bias toward defection
             
         self.last_state = state
         self.last_action = action
@@ -290,14 +314,34 @@ class QLearningAgent(Agent):
 
 
 class ThompsonSampling(Agent):
-    """Thompson sampling for exploration/exploitation"""
-    def __init__(self, name: str):
+    """Thompson sampling for exploration/exploitation (default settings optimized for length 5 games)"""
+    def __init__(self, name: str, base_learning_rate: float = 0.2, learning_rate_scale: float = 1.2):
         super().__init__(name)
         # Beta distribution parameters for each action
         self.alpha_c = 1  # Successes for cooperation
         self.beta_c = 1   # Failures for cooperation
         self.alpha_d = 1  # Successes for defection
         self.beta_d = 1   # Failures for defection
+        
+        # Learning rate parameters for game length adaptation
+        self.base_learning_rate = base_learning_rate
+        self.learning_rate_scale = learning_rate_scale
+    
+    @classmethod
+    def for_game_length(cls, name: str, expected_game_length: float):
+        """Factory method to create ThompsonSampling agent with optimal parameters for game length"""
+        if expected_game_length <= 1.5:
+            # Very short games (mean ~1.3): fast learning, high sensitivity
+            return cls(name, base_learning_rate=0.3, learning_rate_scale=1.5)
+        elif expected_game_length <= 5:
+            # Short games (mean ~4): moderate learning, balanced sensitivity
+            return cls(name, base_learning_rate=0.2, learning_rate_scale=1.2)
+        elif expected_game_length <= 12:
+            # Moderate games (mean ~10): standard learning, normal sensitivity
+            return cls(name, base_learning_rate=0.1, learning_rate_scale=0.9)
+        else:
+            # Long games: gradual learning, conservative sensitivity
+            return cls(name, base_learning_rate=0.05, learning_rate_scale=0.7)
         
     def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
         # Sample from beta distributions
@@ -308,25 +352,34 @@ class ThompsonSampling(Agent):
         return 'C' if theta_c > theta_d else 'D'
     
     def update(self, own_move: str, opponent_move: str, payoff: float):
-        """Update beta parameters based on outcome"""
-        # Success if payoff is above average (2.25)
-        success = payoff > 2.25
+        """Update beta parameters based on outcome with adaptive learning rate"""
+        # Use adaptive learning rate based on payoff magnitude and game length
+        # Scale payoff to learning rate: higher payoffs give stronger updates
+        # Payoff range: 0-5, so we normalize and scale appropriately
         
+        # Calculate adaptive learning rate based on payoff and game length parameters
+        # Base learning rate adjusted by payoff magnitude
+        learning_rate = self.base_learning_rate + (payoff / 5.0) * self.learning_rate_scale
+        
+        # All payoffs are treated as "successes" but with different magnitudes
+        # This allows the agent to learn that higher payoffs are better
         if own_move == 'C':
-            if success:
-                self.alpha_c += 1
-            else:
-                self.beta_c += 1
+            self.alpha_c += learning_rate
+            # Small penalty for low payoffs to maintain exploration
+            if payoff < 2.5:  # Below average
+                penalty = (2.5 - payoff) * self.base_learning_rate
+                self.beta_c += penalty
         else:
-            if success:
-                self.alpha_d += 1
-            else:
-                self.beta_d += 1
+            self.alpha_d += learning_rate
+            # Small penalty for low payoffs
+            if payoff < 2.5:  # Below average
+                penalty = (2.5 - payoff) * self.base_learning_rate
+                self.beta_d += penalty
 
 
 class GradientMetaLearner(Agent):
-    """Policy gradient approach with feature extraction"""
-    def __init__(self, name: str, learning_rate: float = 0.01):
+    """Policy gradient approach with feature extraction (default settings optimized for length 5 games)"""
+    def __init__(self, name: str, learning_rate: float = 0.05):
         super().__init__(name)
         self.learning_rate = learning_rate
         self.weights = np.zeros(5)  # Feature weights
@@ -354,8 +407,8 @@ class GradientMetaLearner(Agent):
                          if own_history[i] == 'C' and opponent_history[i] == 'C')
         features[3] = mutual_coop / len(own_history) if own_history else 0
         
-        # Feature 4: Rounds played (normalized)
-        features[4] = min(len(own_history) / 50, 1.0)
+        # Feature 4: Rounds played (normalized for ~5 round games)
+        features[4] = min(len(own_history) / 5, 1.0)
         
         return features
     
@@ -498,7 +551,7 @@ class GPT4Agent(LLMAgent):
 class ClaudeAgent(LLMAgent):
     """Anthropic Claude agent"""
     
-    def __init__(self, name: str, api_key: str, model: str = "claude-3-sonnet-20240229",
+    def __init__(self, name: str, api_key: str, model: str = "claude-3-5-sonnet-20241022",
                  temperature: float = 0.7, termination_prob: float = 0.1):
         super().__init__(name, model, temperature, termination_prob)
         self.client = anthropic.Anthropic(api_key=api_key)

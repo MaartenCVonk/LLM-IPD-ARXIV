@@ -18,12 +18,12 @@ def load_env_vars(env_path: str = None) -> Dict[str, str]:
     if env_path is None:
         # Try to find axelrod.env in current or parent directory
         possible_paths = [
-            'axelrod.env',
-            'Axelrod.env', 
-            '../axelrod.env',
-            '../Axelrod.env',
-            os.path.join(os.path.dirname(__file__), '..', 'axelrod.env'),
-            os.path.join(os.path.dirname(__file__), '..', 'Axelrod.env')
+            '.env',
+            '.env', 
+            '../.env',
+            '../.env',
+            os.path.join(os.path.dirname(__file__), '..', '.env'),
+            os.path.join(os.path.dirname(__file__), '..', '.env')
         ]
         
         for path in possible_paths:
@@ -128,14 +128,14 @@ def estimate_api_costs(n_agents: Dict[str, int], avg_rounds: int = 20,
 
 
 def create_experiment_config(shadow_conditions: List[float],
-                           temperature_settings: List[float],
+                           temperature_settings: Dict[str, List[float]],
                            llm_models: Dict[str, str]) -> Dict:
     """
     Create configuration for experiments
     
     Args:
         shadow_conditions: List of termination probabilities
-        temperature_settings: List of temperature values
+        temperature_settings: Dict mapping model type to list of temperature values
         llm_models: Dict mapping model type to specific model name
     
     Returns:

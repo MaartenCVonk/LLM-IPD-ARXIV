@@ -6,8 +6,11 @@ This repository extends the groundbreaking work by [Payne & Alloui-Cros (2025)](
 
 ### 1. Temperature Variation Analysis
 - **Novel contribution**: First systematic study of temperature effects on LLM strategic behavior
-- Tests 3 temperature settings (0.2, 0.7, 1.2) across all LLM models
-- Discovers API limitations (Claude max temp=1.0, Gemini rate limits)
+- Tests model-specific temperature settings optimized for each API:
+  - **OpenAI/Gemini**: [0.2, 0.7, 1.2] (0-2 range supported)
+  - **Anthropic Claude**: [0.2, 0.5, 0.8] (0-1 range constraint)
+  - **Mistral**: [0.2, 0.7, 1.0] (0-1 range supported)
+- Discovers and adapts to API limitations (Claude max temp=1.0, Gemini rate limits)
 
 ### 2. Expanded Model Coverage
 - **Original**: OpenAI, Google Gemini, Anthropic Claude
@@ -17,17 +20,56 @@ This repository extends the groundbreaking work by [Payne & Alloui-Cros (2025)](
 ### 3. New Strategy Implementations
 
 #### Behavioral Strategies (New)
-- `ForgivingGrimTrigger`: Forgives after N mutual defections
-- `Detective`: Tests opponents with C-D-C-C sequence, then classifies based on round 3 response and cooperation rate:
-  - **Sucker**: Doesn't defect in round 3 AND >70% cooperation → Exploit with always defect
+- `ForgivingGrimTrigger`: Triggers on first opponent defection, then defects until N mutual defections occur (default N=2, optimized for shorter games):
+  - **Triggered**: Once opponent defects, permanently switch to defection
+  - **Mutual Defection Counter**: Track consecutive rounds where both players defect
+  - **Forgiveness**: After N mutual defections (2 default), reset to cooperation and clear trigger
+  - **Return to Cooperation**: Resets both trigger state and mutual defection count
+- `Detective`: Tests opponents with C-D-C sequence (shortened for shorter games), then classifies based on round 3 response and cooperation rate:
+  - **Sucker**: Doesn't defect in round 3 AND ≥67% cooperation → Exploit with always defect
   - **Retaliator**: Defects in round 3 (retaliates to Detective's round 2 defection) → Play Tit-for-Tat  
   - **Random**: All other cases → Mixed strategy (60% cooperate)
-- `SoftGrudger`: Graduated punishment with recovery
+- `SoftGrudger`: Graduated punishment sequence with automatic recovery (D-D-C pattern, optimized for shorter games):
+  - **Punishment Trigger**: Activates on any opponent defection during cooperation
+  - **Punishment Sequence**: Fixed 3-move pattern: D-D-C (2 defections, then 1 cooperation)
+  - **Sequence Execution**: Plays through entire sequence once triggered, regardless of opponent response
+  - **Automatic Recovery**: Returns to cooperation after completing punishment sequence
 
 #### Adaptive Learning Strategies (New)
-- `QLearningAgent`: Reinforcement learning with ε-greedy exploration
-- `ThompsonSampling`: Bayesian exploration/exploitation
-- `GradientMetaLearner`: Policy gradient with feature extraction
+- `QLearningAgent`: Reinforcement learning with ε-greedy exploration and temporal difference learning (default optimized for length 4 games):
+  - **State Representation**: Uses last moves tuple (own_move, opponent_move) plus START state
+  - **Q-Table Learning**: Maintains Q(state, action) values updated via Q-learning formula
+  - **Action Selection**: ε-greedy policy with adaptive exploration decay (ε × 0.99^t)
+  - **Optimistic Initialization**: Q-values start at 10.0 to encourage exploration of all actions
+  - **Temporal Difference**: Updates Q-values using Q(s,a) ← Q(s,a) + α[r + γ max Q(s',a') - Q(s,a)]
+  - **Payoff Matrix**: Uses standard IPD rewards (CC=3, CD=0, DC=5, DD=1)
+  - **Default Parameters**: α=0.7, γ=0.5, ε=0.3 (optimized for ~4 round games)
+  - **Game Length Optimization**: Factory method `for_game_length()` provides optimal parameters:
+    - **Length 1**: α=1.0, γ=0.0, ε=0.0 (immediate learning, no future, no exploration)
+    - **Length ≤5**: α=0.7, γ=0.5, ε=0.3 (fast learning, short horizon, moderate exploration) ← **Default**
+    - **Length ≤10**: α=0.3, γ=0.7, ε=0.2 (standard learning, moderate horizon, conservative exploration)
+
+- `ThompsonSampling`: Bayesian multi-armed bandit with Beta distributions for exploration/exploitation (default optimized for length 5 games):
+  - **Beta Parameters**: Maintains separate α,β parameters for cooperation and defection actions
+  - **Sampling Strategy**: Draws θ_C ~ Beta(α_C, β_C) and θ_D ~ Beta(α_D, β_D), selects action with higher sample
+  - **Adaptive Learning Rate**: Learning rate = base_lr + (payoff/5.0) × lr_scale, scaling with payoff magnitude
+  - **Default Parameters**: base_lr=0.2, lr_scale=1.2 (optimized for ~5 round games)
+  - **Game Length Optimization**: Factory method `for_game_length()` provides optimal parameters:
+    - **Length ≤1.5**: base_lr=0.3, lr_scale=1.5 (fast learning, high sensitivity)
+    - **Length ≤5**: base_lr=0.2, lr_scale=1.2 (moderate learning, balanced sensitivity) ← **Default**
+    - **Length ≤12**: base_lr=0.1, lr_scale=0.9 (standard learning, normal sensitivity)
+    - **Length >12**: base_lr=0.05, lr_scale=0.7 (gradual learning, conservative sensitivity)
+  - **Parameter Updates**: α += learning_rate, β += penalty for below-average payoffs
+  - **Bayesian Learning**: Naturally balances exploration/exploitation through posterior uncertainty
+
+- `GradientMetaLearner`: Policy gradient with strategic feature extraction and stochastic policy (default optimized for length 5 games):
+  - **Feature Engineering**: Extracts 5 features: first_round, opponent_coop_rate, recent_coop_rate, mutual_coop_rate, rounds_played
+  - **Policy Network**: Uses sigmoid policy π(C|s) = σ(w^T φ(s)) for cooperation probability
+  - **Stochastic Actions**: Samples actions from policy distribution (not deterministic)
+  - **Policy Gradient**: Updates weights using ∇w = α × advantage × ∇log π(a|s)
+  - **Advantage Estimation**: Uses reward minus baseline (mean reward) for variance reduction
+  - **Default Parameters**: learning_rate=0.05, rounds_normalization=5 (optimized for ~5 round games)
+  - **Game Length Adaptation**: Higher learning rate (5x faster than original) and feature normalization optimized for shorter games
 
 ### 4. Real-time Monitoring System
 - Live progress tracking with visual progress bars
@@ -39,7 +81,7 @@ This repository extends the groundbreaking work by [Payne & Alloui-Cros (2025)](
 | Feature | Original (Payne & Alloui-Cros) | Our Extension |
 |---------|-------------------------------|---------------|
 | LLM Providers | 3 | 4 |
-| Temperature Settings | Not specified | 3 (0.2, 0.7, 1.2) |
+| Temperature Settings | Not specified | Model-specific: OpenAI/Gemini [0.2, 0.7, 1.2], Claude [0.2, 0.5, 0.8], Mistral [0.2, 0.7, 1.0] |
 | Total Strategies | ~5-10 canonical | 24 (12 classical + 12 LLM) |
 | Shadow Conditions | Variable | 3 (10%, 25%, 75%) |
 | Progress Monitoring | None mentioned | Real-time with visual display |
@@ -48,15 +90,33 @@ This repository extends the groundbreaking work by [Payne & Alloui-Cros (2025)](
 ## 🔬 Current Findings
 
 ### API Behavior Observations
-1. **Claude 3 Sonnet**: Rejects temperature > 1.0 (defaults to cooperation)
-2. **Gemini 1.5 Flash**: Free tier limits (15 req/min, 50 req/day)
-3. **GPT-4o-mini**: Most reliable and cost-effective
-4. **Mistral Large**: Stable but higher cost
+1. **Claude 3 Sonnet**: Rejects temperature > 1.0, hence custom range [0.2, 0.5, 0.8]
+2. **Gemini 1.5 Flash**: Free tier limits (15 req/min, 50 req/day), supports 0-2 temperature range
+3. **GPT-4o-mini**: Most reliable and cost-effective, supports 0-2 temperature range
+4. **Mistral Large**: Stable but higher cost, supports 0-1 temperature range (capped at 1.0)
 
 ### Performance Insights (Preliminary)
 - Match duration varies significantly: LLM matches (20-120s) vs classical (<0.1s)
 - ForgivingGrimTrigger shows early promise as top performer
 - Temperature effects still being analyzed
+
+## 🌡️ Temperature Configuration
+
+Our framework supports model-specific temperature settings to respect API constraints:
+
+### Temperature Ranges by Model
+- **OpenAI GPT-4**: 0.0-2.0 (default: [0.2, 0.7, 1.2])
+- **Anthropic Claude**: 0.0-1.0 (default: [0.2, 0.5, 0.8]) - **Limited range**
+- **Mistral Large**: 0.0-1.0 (default: [0.2, 0.7, 1.0]) - **Capped at 1.0**
+- **Google Gemini**: 0.0-2.0 (default: [0.2, 0.7, 1.2])
+
+### Why Different Ranges?
+Each LLM provider has different temperature parameter constraints:
+- **Anthropic Claude** strictly enforces 0-1 range, rejecting higher values
+- **Mistral** supports 0-1 range in their API documentation
+- **OpenAI & Gemini** support the full 0-2 range for maximum creativity
+
+This ensures experiments run reliably across all providers while maintaining comparable temperature effects.
 
 ## 🛠️ Installation & Usage
 
@@ -72,8 +132,11 @@ cp Axelrod.env.example Axelrod.env
 # Run test experiment
 python run_experiments.py --test
 
-# Run full experiment
-python run_experiments.py --shadow 0.1 0.25 0.75 --temperature 0.2 0.7 1.2
+# Run full experiment with default model-specific temperatures
+python run_experiments.py --shadow 0.1 0.25 0.75
+
+# Run with custom temperature settings
+python run_experiments.py --shadow 0.1 0.25 0.75 --temperature '{"openai": [0.3, 0.8], "anthropic": [0.1, 0.6], "mistral": [0.4, 0.9], "gemini": [0.2, 1.0]}'
 
 # Monitor progress (in separate terminal)
 python live_monitor.py
