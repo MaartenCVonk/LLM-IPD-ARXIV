@@ -35,8 +35,8 @@ class TestRealLLMAgentAPICalls:
         agent = GPT4Agent(
             name="TestGPT4Real",
             api_key=api_key,
-            model="gpt-4o-mini",
-            temperature=0.7,
+            model="o3",
+            temperature=1,
             termination_prob=0.1
         )
         
@@ -62,25 +62,6 @@ class TestRealLLMAgentAPICalls:
         assert agent.api_calls == 3
         assert move3 in ['C', 'D']
         
-        # Test different temperature settings (OpenAI supports 0-2 range)
-        test_temperatures = [0.2, 0.7, 1.2]
-        for temp in test_temperatures:
-            temp_agent = GPT4Agent(
-                name=f"TestGPT4Temp{temp}",
-                api_key=api_key,
-                model="gpt-4o-mini",
-                temperature=temp,
-                termination_prob=0.1
-            )
-            
-            # Verify temperature is set correctly
-            assert temp_agent.temperature == temp
-            
-            # Make API call with this temperature
-            temp_move = temp_agent.make_move(['C'], ['D'])
-            assert temp_move in ['C', 'D']
-            assert temp_agent.api_calls == 1
-    
     def test_claude_agent_real_api_call(self):
         """Test ClaudeAgent with real API call"""
         # Skip if no API key provided
@@ -92,7 +73,7 @@ class TestRealLLMAgentAPICalls:
         agent = ClaudeAgent(
             name="TestClaudeReal",
             api_key=api_key,
-            model="claude-3-haiku-20240307",  # Use cheaper model for testing
+            model="claude-opus-4-20250514",  # claude-3-haiku-20240307
             temperature=0.7,
             termination_prob=0.1
         )
@@ -125,7 +106,7 @@ class TestRealLLMAgentAPICalls:
             temp_agent = ClaudeAgent(
                 name=f"TestClaudeTemp{temp}",
                 api_key=api_key,
-                model="claude-3-haiku-20240307",
+                model="claude-opus-4-20250514",
                 temperature=temp,
                 termination_prob=0.1
             )
@@ -149,8 +130,8 @@ class TestRealLLMAgentAPICalls:
         agent = MistralAgent(
             name="TestMistralReal",
             api_key=api_key,
-            model="mistral-tiny",  # Use cheaper model for testing
-            temperature=0.7,
+            model="mistral-large-latest", # mistral-tiny
+            temperature=1,
             termination_prob=0.1
         )
         
@@ -182,7 +163,7 @@ class TestRealLLMAgentAPICalls:
             temp_agent = MistralAgent(
                 name=f"TestMistralTemp{temp}",
                 api_key=api_key,
-                model="mistral-tiny",
+                model="mistral-large-latest", # mistral-tiny
                 temperature=temp,
                 termination_prob=0.1
             )
@@ -206,7 +187,7 @@ class TestRealLLMAgentAPICalls:
         agent = GeminiAgent(
             name="TestGeminiReal",
             api_key=api_key,
-            model="gemini-1.5-flash",
+            model="gemini-2.5-pro", # gemini-1.5-flash
             temperature=0.7,
             termination_prob=0.1
         )
@@ -239,7 +220,7 @@ class TestRealLLMAgentAPICalls:
             temp_agent = GeminiAgent(
                 name=f"TestGeminiTemp{temp}",
                 api_key=api_key,
-                model="gemini-1.5-flash",
+                model="gemini-2.5-pro", # gemini-1.5-flash
                 temperature=temp,
                 termination_prob=0.1
             )

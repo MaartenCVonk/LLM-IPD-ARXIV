@@ -105,6 +105,306 @@ class Pavlov(Agent):
         return WinStayLoseShift.make_move(self, own_history, opponent_history)
 
 
+class GenerousTitForTat(Agent):
+    """Tit-for-Tat with forgiveness probability"""
+    def __init__(self, name: str, forgiveness_prob: float = 0.1):
+        super().__init__(name)
+        self.forgiveness_prob = forgiveness_prob
+        
+    def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
+        if not opponent_history:
+            self.last_reasoning = "Starting with cooperation."
+            return "C"
+        
+        if opponent_history[-1] == "D":
+            if random.random() < self.forgiveness_prob:
+                self.last_reasoning = "Opponent defected, but I'm being generous and forgiving."
+                return "C"
+            else:
+                self.last_reasoning = "Opponent defected, so I'm reciprocating with defection."
+                return "D"
+        else:
+            self.last_reasoning = "Opponent cooperated, so I'm cooperating too."
+            return "C"
+
+
+class SuspiciousTitForTat(Agent):
+    """Starts with defection, then plays Tit-for-Tat"""
+    def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
+        if not opponent_history:
+            self.last_reasoning = "Starting with defection (suspicious)."
+            return "D"
+        
+        self.last_reasoning = f"Copying opponent's last move ({opponent_history[-1]})."
+        return opponent_history[-1]
+
+
+class Gradual(Agent):
+    """Escalating retaliation strategy"""
+    def __init__(self, name: str):
+        super().__init__(name)
+        self.defect_count = 0
+        self.retaliation_count = 0
+        self.retaliating = False
+        
+    def reset(self):
+        super().reset()
+        self.defect_count = 0
+        self.retaliation_count = 0
+        self.retaliating = False
+        
+    def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
+        if not opponent_history:
+            self.last_reasoning = "Starting with cooperation."
+            return "C"
+        
+        # If currently retaliating
+        if self.retaliating:
+            self.retaliation_count -= 1
+            if self.retaliation_count > 0:
+                self.last_reasoning = f"Continuing retaliation ({self.retaliation_count} more defections)."
+                return "D"
+            else:
+                self.retaliating = False
+                self.last_reasoning = "Retaliation complete, offering cooperation as peace."
+                return "C"
+        
+        # Check if opponent defected
+        if opponent_history[-1] == "D":
+            self.defect_count += 1
+            self.retaliation_count = self.defect_count
+            self.retaliating = True
+            self.last_reasoning = f"Opponent defected, initiating retaliation of {self.retaliation_count} defections."
+            return "D"
+        
+        self.last_reasoning = "Opponent cooperated, so I'm cooperating too."
+        return "C"
+
+
+class Prober(Agent):
+    """Tests opponent with C-D-C sequence, then adapts"""
+    def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
+        if len(own_history) == 0:
+            self.last_reasoning = "Starting with cooperation."
+            return "C"
+        elif len(own_history) == 1:
+            self.last_reasoning = "Testing opponent with defection on second move."
+            return "D"
+        elif len(own_history) == 2:
+            self.last_reasoning = "Back to cooperation for the third move."
+            return "C"
+        else:
+            # If opponent didn't retaliate after our defection, exploit them
+            if opponent_history[1] == "C" and opponent_history[2] == "C":
+                self.last_reasoning = "Opponent didn't retaliate to my test, so I'll exploit with defection."
+                return "D"
+            else:
+                # Otherwise play TFT
+                self.last_reasoning = f"Playing Tit-for-Tat, copying opponent's last move ({opponent_history[-1]})."
+                return opponent_history[-1]
+
+
+class Alternator(Agent):
+    """Simple alternating pattern (C-D-C-D...)"""
+    def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
+        if len(own_history) % 2 == 0:
+            self.last_reasoning = "Alternating pattern: cooperate on even-numbered rounds."
+            return "C"
+        else:
+            self.last_reasoning = "Alternating pattern: defect on odd-numbered rounds."
+            return "D"
+
+
+class Bayesian(Agent):
+    """Bayesian inference to identify opponent strategy"""
+    def __init__(self, name: str):
+        super().__init__(name)
+        # Initialize equal probabilities for all strategies
+        self.strategy_probs = {
+            'tit_for_tat': 0.1,
+            'grim_trigger': 0.1,
+            'win_stay_lose_shift': 0.1,
+            'random': 0.1,
+            'generous_tft': 0.1,
+            'suspicious_tft': 0.1,
+            'gradual': 0.1,
+            'prober': 0.1,
+            'alternator': 0.1,
+            'always_cooperate': 0.1
+        }
+        self.evidence_count = 0
+        
+    def reset(self):
+        super().reset()
+        self.strategy_probs = {
+            'tit_for_tat': 0.1,
+            'grim_trigger': 0.1,
+            'win_stay_lose_shift': 0.1,
+            'random': 0.1,
+            'generous_tft': 0.1,
+            'suspicious_tft': 0.1,
+            'gradual': 0.1,
+            'prober': 0.1,
+            'alternator': 0.1,
+            'always_cooperate': 0.1
+        }
+        self.evidence_count = 0
+        
+    def predict_strategy_move(self, strategy, opponent_move, prev_opponent_move, prev_my_move, move_history_length):
+        """Predict what move a strategy would make in the current situation."""
+        if strategy == 'always_cooperate':
+            return "C"
+        elif strategy == 'tit_for_tat':
+            return prev_my_move if prev_my_move else "C"
+        elif strategy == 'grim_trigger':
+            return "D" if "D" in self.opponent_history else "C"
+        elif strategy == 'win_stay_lose_shift':
+            if not prev_my_move or not prev_opponent_move:
+                return "C"
+            # Win conditions: (C,C) or (D,D)
+            won_last = (prev_my_move == prev_opponent_move)
+            return prev_my_move if won_last else ("D" if prev_my_move == "C" else "C")
+        elif strategy == 'random':
+            return None  # Special case: handled in likelihood calculation
+        elif strategy == 'generous_tft':
+            if not prev_my_move:
+                return "C"
+            return "C" if random.random() < 0.1 else prev_my_move
+        elif strategy == 'suspicious_tft':
+            return prev_my_move if prev_my_move else "D"
+        elif strategy == 'gradual':
+            if not prev_opponent_move:
+                return "C"
+            defection_count = self.opponent_history.count("D")
+            if defection_count > 0:
+                # In retaliation mode
+                return "D"
+            return "C"
+        elif strategy == 'prober':
+            if move_history_length == 0:
+                return "C"
+            elif move_history_length == 1:
+                return "D"
+            elif move_history_length == 2:
+                return "C"
+            else:
+                # If opponent didn't retaliate to defection, exploit
+                if self.opponent_history[1] == "C" and self.opponent_history[2] == "C":
+                    return "D"
+                return prev_opponent_move
+        elif strategy == 'alternator':
+            return "D" if move_history_length % 2 == 1 else "C"
+        return "C"  # Default to cooperation for unknown strategies
+        
+    def update_probs(self, opponent_move, prev_opponent_move=None, prev_my_move=None):
+        # Skip update on first move since we have no evidence
+        if prev_opponent_move is None:
+            return
+            
+        # Calculate likelihood of this move given each strategy
+        likelihoods = {}
+        move_history_length = len(self.opponent_history)
+        
+        for strategy in self.strategy_probs:
+            if strategy == 'random':
+                # Random strategy: 50% chance of either move
+                likelihoods[strategy] = 0.5
+            else:
+                # Predict what this strategy would have done
+                predicted = self.predict_strategy_move(
+                    strategy, opponent_move, prev_opponent_move, 
+                    prev_my_move, move_history_length - 1
+                )
+                # High likelihood if prediction matches actual move
+                likelihoods[strategy] = 0.95 if predicted == opponent_move else 0.05
+        
+        # Bayesian update
+        total = 0
+        for strategy in self.strategy_probs:
+            self.strategy_probs[strategy] *= likelihoods[strategy]
+            total += self.strategy_probs[strategy]
+            
+        # Normalize
+        if total > 0:
+            for strategy in self.strategy_probs:
+                self.strategy_probs[strategy] /= total
+                
+        self.evidence_count += 1
+        
+    def choose_counter_strategy(self, most_likely, highest_prob):
+        """Choose the best counter-strategy based on opponent identification."""
+        if most_likely in ['always_cooperate', 'generous_tft']:
+            self.last_reasoning = f"Determined opponent is likely {most_likely} ({highest_prob:.2f}), exploiting with defection."
+            return "D"  # Exploit cooperative strategies
+            
+        elif most_likely in ['grim_trigger', 'suspicious_tft']:
+            if "D" not in self.opponent_history:
+                self.last_reasoning = f"Opponent likely {most_likely} ({highest_prob:.2f}) but hasn't defected, cooperating."
+                return "C"
+            else:
+                self.last_reasoning = f"Opponent likely {most_likely} ({highest_prob:.2f}) and has defected, matching defection."
+                return "D"
+                
+        elif most_likely == 'tit_for_tat':
+            self.last_reasoning = f"Determined opponent is likely TFT ({highest_prob:.2f}), cooperating to establish mutual cooperation."
+            return "C"
+            
+        elif most_likely == 'win_stay_lose_shift':
+            if not self.opponent_history:
+                return "C"
+            # Try to manipulate WSLS by breaking its pattern
+            self.last_reasoning = f"Opponent likely WSLS ({highest_prob:.2f}), attempting to manipulate its pattern."
+            return "D" if len(self.history) % 2 == 0 else "C"
+            
+        elif most_likely == 'gradual':
+            if "D" not in self.opponent_history:
+                self.last_reasoning = f"Opponent likely Gradual ({highest_prob:.2f}) but hasn't defected, cooperating."
+                return "C"
+            else:
+                self.last_reasoning = f"Opponent likely Gradual ({highest_prob:.2f}) and has defected, matching defection."
+                return "D"
+                
+        elif most_likely == 'prober':
+            if len(self.opponent_history) < 3:
+                self.last_reasoning = f"Opponent likely Prober ({highest_prob:.2f}), cooperating during testing phase."
+                return "C"
+            else:
+                self.last_reasoning = f"Opponent likely Prober ({highest_prob:.2f}), matching its moves."
+                return self.opponent_history[-1]
+                
+        elif most_likely == 'alternator':
+            self.last_reasoning = f"Opponent likely Alternator ({highest_prob:.2f}), exploiting with defection."
+            return "D"
+            
+        elif most_likely == 'random':
+            self.last_reasoning = f"Opponent likely Random ({highest_prob:.2f}), defaulting to defection."
+            return "D"
+            
+        return self.opponent_history[-1]  # Default to TFT if unsure
+        
+    def make_move(self, own_history: List[str], opponent_history: List[str]) -> str:
+        if not opponent_history:
+            self.last_reasoning = "Starting with cooperation to gather data."
+            return "C"
+            
+        # Update probabilities based on opponent's last move
+        prev_opponent_move = opponent_history[-2] if len(opponent_history) > 1 else None
+        prev_my_move = own_history[-2] if len(own_history) > 1 else None
+        self.update_probs(opponent_history[-1], prev_opponent_move, prev_my_move)
+        
+        # Determine most likely strategy
+        most_likely = max(self.strategy_probs, key=self.strategy_probs.get)
+        highest_prob = self.strategy_probs[most_likely]
+        
+        # If we're confident enough, use best counter-strategy
+        if highest_prob > 0.7 and self.evidence_count >= 3:
+            return self.choose_counter_strategy(most_likely, highest_prob)
+        else:
+            # Not confident enough, use TFT as safe fallback
+            self.last_reasoning = f"Not confident in opponent strategy yet. Probs: {', '.join([f'{k}:{v:.2f}' for k, v in self.strategy_probs.items()])}. Using TFT."
+            return opponent_history[-1]
+
+
 # Behavioral Strategies
 class ForgivingGrimTrigger(Agent):
     """Grim Trigger that forgives after N mutual defections (optimized for shorter games)"""
@@ -471,6 +771,8 @@ class LLMAgent(Agent):
         self.termination_prob = termination_prob
         self.api_calls = 0
         self.total_tokens = 0
+        self.input_tokens = 0
+        self.output_tokens = 0
         
     def _create_prompt(self, own_history: List[str], opponent_history: List[str]) -> str:
         """Create prompt for LLM"""
@@ -527,7 +829,7 @@ class GPT4Agent(LLMAgent):
     """OpenAI GPT-4 agent"""
     
     def __init__(self, name: str, api_key: str, model: str = "gpt-4o-mini", 
-                 temperature: float = 0.7, termination_prob: float = 0.1):
+                 temperature: float = 1, termination_prob: float = 0.1):
         super().__init__(name, model, temperature, termination_prob)
         self.client = openai.OpenAI(api_key=api_key)
         
@@ -539,11 +841,13 @@ class GPT4Agent(LLMAgent):
                 {"role": "user", "content": prompt}
             ],
             temperature=self.temperature,
-            max_tokens=500
+            max_completion_tokens=2000
         )
         
         self.api_calls += 1
         self.total_tokens += response.usage.total_tokens
+        self.input_tokens += response.usage.prompt_tokens
+        self.output_tokens += response.usage.completion_tokens
         
         return response.choices[0].message.content
 
@@ -565,8 +869,21 @@ class ClaudeAgent(LLMAgent):
         )
         
         self.api_calls += 1
-        # Estimate tokens (Claude doesn't return usage directly)
-        self.total_tokens += len(prompt.split()) * 1.3 + 200
+        
+        # Claude API returns usage information
+        if hasattr(response, 'usage'):
+            input_tokens = response.usage.input_tokens
+            output_tokens = response.usage.output_tokens
+            self.input_tokens += input_tokens
+            self.output_tokens += output_tokens
+            self.total_tokens += input_tokens + output_tokens
+        else:
+            # Fallback estimation if usage not available
+            estimated_input = len(prompt.split()) * 1.3
+            estimated_output = 200
+            self.input_tokens += estimated_input
+            self.output_tokens += estimated_output
+            self.total_tokens += estimated_input + estimated_output
         
         return response.content[0].text
 
@@ -588,10 +905,17 @@ class MistralAgent(LLMAgent):
         )
         
         self.api_calls += 1
-        if hasattr(response, 'usage'):
+        if hasattr(response, 'usage') and hasattr(response.usage, 'prompt_tokens'):
+            self.input_tokens += response.usage.prompt_tokens
+            self.output_tokens += response.usage.completion_tokens
             self.total_tokens += response.usage.total_tokens
         else:
-            self.total_tokens += len(prompt.split()) * 1.3 + 200
+            # Fallback estimation
+            estimated_input = len(prompt.split()) * 1.3
+            estimated_output = 200
+            self.input_tokens += estimated_input
+            self.output_tokens += estimated_output
+            self.total_tokens += estimated_input + estimated_output
         
         return response.choices[0].message.content
 
@@ -610,12 +934,25 @@ class GeminiAgent(LLMAgent):
             prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=self.temperature,
-                max_output_tokens=500
+                max_output_tokens=5000,
             )
         )
         
         self.api_calls += 1
-        # Estimate tokens
-        self.total_tokens += len(prompt.split()) * 1.3 + 200
+        
+        # Gemini API returns usage information
+        if hasattr(response, 'usage_metadata'):
+            input_tokens = response.usage_metadata.prompt_token_count
+            output_tokens = response.usage_metadata.candidates_token_count
+            self.input_tokens += input_tokens
+            self.output_tokens += output_tokens
+            self.total_tokens += input_tokens + output_tokens
+        else:
+            # Fallback estimation
+            estimated_input = len(prompt.split()) * 1.3
+            estimated_output = 200
+            self.input_tokens += estimated_input
+            self.output_tokens += estimated_output
+            self.total_tokens += estimated_input + estimated_output
         
         return response.text

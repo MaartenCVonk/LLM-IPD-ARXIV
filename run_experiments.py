@@ -16,8 +16,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from ipd_suite import (
     # Classical strategies
-    TitForTat, AlwaysCooperate, AlwaysDefect, Random,
-    GrimTrigger, Pavlov,
+    TitForTat, GrimTrigger, WinStayLoseShift, Random,
+    GenerousTitForTat, SuspiciousTitForTat, Prober, Gradual, Alternator, Bayesian,
     
     # Behavioral strategies  
     ForgivingGrimTrigger, Detective, SoftGrudger,
@@ -47,27 +47,36 @@ def create_agents(api_keys: Dict[str, str],
     """Create all agent instances for experiments"""
     agents = []
     
-    # Classical strategies (always include some for baseline)
+    # Agents 1-16: Classical, behavioral, and adaptive strategies
     if include_classical:
         agents.extend([
-            TitForTat("TitForTat"),
-            AlwaysCooperate("AlwaysCooperate"),
-            AlwaysDefect("AlwaysDefect"),
-            Random("Random"),
-            GrimTrigger("GrimTrigger"),
-            Pavlov("Pavlov"),
-            ForgivingGrimTrigger("ForgivingGrimTrigger"),
-            Detective("Detective"),
-            SoftGrudger("SoftGrudger"),
-            QLearningAgent("QLearning"),
-            ThompsonSampling("ThompsonSampling"),
-            GradientMetaLearner("GradientMetaLearner")
+            # 1-10: Classical strategies
+            TitForTat("TitForTat"),                        # 1
+            GrimTrigger("GrimTrigger"),                    # 2  
+            WinStayLoseShift("WinStayLoseShift"),          # 3
+            GenerousTitForTat("GenerousTitForTat"),        # 4
+            SuspiciousTitForTat("SuspiciousTitForTat"),    # 5
+            Prober("Prober"),                              # 6
+            Random("Random"),                              # 7
+            Gradual("Gradual"),                            # 8
+            Alternator("Alternator"),                      # 9
+            Bayesian("Bayesian"),                          # 10
+            
+            # 11-13: Behavioral strategies
+            ForgivingGrimTrigger("ForgivingGrimTrigger"),  # 11
+            Detective("Detective"),                        # 12
+            SoftGrudger("SoftGrudger"),                    # 13
+            
+            # 14-16: Adaptive learning strategies
+            QLearningAgent("QLearning"),                   # 14
+            ThompsonSampling("ThompsonSampling"),          # 15
+            GradientMetaLearner("GradientMetaLearner")     # 16
         ])
     
-    # LLM agents with model-specific temperature variations
-    # GPT-4 agents (OpenAI supports 0-2 range)
+    # Agents 17-28: LLM agents with 3 temperatures each (4 providers × 3 temperatures = 12 agents)
+    # GPT-4 agents (OpenAI) - Agents 17-19
     if api_keys.get('OPENAI_API_KEY') and 'openai' in temperature_settings:
-        for temp in temperature_settings['openai']:
+        for i, temp in enumerate(temperature_settings['openai'][:3], 17):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
                 GPT4Agent(f"GPT4{temp_suffix}", 
@@ -77,9 +86,9 @@ def create_agents(api_keys: Dict[str, str],
                          termination_prob=termination_prob)
             )
     
-    # Claude agents (Anthropic supports 0-1 range)
+    # Claude agents (Anthropic) - Agents 20-22
     if api_keys.get('ANTHROPIC_API_KEY') and 'anthropic' in temperature_settings:
-        for temp in temperature_settings['anthropic']:
+        for i, temp in enumerate(temperature_settings['anthropic'][:3], 20):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
                 ClaudeAgent(f"Claude3Sonnet{temp_suffix}",
@@ -89,9 +98,9 @@ def create_agents(api_keys: Dict[str, str],
                            termination_prob=termination_prob)
             )
     
-    # Mistral agents (Mistral supports 0-1 range)
+    # Mistral agents - Agents 23-25
     if api_keys.get('MISTRAL_API_KEY') and 'mistral' in temperature_settings:
-        for temp in temperature_settings['mistral']:
+        for i, temp in enumerate(temperature_settings['mistral'][:3], 23):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
                 MistralAgent(f"MistralLarge{temp_suffix}",
@@ -101,14 +110,14 @@ def create_agents(api_keys: Dict[str, str],
                             termination_prob=termination_prob)
             )
     
-    # Gemini agents (Gemini supports 0-2 range)
+    # Gemini agents - Agents 26-28
     if api_keys.get('GOOGLE_API_KEY') and 'gemini' in temperature_settings:
-        for temp in temperature_settings['gemini']:
+        for i, temp in enumerate(temperature_settings['gemini'][:3], 26):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
                 GeminiAgent(f"Gemini25Flash{temp_suffix}",
                            api_keys['GOOGLE_API_KEY'],
-                           model="gemini-1.5-flash",
+                           model="gemini-2.5-pro",
                            temperature=temp,
                            termination_prob=termination_prob)
             )
@@ -151,7 +160,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
     n_llm_agents = sum(len(temperature_settings.get(api.lower(), [])) 
                       for api in available_apis 
                       if api.lower() in temperature_settings)
-    n_total_agents = n_llm_agents + 12  # 12 classical/behavioral/adaptive
+    n_total_agents = n_llm_agents + 16  # 16 classical/behavioral/adaptive
     n_matches = n_total_agents * (n_total_agents - 1) // 2
     
     print(f"\nExperiment scale:")
@@ -484,25 +493,29 @@ def run_test_experiment():
         'gemini': [0.2, 0.7, 1.2]      # Gemini supports 0-2 range
     }
     
-    # Create all classical, behavioral, and adaptive agents
+    # Create all classical, behavioral, and adaptive agents (agents 1-16)
     agents = [
-        # Classical strategies
-        TitForTat("TitForTat"),
-        AlwaysCooperate("AlwaysCooperate"),
-        AlwaysDefect("AlwaysDefect"),
-        Random("Random"),
-        GrimTrigger("GrimTrigger"),
-        Pavlov("Pavlov"),
+        # 1-10: Classical strategies
+        TitForTat("TitForTat"),                        # 1
+        GrimTrigger("GrimTrigger"),                    # 2  
+        WinStayLoseShift("WinStayLoseShift"),          # 3
+        GenerousTitForTat("GenerousTitForTat"),        # 4
+        SuspiciousTitForTat("SuspiciousTitForTat"),    # 5
+        Prober("Prober"),                              # 6
+        Random("Random"),                              # 7
+        Gradual("Gradual"),                            # 8
+        Alternator("Alternator"),                      # 9
+        Bayesian("Bayesian"),                          # 10
         
-        # Behavioral strategies  
-        ForgivingGrimTrigger("ForgivingGrimTrigger"),
-        Detective("Detective"),
-        SoftGrudger("SoftGrudger"),
+        # 11-13: Behavioral strategies
+        ForgivingGrimTrigger("ForgivingGrimTrigger"),  # 11
+        Detective("Detective"),                        # 12
+        SoftGrudger("SoftGrudger"),                    # 13
         
-        # Adaptive strategies
-        QLearningAgent("QLearning"),
-        ThompsonSampling("ThompsonSampling"),
-        GradientMetaLearner("GradientMetaLearner")
+        # 14-16: Adaptive learning strategies
+        QLearningAgent("QLearning"),                   # 14
+        ThompsonSampling("ThompsonSampling"),          # 15
+        GradientMetaLearner("GradientMetaLearner")     # 16
     ]
     
     # Add LLM agents with their assigned temperature settings
@@ -557,7 +570,7 @@ def run_test_experiment():
             )
     
     print(f"\nCreated {len(agents)} total agents:")
-    print(f"- 12 Classical/Behavioral/Adaptive agents")
+    print(f"- 16 Classical/Behavioral/Adaptive agents")
     
     # Count LLM agents by provider
     llm_counts = {'GPT4': 0, 'Claude': 0, 'Mistral': 0, 'Gemini': 0}
@@ -633,7 +646,7 @@ def run_test_experiment():
         'timestamp': datetime.now().isoformat(),
         'test_type': 'comprehensive_test',
         'total_agents': len(agents),
-        'classical_agents': 12,
+        'classical_agents': 16,
         'llm_agent_counts': {k: v for k, v in llm_counts.items() if v > 0},
         'temperature_settings': temperature_settings,
         'termination_probability': test_termination_prob,
