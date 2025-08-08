@@ -6,7 +6,8 @@ in the Iterated Prisoner's Dilemma based on Payne & Alloui-Cros (2025)
 from .agents import (
     # Classical strategies
     TitForTat, AlwaysCooperate, AlwaysDefect, Random,
-    GrimTrigger, Pavlov,
+    GrimTrigger, Pavlov, WinStayLoseShift,
+    GenerousTitForTat, SuspiciousTitForTat, Prober, Gradual, Alternator, Bayesian,
     
     # Behavioral strategies
     ForgivingGrimTrigger, Detective, SoftGrudger,
@@ -32,7 +33,8 @@ __version__ = "1.0.0"
 __all__ = [
     # Agents
     "TitForTat", "AlwaysCooperate", "AlwaysDefect", "Random",
-    "GrimTrigger", "Pavlov",
+    "GrimTrigger", "Pavlov", "WinStayLoseShift",
+    "GenerousTitForTat", "SuspiciousTitForTat", "Prober", "Gradual", "Alternator", "Bayesian",
     "ForgivingGrimTrigger", "Detective", "SoftGrudger",
     "QLearningAgent", "ThompsonSampling", "GradientMetaLearner",
     "GPT4Agent", "ClaudeAgent", "MistralAgent", "GeminiAgent",

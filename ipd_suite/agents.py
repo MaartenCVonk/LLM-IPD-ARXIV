@@ -289,7 +289,7 @@ class Bayesian(Agent):
                 return "C"
             else:
                 # If opponent didn't retaliate to defection, exploit
-                if self.opponent_history[1] == "C" and self.opponent_history[2] == "C":
+                if len(self.opponent_history) >= 3 and self.opponent_history[1] == "C" and self.opponent_history[2] == "C":
                     return "D"
                 return prev_opponent_move
         elif strategy == 'alternator':

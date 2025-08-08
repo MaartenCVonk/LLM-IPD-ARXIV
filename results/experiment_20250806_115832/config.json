@@ -1,7 +1,9 @@
 {
-  "timestamp": "2025-07-21T15:57:20.051835",
+  "timestamp": "2025-08-06T13:15:30.112768",
   "shadow_conditions": [
-    0.5
+    0.1,
+    0.25,
+    0.75
   ],
   "temperature_settings": {
     "openai": [
@@ -28,8 +30,8 @@
   "llm_models": {
     "OPENAI": "default",
     "ANTHROPIC": "default",
-    "MISTRAL": "default",
-    "GOOGLE": "default"
+    "GOOGLE": "default",
+    "MISTRAL": "default"
   },
   "classical_strategies": [
     "TitForTat",

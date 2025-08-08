@@ -39,6 +39,9 @@ from ipd_suite.utils import (
     create_progress_file, update_progress
 )
 
+# Import evolution functions
+from collections import defaultdict
+
 
 def create_agents(api_keys: Dict[str, str], 
                  temperature_settings: Dict[str, List[float]],
@@ -126,14 +129,140 @@ def create_agents(api_keys: Dict[str, str],
     return agents
 
 
+def evolve_population(current_population, tournament_result, min_count=1, verbose=True):
+    """Evolve population based on tournament performance (adapted from evolutionary_PD_expanded.py)"""
+    # Extract strategy statistics from tournament result
+    strategy_stats = {}
+    
+    # Get summary stats and convert to the format expected by evolution
+    summary = tournament_result.get_summary_stats()
+    for _, row in summary.iterrows():
+        agent_name = row['agent']
+        # Extract strategy name (remove temperature suffix for LLM agents)
+        if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Gemini']):
+            # For LLM agents, keep the full name as strategy
+            strategy = agent_name
+        else:
+            # For classical agents, use base name
+            strategy = agent_name
+            
+        if strategy not in strategy_stats:
+            strategy_stats[strategy] = {
+                'avg_score_per_move': 0,
+                'total_score': 0,
+                'matches_played': 0,
+                'total_rounds': 0
+            }
+        
+        strategy_stats[strategy]['avg_score_per_move'] = row['avg_score_per_move']
+        strategy_stats[strategy]['total_score'] = row['total_score'] 
+        strategy_stats[strategy]['matches_played'] = row['matches_played']
+        strategy_stats[strategy]['total_rounds'] = row['total_rounds']
+    
+    # Calculate fitness for each strategy
+    strategy_fitness = {
+        strategy: stats['avg_score_per_move'] 
+        for strategy, stats in strategy_stats.items()
+    }
+    
+    # Print detailed fitness values
+    if verbose:
+        print("\nStrategy Performance:")
+        print("---------------------")
+        print("Strategy                 | Score/Move | Matches | Rounds")
+        print("-------------------------|------------|---------|--------")
+        for strategy, stats in sorted(strategy_stats.items(), 
+                                     key=lambda x: x[1]['avg_score_per_move'], 
+                                     reverse=True):
+            print(f"{strategy:25}|    {stats['avg_score_per_move']:.3f}    | {stats['matches_played']:7} | {stats['total_rounds']:6}")
+    
+    # Calculate total fitness
+    total_fitness = sum(strategy_fitness.values())
+    if total_fitness == 0:
+        print("Warning: Total fitness is zero. Maintaining current population.")
+        return current_population.copy()
+    
+    # Calculate new population sizes
+    total_agents = sum(current_population.values())
+    new_population = {}
+    
+    # Calculate mean fitness
+    mean_fitness = total_fitness / len(strategy_fitness)
+    
+    if verbose:
+        print("\nPopulation Evolution:")
+        print("---------------------")
+        print("Strategy                 | Fitness | Relative | Current | New")
+        print("-------------------------|---------|----------|---------|----")
+    
+    for strategy, current_count in current_population.items():
+        if strategy not in strategy_fitness:
+            # Strategy didn't participate, give minimum
+            new_population[strategy] = min_count
+            continue
+            
+        fitness = strategy_fitness[strategy]
+        # Calculate relative fitness with amplification
+        relative_fitness = (fitness / mean_fitness) ** 1.5  # Moderate amplification
+        raw_count = relative_fitness * current_count
+        new_count = max(min_count, int(round(raw_count)))
+        new_population[strategy] = new_count
+        
+        if verbose:
+            print(f"{strategy:25}| {fitness:.3f}  | {relative_fitness:.3f}   | {current_count:7} | {new_count:3}")
+    
+    # Adjust to maintain total population size
+    current_total = sum(new_population.values())
+    adjustment_attempts = 0
+    max_adjustments = 100
+    
+    while current_total > total_agents and adjustment_attempts < max_adjustments:
+        adjustment_attempts += 1
+        # Find strategy with lowest fitness that has more than min_count
+        adjustable = [s for s in new_population if new_population[s] > min_count]
+        if not adjustable:
+            strategy = max(new_population, key=new_population.get)
+        else:
+            strategy = min(adjustable, key=lambda s: strategy_fitness.get(s, 0))
+        new_population[strategy] -= 1
+        current_total -= 1
+    
+    while current_total < total_agents and adjustment_attempts < max_adjustments:
+        adjustment_attempts += 1
+        strategy = max(strategy_fitness, key=strategy_fitness.get)
+        new_population[strategy] += 1
+        current_total += 1
+    
+    # Remove strategies with 0 count
+    new_population = {k: v for k, v in new_population.items() if v > 0}
+    
+    return new_population
+
+
 def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                         temperature_settings: Dict[str, List[float]] = None,
                         n_tournaments: int = 5,
-                        output_dir: str = "results"):
-    """Run the main experimental suite"""
+                        n_phases: int = 5,
+                        output_dir: str = "results",
+                        evolutionary: bool = False):
+    """Run the main experimental suite
+    
+    Args:
+        shadow_conditions: List of termination probabilities to test
+        temperature_settings: Temperature settings for each LLM provider
+        n_tournaments: Number of tournaments per condition (standard mode only)
+        n_phases: Number of evolutionary phases per condition (evolutionary mode only)
+        output_dir: Directory to save results
+        evolutionary: If True, use evolutionary mode where population changes
+                     based on performance. If False, run repeated identical tournaments.
+    """
     print("="*60)
     print("IPD EXPERIMENT RUNNER")
     print("Based on Payne & Alloui-Cros (2025)")
+    if evolutionary:
+        print("Mode: EVOLUTIONARY (population evolves based on performance)")
+    else:
+        print("Mode: STANDARD (repeated identical tournaments)")
     print("="*60)
     
     # Default temperature settings - model-specific to respect API constraints
@@ -156,28 +285,37 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
     
     print(f"\nAvailable APIs: {', '.join(available_apis)}")
     
+    # Map API key names to temperature setting keys
+    api_to_temp_key = {
+        'OPENAI': 'openai',
+        'ANTHROPIC': 'anthropic', 
+        'MISTRAL': 'mistral',
+        'GOOGLE': 'gemini'  # Google API key maps to gemini temperature settings
+    }
+    
     # Calculate number of LLM agents based on available APIs and their temperature settings
-    n_llm_agents = sum(len(temperature_settings.get(api.lower(), [])) 
+    n_llm_agents = sum(len(temperature_settings.get(api_to_temp_key.get(api, api.lower()), [])) 
                       for api in available_apis 
-                      if api.lower() in temperature_settings)
+                      if api_to_temp_key.get(api, api.lower()) in temperature_settings)
     n_total_agents = n_llm_agents + 16  # 16 classical/behavioral/adaptive
     n_matches = n_total_agents * (n_total_agents - 1) // 2
     
     print(f"\nExperiment scale:")
     print(f"- Shadow conditions: {shadow_conditions}")
     print(f"- Temperature settings by model:")
-    for model, temps in temperature_settings.items():
-        if model.upper() in [api.upper() for api in available_apis]:
-            print(f"  - {model.capitalize()}: {temps}")
+    for api in available_apis:
+        temp_key = api_to_temp_key.get(api, api.lower())
+        if temp_key in temperature_settings:
+            print(f"  - {temp_key.capitalize()}: {temperature_settings[temp_key]}")
     print(f"- Total agents: {n_total_agents}")
     print(f"- Matches per tournament: {n_matches}")
     print(f"- Tournaments per condition: {n_tournaments}")
     
     # Cost estimation
     avg_rounds = 1 / shadow_conditions[0]  # Expected rounds for first condition
-    api_counts = {api: len(temperature_settings.get(api.lower(), [])) 
+    api_counts = {api: len(temperature_settings.get(api_to_temp_key.get(api, api.lower()), [])) 
                   for api in available_apis 
-                  if api.lower() in temperature_settings}
+                  if api_to_temp_key.get(api, api.lower()) in temperature_settings}
     costs = estimate_api_costs(api_counts, int(avg_rounds), n_matches)
     
     total_cost = sum(costs.values()) * len(shadow_conditions) * n_tournaments
@@ -224,37 +362,137 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
             'completed_conditions': i
         })
         
-        # Create agents for this condition
-        agents = create_agents(api_keys, temperature_settings, shadow, 
-                             include_classical=True)
-        
-        # Run tournaments
-        tournament = Tournament(agents, termination_prob=shadow, verbose=True)
-        
-        with Timer(f"Shadow {shadow*100}% tournaments"):
+        if evolutionary:
+            # Run evolutionary tournaments
+            print(f"\nRunning evolutionary mode with {n_phases} phases...")
+            
+            # Create initial population from agents
+            initial_agents = create_agents(api_keys, temperature_settings, shadow, include_classical=True)
+            
+            # Convert to population dictionary
+            initial_population = {}
+            for agent in initial_agents:
+                agent_name = agent.name
+                if agent_name in initial_population:
+                    initial_population[agent_name] += 1
+                else:
+                    initial_population[agent_name] = 1
+            
+            current_population = initial_population.copy()
+            population_history = [initial_population.copy()]
             results = []
-            for t in range(n_tournaments):
-                print(f"\nTournament {t+1}/{n_tournaments}")
-                result = tournament.run_tournament()
-                
-                # Save individual tournament results
-                result.save_to_csv(
-                    os.path.join(experiment_dir, 
-                               f"tournament_shadow{int(shadow*100)}_run{t+1}.csv")
-                )
-                results.append(result)
-                
-                # Update progress
-                completed_matches = (i * n_tournaments + t + 1) * n_matches
-                update_progress(progress_file, {
-                    'completed_matches': completed_matches
-                })
-                
-                # Print intermediate results
-                print("\nTop 5 performers:")
-                summary = result.get_summary_stats()
-                for idx, row in summary.head().iterrows():
-                    print(f"{idx+1}. {row['agent']}: {row['avg_score_per_move']:.3f}")
+            
+            with Timer(f"Shadow {shadow*100}% evolutionary tournaments"):
+                for phase in range(n_phases):
+                    print(f"\n{'='*50}")
+                    print(f"Phase {phase+1}/{n_phases} - Shadow {shadow*100}%")
+                    print(f"{'='*50}")
+                    print(f"Population: {current_population}")
+                    
+                    # Create agents based on current population
+                    phase_agents = []
+                    for agent_name, count in current_population.items():
+                        for instance in range(count):
+                            # Find the original agent template
+                            original_agent = next(a for a in initial_agents if a.name == agent_name)
+                            
+                            # Create new instance with proper API key handling
+                            if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Gemini']):
+                                # For LLM agents, determine which API key to use based on agent type
+                                if 'GPT4' in agent_name:
+                                    api_key = api_keys['OPENAI_API_KEY']
+                                elif 'Claude' in agent_name:
+                                    api_key = api_keys['ANTHROPIC_API_KEY']
+                                elif 'Mistral' in agent_name:
+                                    api_key = api_keys['MISTRAL_API_KEY']
+                                elif 'Gemini' in agent_name:
+                                    api_key = api_keys['GOOGLE_API_KEY']
+                                else:
+                                    continue  # Skip unknown LLM agent types
+                                
+                                new_agent = original_agent.__class__(
+                                    f"{agent_name}_p{phase+1}i{instance+1}",
+                                    api_key,
+                                    model=original_agent.model,
+                                    temperature=original_agent.temperature,
+                                    termination_prob=shadow
+                                )
+                            else:
+                                # For classical agents
+                                new_agent = original_agent.__class__(f"{agent_name}_p{phase+1}i{instance+1}")
+                            
+                            phase_agents.append(new_agent)
+                    
+                    # Run tournament for this phase
+                    tournament = Tournament(phase_agents, termination_prob=shadow, verbose=True)
+                    result = tournament.run_tournament()
+                    
+                    # Save phase results
+                    result.save_to_csv(
+                        os.path.join(experiment_dir, 
+                                   f"evolutionary_shadow{int(shadow*100)}_phase{phase+1}.csv")
+                    )
+                    results.append(result)
+                    
+                    # Update progress
+                    completed_matches = (i * n_phases + phase + 1) * len(phase_agents) * (len(phase_agents) - 1) // 2
+                    update_progress(progress_file, {
+                        'completed_matches': completed_matches
+                    })
+                    
+                    # Print phase results
+                    print("\nTop 5 performers this phase:")
+                    summary = result.get_summary_stats()
+                    for idx, row in summary.head().iterrows():
+                        print(f"{idx+1}. {row['agent']}: {row['avg_score_per_move']:.3f}")
+                    
+                    # Evolve population for next phase (except last phase)
+                    if phase < n_phases - 1:
+                        current_population = evolve_population(current_population, result, verbose=True)
+                        population_history.append(current_population.copy())
+                        
+                        print("\nPopulation changes:")
+                        prev_pop = population_history[-2]
+                        for strategy in sorted(set(list(prev_pop.keys()) + list(current_population.keys()))):
+                            prev_count = prev_pop.get(strategy, 0)
+                            curr_count = current_population.get(strategy, 0)
+                            if prev_count != curr_count:
+                                change = curr_count - prev_count
+                                change_str = f"(+{change})" if change > 0 else f"({change})" if change < 0 else ""
+                                print(f"  {strategy}: {prev_count} → {curr_count} {change_str}")
+        else:
+            # Run standard tournaments (original behavior)
+            # Create agents for this condition
+            agents = create_agents(api_keys, temperature_settings, shadow, 
+                                 include_classical=True)
+            
+            # Run tournaments
+            tournament = Tournament(agents, termination_prob=shadow, verbose=True)
+            
+            with Timer(f"Shadow {shadow*100}% tournaments"):
+                results = []
+                for t in range(n_tournaments):
+                    print(f"\nTournament {t+1}/{n_tournaments}")
+                    result = tournament.run_tournament()
+                    
+                    # Save individual tournament results
+                    result.save_to_csv(
+                        os.path.join(experiment_dir, 
+                                   f"tournament_shadow{int(shadow*100)}_run{t+1}.csv")
+                    )
+                    results.append(result)
+                    
+                    # Update progress
+                    completed_matches = (i * n_tournaments + t + 1) * n_matches
+                    update_progress(progress_file, {
+                        'completed_matches': completed_matches
+                    })
+                    
+                    # Print intermediate results
+                    print("\nTop 5 performers:")
+                    summary = result.get_summary_stats()
+                    for idx, row in summary.head().iterrows():
+                        print(f"{idx+1}. {row['agent']}: {row['avg_score_per_move']:.3f}")
         
         all_results[f"shadow_{int(shadow*100)}"] = results
     
@@ -715,9 +953,15 @@ if __name__ == "__main__":
                        default='{"openai": [0.2, 0.7, 1.2], "anthropic": [0.2, 0.5, 0.8], "mistral": [0.2, 0.7, 1.2], "gemini": [0.2, 0.7, 1.2]}',
                        help="Temperature settings JSON string for each model (e.g., '{\"openai\": [0.2, 0.7, 1.2], \"anthropic\": [0.2, 0.5, 0.8]}')")
     parser.add_argument("--tournaments", type=int, default=5,
-                       help="Number of tournaments per condition")
+                       help="Number of tournaments per condition (standard mode only, default: 5)")
+    parser.add_argument("--phases", type=int, default=5,
+                       help="Number of evolutionary phases per condition (evolutionary mode only, default: 5)")
     parser.add_argument("--output", type=str, default="results",
                        help="Output directory for results")
+    parser.add_argument("--evolutionary", action="store_true",
+                       help="Use evolutionary mode: population evolves based on performance across phases")
+    parser.add_argument("--test-evolutionary", action="store_true",
+                       help="Run test experiment in evolutionary mode")
     
     args = parser.parse_args()
     
@@ -725,6 +969,16 @@ if __name__ == "__main__":
         run_test_experiment()
     elif args.test_mistral_temp:
         test_mistral_temperature()
+    elif args.test_evolutionary:
+        # Run a quick evolutionary test with fewer agents and phases
+        run_main_experiments(
+            shadow_conditions=[0.5],  # Single condition for speed
+            temperature_settings={'openai': [0.7]} if os.getenv('OPENAI_API_KEY') else {},
+            n_tournaments=5,  # Not used in evolutionary mode
+            n_phases=3,  # 3 phases instead of 5
+            output_dir="results",
+            evolutionary=True
+        )
     else:
         # Parse temperature settings from JSON string
         try:
@@ -743,5 +997,7 @@ if __name__ == "__main__":
             shadow_conditions=args.shadow,
             temperature_settings=temperature_settings,
             n_tournaments=args.tournaments,
-            output_dir=args.output
+            n_phases=args.phases,
+            output_dir=args.output,
+            evolutionary=args.evolutionary
         )

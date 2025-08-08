@@ -1,0 +1,188 @@
+{
+  "timestamp": "2025-08-06T15:12:56.572110",
+  "test_type": "comprehensive_test",
+  "total_agents": 28,
+  "classical_agents": 16,
+  "llm_agent_counts": {
+    "GPT4": 3,
+    "Claude": 3,
+    "Mistral": 3,
+    "Gemini": 3
+  },
+  "temperature_settings": {
+    "openai": [
+      0.2,
+      0.7,
+      1.2
+    ],
+    "anthropic": [
+      0.2,
+      0.5,
+      0.8
+    ],
+    "mistral": [
+      0.2,
+      0.7,
+      1.2
+    ],
+    "gemini": [
+      0.2,
+      0.7,
+      1.2
+    ]
+  },
+  "termination_probability": 0.5,
+  "max_rounds": 8,
+  "api_usage_summary": {
+    "total_api_calls": 663,
+    "total_tokens": 311388
+  },
+  "top_performers": [
+    {
+      "rank": 15,
+      "agent": "ThompsonSampling",
+      "avg_score_per_move": 3.375,
+      "is_llm": false
+    },
+    {
+      "rank": 5,
+      "agent": "SuspiciousTitForTat",
+      "avg_score_per_move": 3.2325581395348837,
+      "is_llm": false
+    },
+    {
+      "rank": 7,
+      "agent": "Random",
+      "avg_score_per_move": 3.175,
+      "is_llm": false
+    },
+    {
+      "rank": 14,
+      "agent": "QLearning",
+      "avg_score_per_move": 3.169811320754717,
+      "is_llm": false
+    },
+    {
+      "rank": 16,
+      "agent": "GradientMetaLearner",
+      "avg_score_per_move": 3.0652173913043477,
+      "is_llm": false
+    },
+    {
+      "rank": 9,
+      "agent": "Alternator",
+      "avg_score_per_move": 2.9215686274509802,
+      "is_llm": false
+    },
+    {
+      "rank": 26,
+      "agent": "Gemini25Flash_T02",
+      "avg_score_per_move": 2.75,
+      "is_llm": true
+    },
+    {
+      "rank": 8,
+      "agent": "Gradual",
+      "avg_score_per_move": 2.7454545454545456,
+      "is_llm": false
+    },
+    {
+      "rank": 20,
+      "agent": "Claude3Sonnet_T02",
+      "avg_score_per_move": 2.7049180327868854,
+      "is_llm": true
+    },
+    {
+      "rank": 12,
+      "agent": "Detective",
+      "avg_score_per_move": 2.702127659574468,
+      "is_llm": false
+    }
+  ],
+  "llm_performance": [
+    {
+      "agent": "GPT4_T02",
+      "temperature": 0.2,
+      "score": 2.5660377358490565,
+      "api_calls": 53,
+      "tokens": 27122
+    },
+    {
+      "agent": "GPT4_T07",
+      "temperature": 0.7,
+      "score": 2.5714285714285716,
+      "api_calls": 63,
+      "tokens": 30843
+    },
+    {
+      "agent": "GPT4_T12",
+      "temperature": 1.2,
+      "score": 2.6557377049180326,
+      "api_calls": 61,
+      "tokens": 31066
+    },
+    {
+      "agent": "Claude3Sonnet_T02",
+      "temperature": 0.2,
+      "score": 2.7049180327868854,
+      "api_calls": 61,
+      "tokens": 25148
+    },
+    {
+      "agent": "Claude3Sonnet_T05",
+      "temperature": 0.5,
+      "score": 2.5762711864406778,
+      "api_calls": 59,
+      "tokens": 24163
+    },
+    {
+      "agent": "Claude3Sonnet_T08",
+      "temperature": 0.8,
+      "score": 2.5319148936170213,
+      "api_calls": 47,
+      "tokens": 18954
+    },
+    {
+      "agent": "MistralLarge_T02",
+      "temperature": 0.2,
+      "score": 2.6607142857142856,
+      "api_calls": 56,
+      "tokens": 35646
+    },
+    {
+      "agent": "MistralLarge_T07",
+      "temperature": 0.7,
+      "score": 2.3555555555555556,
+      "api_calls": 45,
+      "tokens": 27865
+    },
+    {
+      "agent": "MistralLarge_T12",
+      "temperature": 1.2,
+      "score": 2.4838709677419355,
+      "api_calls": 62,
+      "tokens": 38621
+    },
+    {
+      "agent": "Gemini25Flash_T02",
+      "temperature": 0.2,
+      "score": 2.75,
+      "api_calls": 44,
+      "tokens": 14317
+    },
+    {
+      "agent": "Gemini25Flash_T07",
+      "temperature": 0.7,
+      "score": 2.586206896551724,
+      "api_calls": 58,
+      "tokens": 19486
+    },
+    {
+      "agent": "Gemini25Flash_T12",
+      "temperature": 1.2,
+      "score": 2.6666666666666665,
+      "api_calls": 54,
+      "tokens": 18157
+    }
+  ]
+}
