@@ -88,6 +88,7 @@ class TournamentResult:
                 'avg_score_per_move': agent_data['avg_score_per_move'],
                 'total_score': agent_data['total_score'],
                 'matches_played': agent_data['matches_played'],
+                'total_moves': agent_data['total_moves'],
                 'cooperation_rate': agent_data['cooperation_rate'],
                 'first_move_cooperation': agent_data['first_move_cooperation']
             })
@@ -98,7 +99,7 @@ class Tournament:
     """Main tournament runner with async support for concurrent matches"""
     
     def __init__(self, agents: List[Agent], termination_prob: float = 0.1,
-                 max_rounds: int = 200, verbose: bool = True, max_concurrent: int = 10):
+                 max_rounds: int = 200, verbose: bool = True, max_concurrent: int = 20):
         self.agents = agents
         self.termination_prob = termination_prob
         self.max_rounds = max_rounds

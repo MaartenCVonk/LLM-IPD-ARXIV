@@ -82,7 +82,7 @@ def create_agents(api_keys: Dict[str, str],
         for i, temp in enumerate(temperature_settings['openai'][:3], 17):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
-                GPT4Agent(f"GPT4{temp_suffix}", 
+                GPT4Agent(f"GPT4oMini{temp_suffix}", 
                          api_keys['OPENAI_API_KEY'],
                          model="gpt-4o-mini",
                          temperature=temp,
@@ -94,9 +94,9 @@ def create_agents(api_keys: Dict[str, str],
         for i, temp in enumerate(temperature_settings['anthropic'][:3], 20):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
-                ClaudeAgent(f"Claude3Sonnet{temp_suffix}",
+                ClaudeAgent(f"Claude3.5-haiku{temp_suffix}",
                            api_keys['ANTHROPIC_API_KEY'],
-                           model="claude-3-5-sonnet-20241022",
+                           model="claude-3-5-haiku-latest",
                            temperature=temp,
                            termination_prob=termination_prob)
             )
@@ -106,9 +106,9 @@ def create_agents(api_keys: Dict[str, str],
         for i, temp in enumerate(temperature_settings['mistral'][:3], 23):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
-                MistralAgent(f"MistralLarge{temp_suffix}",
+                MistralAgent(f"Ministral-8b{temp_suffix}",
                             api_keys['MISTRAL_API_KEY'],
-                            model="mistral-large-latest",
+                            model="ministral-8b-latest",
                             temperature=temp,
                             termination_prob=termination_prob)
             )
@@ -120,7 +120,7 @@ def create_agents(api_keys: Dict[str, str],
             agents.append(
                 GeminiAgent(f"Gemini25Flash{temp_suffix}",
                            api_keys['GOOGLE_API_KEY'],
-                           model="gemini-2.5-pro",
+                           model="gemini-2.5-flash",
                            temperature=temp,
                            termination_prob=termination_prob)
             )
@@ -129,111 +129,172 @@ def create_agents(api_keys: Dict[str, str],
     return agents
 
 
-def evolve_population(current_population, tournament_result, min_count=1, verbose=True):
-    """Evolve population based on tournament performance (adapted from evolutionary_PD_expanded.py)"""
-    # Extract strategy statistics from tournament result
+def convert_tournament_result_to_phase_result(tournament_result):
+    """Convert TournamentResult to phase_result format expected by evolve_population"""
+    # Get agent stats from tournament result
+    agent_stats = tournament_result.agent_stats
+    
+    # Convert to strategy stats by grouping agents by strategy name
     strategy_stats = {}
     
-    # Get summary stats and convert to the format expected by evolution
-    summary = tournament_result.get_summary_stats()
-    for _, row in summary.iterrows():
-        agent_name = row['agent']
-        # Extract strategy name (remove temperature suffix for LLM agents)
-        if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Gemini']):
-            # For LLM agents, keep the full name as strategy
-            strategy = agent_name
+    for agent_name, stats in agent_stats.items():
+        # Extract strategy name (remove instance numbers like _p1i1)
+        if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Ministral', 'Gemini']):
+            # For LLM agents, remove the phase/instance suffix (_p1i1) but keep temperature
+            # Examples: 'Gemini25Flash_T07_p1i1' -> 'Gemini25Flash_T07'
+            parts = agent_name.split('_')
+            # Keep all parts except the last one if it looks like phase/instance (pXiX)
+            if len(parts) > 1 and parts[-1].startswith('p') and 'i' in parts[-1]:
+                strategy = '_'.join(parts[:-1])
+            else:
+                strategy = agent_name
         else:
-            # For classical agents, use base name
-            strategy = agent_name
-            
+            # For classical agents, extract base strategy name (remove instance IDs like _p1i1)
+            parts = agent_name.split('_')
+            if len(parts) > 1 and parts[-1].startswith('p') and 'i' in parts[-1]:
+                strategy = '_'.join(parts[:-1])
+            else:
+                strategy = parts[0]
+        
         if strategy not in strategy_stats:
             strategy_stats[strategy] = {
-                'avg_score_per_move': 0,
                 'total_score': 0,
                 'matches_played': 0,
                 'total_rounds': 0
             }
         
-        strategy_stats[strategy]['avg_score_per_move'] = row['avg_score_per_move']
-        strategy_stats[strategy]['total_score'] = row['total_score'] 
-        strategy_stats[strategy]['matches_played'] = row['matches_played']
-        strategy_stats[strategy]['total_rounds'] = row['total_rounds']
+        # Aggregate stats for this strategy
+        strategy_stats[strategy]['total_score'] += stats['total_score']
+        strategy_stats[strategy]['matches_played'] += stats['matches_played']
+        strategy_stats[strategy]['total_rounds'] += stats['total_moves']
     
-    # Calculate fitness for each strategy
+    # Calculate average scores for each strategy
+    for strategy, stats in strategy_stats.items():
+        if stats['matches_played'] > 0:
+            stats['avg_score_per_match'] = stats['total_score'] / stats['matches_played']
+            
+            if stats['total_rounds'] > 0:
+                stats['avg_score_per_move'] = stats['total_score'] / stats['total_rounds']
+            else:
+                stats['avg_score_per_move'] = 0
+                
+            stats['avg_score_per_round'] = stats['avg_score_per_match']  # For compatibility
+        else:
+            stats['avg_score_per_match'] = 0
+            stats['avg_score_per_move'] = 0
+            stats['avg_score_per_round'] = 0
+    
+    return {
+        "strategy_stats": strategy_stats,
+        "matches": []  # Not needed for evolution but included for completeness
+    }
+
+
+def evolve_population(current_population, phase_result, min_count=0, verbose=True):
+    """
+    Update the population based on performance in the last phase.
+    """
+    # Extract average score per move for each strategy (true per-move performance)
+    strategy_stats = phase_result["strategy_stats"]
     strategy_fitness = {
-        strategy: stats['avg_score_per_move'] 
+        strategy: stats["avg_score_per_move"] 
         for strategy, stats in strategy_stats.items()
     }
     
     # Print detailed fitness values
     if verbose:
-        print("\nStrategy Performance:")
-        print("---------------------")
-        print("Strategy                 | Score/Move | Matches | Rounds")
-        print("-------------------------|------------|---------|--------")
+        print("\nDetailed Strategy Fitness Calculation:")
+        print("----------------------------------------")
+        print("Strategy    | Score/Move | Score/Match | Total Score | Rounds | Matches")
+        print("------------|------------|-------------|-------------|--------|--------")
         for strategy, stats in sorted(strategy_stats.items(), 
                                      key=lambda x: x[1]['avg_score_per_move'], 
                                      reverse=True):
-            print(f"{strategy:25}|    {stats['avg_score_per_move']:.3f}    | {stats['matches_played']:7} | {stats['total_rounds']:6}")
+            print(f"{strategy:12}|    {stats['avg_score_per_move']:.3f}    |    {stats['avg_score_per_match']:.3f}    | {stats['total_score']:.1f}     | {stats['total_rounds']}   | {stats['matches_played']}")
     
     # Calculate total fitness
     total_fitness = sum(strategy_fitness.values())
-    if total_fitness == 0:
-        print("Warning: Total fitness is zero. Maintaining current population.")
-        return current_population.copy()
+    if total_fitness == 0:  # Avoid division by zero
+        print("Warning: Total fitness is zero. Using equal distribution.")
+        new_population = {strategy: min_count for strategy in current_population}
+        return new_population
     
-    # Calculate new population sizes
+    # Calculate new population sizes with enhanced selection pressure
     total_agents = sum(current_population.values())
     new_population = {}
     
     # Calculate mean fitness
     mean_fitness = total_fitness / len(strategy_fitness)
     
+    # Print evolutionary calculations
     if verbose:
-        print("\nPopulation Evolution:")
-        print("---------------------")
-        print("Strategy                 | Fitness | Relative | Current | New")
-        print("-------------------------|---------|----------|---------|----")
+        print("\nEvolutionary Calculation:")
+        print("-------------------------")
+        print("Strategy    | Fitness | Relative | Raw Count | Final Count")
+        print("------------|---------|----------|-----------|------------")
     
     for strategy, current_count in current_population.items():
         if strategy not in strategy_fitness:
-            # Strategy didn't participate, give minimum
+            print(f"Warning: No fitness data for {strategy}, using minimum count.")
             new_population[strategy] = min_count
             continue
             
+        # Enhanced fitness-proportional reproduction
         fitness = strategy_fitness[strategy]
-        # Calculate relative fitness with amplification
-        relative_fitness = (fitness / mean_fitness) ** 1.5  # Moderate amplification
-        raw_count = relative_fitness * current_count
+        # Calculate relative fitness compared to mean (amplifies differences)
+        relative_fitness = (fitness / mean_fitness) ** 2  # Square to amplify differences
+        raw_count = (relative_fitness * current_count)
+        # Use more aggressive rounding to increase selective pressure
         new_count = max(min_count, int(round(raw_count)))
         new_population[strategy] = new_count
         
         if verbose:
-            print(f"{strategy:25}| {fitness:.3f}  | {relative_fitness:.3f}   | {current_count:7} | {new_count:3}")
+            print(f"{strategy:12}| {fitness:.3f}  | {relative_fitness:.3f}   | {raw_count:.2f}    | {new_count}")
     
     # Adjust to maintain total population size
-    current_total = sum(new_population.values())
+    original_total = sum(new_population.values())
     adjustment_attempts = 0
-    max_adjustments = 100
+    max_adjustments = 100  # Safety limit to prevent infinite loops
     
-    while current_total > total_agents and adjustment_attempts < max_adjustments:
+    while sum(new_population.values()) > total_agents and adjustment_attempts < max_adjustments:
         adjustment_attempts += 1
         # Find strategy with lowest fitness that has more than min_count
         adjustable = [s for s in new_population if new_population[s] > min_count]
         if not adjustable:
+            # If all at minimum, reduce the one with the most counts
             strategy = max(new_population, key=new_population.get)
         else:
+            # Otherwise reduce the one with lowest fitness
             strategy = min(adjustable, key=lambda s: strategy_fitness.get(s, 0))
         new_population[strategy] -= 1
-        current_total -= 1
+        if verbose and adjustment_attempts <= 5:  # Only show first few adjustments
+            print(f"Adjusting down: {strategy} (lowest adjustable fitness)")
     
-    while current_total < total_agents and adjustment_attempts < max_adjustments:
+    while sum(new_population.values()) < total_agents and adjustment_attempts < max_adjustments:
         adjustment_attempts += 1
-        strategy = max(strategy_fitness, key=strategy_fitness.get)
-        new_population[strategy] += 1
-        current_total += 1
+        # Find strategy with highest fitness that exists in new_population to increment
+        available_strategies = [s for s in strategy_fitness.keys() if s in new_population]
+        if available_strategies:
+            strategy = max(available_strategies, key=strategy_fitness.get)
+            new_population[strategy] += 1
+            if verbose and adjustment_attempts <= 5:  # Only show first few adjustments
+                print(f"Adjusting up: {strategy} (highest fitness)")
+        else:
+            # If no strategies available, break to avoid infinite loop
+            break
     
-    # Remove strategies with 0 count
+    # Verify all strategies have at least min_count
+    for strategy in new_population:
+        if new_population[strategy] < min_count:
+            new_population[strategy] = min_count
+            if verbose:
+                print(f"Warning: Adjusted {strategy} to minimum count of {min_count}")
+    
+    if verbose and original_total != sum(new_population.values()):
+        print(f"Population adjusted from {original_total} to {sum(new_population.values())} to maintain total of {total_agents} agents")
+    
+    # Special handling: if a strategy has 0 count, remove it entirely from the population
+    # This ensures eliminated strategies really disappear
     new_population = {k: v for k, v in new_population.items() if v > 0}
     
     return new_population
@@ -397,13 +458,13 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                             original_agent = next(a for a in initial_agents if a.name == agent_name)
                             
                             # Create new instance with proper API key handling
-                            if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Gemini']):
+                            if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Ministral', 'Gemini']):
                                 # For LLM agents, determine which API key to use based on agent type
                                 if 'GPT4' in agent_name:
                                     api_key = api_keys['OPENAI_API_KEY']
                                 elif 'Claude' in agent_name:
                                     api_key = api_keys['ANTHROPIC_API_KEY']
-                                elif 'Mistral' in agent_name:
+                                elif 'Mistral' in agent_name or 'Ministral' in agent_name:
                                     api_key = api_keys['MISTRAL_API_KEY']
                                 elif 'Gemini' in agent_name:
                                     api_key = api_keys['GOOGLE_API_KEY']
@@ -448,7 +509,8 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                     
                     # Evolve population for next phase (except last phase)
                     if phase < n_phases - 1:
-                        current_population = evolve_population(current_population, result, verbose=True)
+                        phase_result = convert_tournament_result_to_phase_result(result)
+                        current_population = evolve_population(current_population, phase_result, verbose=True)
                         population_history.append(current_population.copy())
                         
                         print("\nPopulation changes:")
