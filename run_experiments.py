@@ -305,7 +305,8 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                         n_tournaments: int = 5,
                         n_phases: int = 5,
                         output_dir: str = "results",
-                        evolutionary: bool = False):
+                        evolutionary: bool = False,
+                        auto_confirm: bool = False):
     """Run the main experimental suite
     
     Args:
@@ -316,6 +317,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
         output_dir: Directory to save results
         evolutionary: If True, use evolutionary mode where population changes
                      based on performance. If False, run repeated identical tournaments.
+        auto_confirm: If True, automatically confirm all prompts (skip cost confirmation)
     """
     print("="*60)
     print("IPD EXPERIMENT RUNNER")
@@ -382,9 +384,9 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
     total_cost = sum(costs.values()) * len(shadow_conditions) * n_tournaments
     print(f"\nEstimated total cost: ${total_cost:.2f}")
     
-    # Auto-confirm for non-interactive mode or if AUTO_CONFIRM is set
+    # Auto-confirm for non-interactive mode, if AUTO_CONFIRM is set, or if --yes flag is used
     import sys
-    if not sys.stdin.isatty() or os.environ.get('AUTO_CONFIRM') == 'yes':
+    if auto_confirm or not sys.stdin.isatty() or os.environ.get('AUTO_CONFIRM') == 'yes':
         print("\nAuto-confirming experiment start")
     else:
         response = input("\nProceed with experiments? (y/n): ")
@@ -1024,6 +1026,8 @@ if __name__ == "__main__":
                        help="Use evolutionary mode: population evolves based on performance across phases")
     parser.add_argument("--test-evolutionary", action="store_true",
                        help="Run test experiment in evolutionary mode")
+    parser.add_argument("--yes", "-y", action="store_true",
+                       help="Automatically confirm all prompts (skip cost confirmation)")
     
     args = parser.parse_args()
     
@@ -1039,7 +1043,8 @@ if __name__ == "__main__":
             n_tournaments=5,  # Not used in evolutionary mode
             n_phases=3,  # 3 phases instead of 5
             output_dir="results",
-            evolutionary=True
+            evolutionary=True,
+            auto_confirm=args.yes
         )
     else:
         # Parse temperature settings from JSON string
@@ -1061,5 +1066,6 @@ if __name__ == "__main__":
             n_tournaments=args.tournaments,
             n_phases=args.phases,
             output_dir=args.output,
-            evolutionary=args.evolutionary
+            evolutionary=args.evolutionary,
+            auto_confirm=args.yes
         )
