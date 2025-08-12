@@ -77,15 +77,16 @@ def create_agents(api_keys: Dict[str, str],
         ])
     
     # Agents 17-28: LLM agents with 3 temperatures each (4 providers × 3 temperatures = 12 agents)
-    # GPT-4 agents (OpenAI) - Agents 17-19
-    if api_keys.get('OPENAI_API_KEY') and 'openai' in temperature_settings:
-        for i, temp in enumerate(temperature_settings['openai'][:3], 17):  # Ensure exactly 3 temperatures
-            temp_suffix = f"_T{str(temp).replace('.', '')}"
+    # OpenAI agents (Different Models) - Agents 17-19
+    if api_keys.get('OPENAI_API_KEY'):
+        openai_models = ['o3', 'gpt-4o', 'gpt-5']
+        for i, model in enumerate(openai_models, 17):
+            model_name = model.replace('-', '').replace('gpt', 'GPT')
             agents.append(
-                GPT4Agent(f"GPT4oMini{temp_suffix}", 
+                GPT4Agent(f"{model_name}_T1", 
                          api_keys['OPENAI_API_KEY'],
-                         model="gpt-4o-mini",
-                         temperature=temp,
+                         model=model,
+                         temperature=1.0,
                          termination_prob=termination_prob)
             )
     
@@ -94,9 +95,9 @@ def create_agents(api_keys: Dict[str, str],
         for i, temp in enumerate(temperature_settings['anthropic'][:3], 20):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
-                ClaudeAgent(f"Claude3.5-haiku{temp_suffix}",
+                ClaudeAgent(f"Claude4-Sonnet{temp_suffix}",
                            api_keys['ANTHROPIC_API_KEY'],
-                           model="claude-3-5-haiku-latest",
+                           model="claude-sonnet-4-20250514", #claude-3-5-haiku-latest
                            temperature=temp,
                            termination_prob=termination_prob)
             )
@@ -106,9 +107,9 @@ def create_agents(api_keys: Dict[str, str],
         for i, temp in enumerate(temperature_settings['mistral'][:3], 23):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
-                MistralAgent(f"Ministral-8b{temp_suffix}",
+                MistralAgent(f"Ministral-Large{temp_suffix}",
                             api_keys['MISTRAL_API_KEY'],
-                            model="ministral-8b-latest",
+                            model="mistral-large-latest", #ministral-8b-latest
                             temperature=temp,
                             termination_prob=termination_prob)
             )
@@ -118,9 +119,9 @@ def create_agents(api_keys: Dict[str, str],
         for i, temp in enumerate(temperature_settings['gemini'][:3], 26):  # Ensure exactly 3 temperatures
             temp_suffix = f"_T{str(temp).replace('.', '')}"
             agents.append(
-                GeminiAgent(f"Gemini25Flash{temp_suffix}",
+                GeminiAgent(f"Gemini25Pro{temp_suffix}",
                            api_keys['GOOGLE_API_KEY'],
-                           model="gemini-2.5-flash",
+                           model="gemini-2.5-pro", #gemini-2.5-flash
                            temperature=temp,
                            termination_prob=termination_prob)
             )
@@ -329,9 +330,9 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
     print("="*60)
     
     # Default temperature settings - model-specific to respect API constraints
+    # Note: OpenAI uses different models instead of temperature variations
     if temperature_settings is None:
         temperature_settings = {
-            'openai': [0.2, 0.7, 1.2],     # OpenAI supports 0-2 range
             'anthropic': [0.2, 0.5, 0.8],  # Anthropic supports 0-1 range
             'mistral': [0.2, 0.7, 1.2],    # Mistral supports 0-1 range (capped at 1.0)
             'gemini': [0.2, 0.7, 1.2]      # Gemini supports 0-2 range
@@ -356,19 +357,27 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
         'GOOGLE': 'gemini'  # Google API key maps to gemini temperature settings
     }
     
-    # Calculate number of LLM agents based on available APIs and their temperature settings
-    n_llm_agents = sum(len(temperature_settings.get(api_to_temp_key.get(api, api.lower()), [])) 
-                      for api in available_apis 
-                      if api_to_temp_key.get(api, api.lower()) in temperature_settings)
+    # Calculate number of LLM agents based on available APIs and their settings
+    n_llm_agents = 0
+    for api in available_apis:
+        temp_key = api_to_temp_key.get(api, api.lower())
+        if api == 'OPENAI':
+            n_llm_agents += 3  # Always 3 OpenAI models
+        elif temp_key in temperature_settings:
+            n_llm_agents += len(temperature_settings[temp_key])
     n_total_agents = n_llm_agents + 16  # 16 classical/behavioral/adaptive
     n_matches = n_total_agents * (n_total_agents - 1) // 2
     
     print(f"\nExperiment scale:")
     print(f"- Shadow conditions: {shadow_conditions}")
-    print(f"- Temperature settings by model:")
+    print(f"- Model configurations:")
+    # Show OpenAI models explicitly
+    if 'OPENAI' in available_apis:
+        print("  - OpenAI: 3 different models (o3, gpt-4o, gpt-5) all at temperature 1.0")
+    # Show other providers with their temperatures
     for api in available_apis:
         temp_key = api_to_temp_key.get(api, api.lower())
-        if temp_key in temperature_settings:
+        if temp_key in temperature_settings and temp_key != 'openai':
             print(f"  - {temp_key.capitalize()}: {temperature_settings[temp_key]}")
     print(f"- Total agents: {n_total_agents}")
     print(f"- Matches per tournament: {n_matches}")
@@ -460,9 +469,9 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                             original_agent = next(a for a in initial_agents if a.name == agent_name)
                             
                             # Create new instance with proper API key handling
-                            if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Ministral', 'Gemini']):
+                            if any(x in agent_name for x in ['GPT4', 'Claude', 'Mistral', 'Ministral', 'Gemini', 'o3', 'GPT5']):
                                 # For LLM agents, determine which API key to use based on agent type
-                                if 'GPT4' in agent_name:
+                                if any(x in agent_name for x in ['GPT4', 'o3', 'GPT5']):
                                     api_key = api_keys['OPENAI_API_KEY']
                                 elif 'Claude' in agent_name:
                                     api_key = api_keys['ANTHROPIC_API_KEY']
@@ -787,9 +796,8 @@ def run_test_experiment():
     
     api_keys = load_env_vars()
     
-    # Test temperature settings (corrected Mistral range)
+    # Test temperature settings (OpenAI uses different models instead)
     temperature_settings = {
-        'openai': [0.2, 0.7, 1.2],     # OpenAI supports 0-2 range
         'anthropic': [0.2, 0.5, 0.8],  # Anthropic supports 0-1 range
         'mistral': [0.2, 0.7, 1.2],    # Mistral supports 0-1 range (capped at 1.0)
         'gemini': [0.2, 0.7, 1.2]      # Gemini supports 0-2 range
@@ -823,15 +831,16 @@ def run_test_experiment():
     # Add LLM agents with their assigned temperature settings
     test_termination_prob = 0.5  # Higher termination for faster testing
     
-    # GPT-4 agents (OpenAI supports 0-2 range)
-    if api_keys.get('OPENAI_API_KEY') and 'openai' in temperature_settings:
-        for temp in temperature_settings['openai']:
-            temp_suffix = f"_T{str(temp).replace('.', '')}"
+    # OpenAI agents (Different Models)
+    if api_keys.get('OPENAI_API_KEY'):
+        openai_models = ['o3', 'gpt-4o', 'gpt-5']
+        for model in openai_models:
+            model_name = model.replace('-', '').replace('gpt', 'GPT')
             agents.append(
-                GPT4Agent(f"GPT4{temp_suffix}", 
+                GPT4Agent(f"{model_name}_T1", 
                          api_keys['OPENAI_API_KEY'],
-                         model="gpt-4o-mini",
-                         temperature=temp,
+                         model=model,
+                         temperature=1.0,
                          termination_prob=test_termination_prob)
             )
     
@@ -1014,7 +1023,7 @@ if __name__ == "__main__":
                        default=[0.1, 0.25, 0.75],
                        help="Shadow conditions (termination probabilities)")
     parser.add_argument("--temperature", type=str,
-                       default='{"openai": [0.2, 0.7, 1.2], "anthropic": [0.2, 0.5, 0.8], "mistral": [0.2, 0.7, 1.2], "gemini": [0.2, 0.7, 1.2]}',
+                       default='{"anthropic": [0.2, 0.5, 0.8], "mistral": [0.2, 0.7, 1.2], "gemini": [0.2, 0.7, 1.2]}',
                        help="Temperature settings JSON string for each model (e.g., '{\"openai\": [0.2, 0.7, 1.2], \"anthropic\": [0.2, 0.5, 0.8]}')")
     parser.add_argument("--tournaments", type=int, default=5,
                        help="Number of tournaments per condition (standard mode only, default: 5)")
@@ -1039,7 +1048,7 @@ if __name__ == "__main__":
         # Run a quick evolutionary test with fewer agents and phases
         run_main_experiments(
             shadow_conditions=[0.5],  # Single condition for speed
-            temperature_settings={'openai': [0.7]} if os.getenv('OPENAI_API_KEY') else {},
+            temperature_settings={},  # No longer using temperature_settings for OpenAI
             n_tournaments=5,  # Not used in evolutionary mode
             n_phases=3,  # 3 phases instead of 5
             output_dir="results",
@@ -1054,7 +1063,6 @@ if __name__ == "__main__":
             print(f"Error parsing temperature settings JSON: {e}")
             print("Using default temperature settings.")
             temperature_settings = {
-                'openai': [0.2, 0.7, 1.2],
                 'anthropic': [0.2, 0.5, 0.8],
                 'mistral': [0.2, 0.7, 1.2],
                 'gemini': [0.2, 0.7, 1.2]

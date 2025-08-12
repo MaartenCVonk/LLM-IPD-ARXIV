@@ -40,7 +40,7 @@ def test_claude_agent_real_api_call():
         agent = ClaudeAgent(
             name="TestClaudeReal",
             api_key=api_key,
-            model="claude-opus-4-20250514",  # Using reliable model
+            model="claude-sonnet-4-20250514",  # Using reliable model
             temperature=1.0,
             termination_prob=0.1
         )

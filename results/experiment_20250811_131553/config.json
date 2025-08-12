@@ -1,16 +1,9 @@
 {
-  "timestamp": "2025-08-06T13:15:30.112768",
+  "timestamp": "2025-08-11T13:15:53.688790",
   "shadow_conditions": [
-    0.1,
-    0.25,
     0.75
   ],
   "temperature_settings": {
-    "openai": [
-      0.2,
-      0.7,
-      1.2
-    ],
     "anthropic": [
       0.2,
       0.5,

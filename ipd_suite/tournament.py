@@ -99,7 +99,7 @@ class Tournament:
     """Main tournament runner with async support for concurrent matches"""
     
     def __init__(self, agents: List[Agent], termination_prob: float = 0.1,
-                 max_rounds: int = 200, verbose: bool = True, max_concurrent: int = 20):
+                 max_rounds: int = 200, verbose: bool = True, max_concurrent: int = 50):
         self.agents = agents
         self.termination_prob = termination_prob
         self.max_rounds = max_rounds
@@ -303,7 +303,7 @@ class Tournament:
         if max_concurrent is None:
             max_concurrent = self.max_concurrent
         if max_concurrent is None or max_concurrent <= 0:
-            max_concurrent = 10  # Default fallback
+            max_concurrent = 20  # Default fallback
             
         match_results = []
         agent_scores = defaultdict(int)
