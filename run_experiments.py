@@ -496,7 +496,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                             phase_agents.append(new_agent)
                     
                     # Run tournament for this phase
-                    tournament = Tournament(phase_agents, termination_prob=shadow, verbose=True)
+                    tournament = Tournament(phase_agents, termination_prob=shadow, verbose=True, max_concurrent=50)
                     result = tournament.run_tournament()
                     
                     # Save phase results
@@ -540,7 +540,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                                  include_classical=True)
             
             # Run tournaments
-            tournament = Tournament(agents, termination_prob=shadow, verbose=True)
+            tournament = Tournament(agents, termination_prob=shadow, verbose=True, max_concurrent=50)
             
             with Timer(f"Shadow {shadow*100}% tournaments"):
                 results = []
@@ -690,7 +690,7 @@ def test_mistral_temperature():
         
         try:
             # Run very short tournament
-            tournament = Tournament(test_agents, termination_prob=0.7, max_rounds=5)
+            tournament = Tournament(test_agents, termination_prob=0.7, max_rounds=5, max_concurrent=50)
             
             with Timer(f"{mistral_agent.name} test"):
                 result = tournament.run_tournament()
@@ -911,7 +911,7 @@ def run_test_experiment():
     
     # Run short tournament (fewer rounds for quick testing)
     print(f"\nRunning test tournament with {test_termination_prob*100}% termination probability...")
-    tournament = Tournament(agents, termination_prob=test_termination_prob, max_rounds=8)
+    tournament = Tournament(agents, termination_prob=test_termination_prob, max_rounds=8, max_concurrent=50)
     
     with Timer("Test tournament"):
         result = tournament.run_tournament()
