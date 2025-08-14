@@ -194,6 +194,153 @@ def find_checkpoint_with_fallback(experiment_dir: str, shadow: float, target_pha
     return 0, initial_population.copy(), [initial_population.copy()], None
 
 
+def find_completed_phases_from_csv(experiment_dir: str, shadow: float):
+    """
+    Find completed phases by looking for CSV result files.
+    Returns the highest phase number that has a corresponding CSV file.
+    """
+    pattern = os.path.join(experiment_dir, f"evolutionary_shadow{int(shadow*100)}_phase*.csv")
+    csv_files = glob.glob(pattern)
+    
+    if not csv_files:
+        return 0  # No phases completed
+    
+    # Extract phase numbers
+    completed_phases = []
+    for file in csv_files:
+        basename = os.path.basename(file)
+        # Extract phase number from filename like "evolutionary_shadow75_phase3.csv"
+        parts = basename.split('_')
+        for part in parts:
+            if part.startswith('phase') and part.endswith('.csv'):
+                try:
+                    phase_num = int(part.replace('phase', '').replace('.csv', ''))
+                    completed_phases.append(phase_num)
+                except ValueError:
+                    continue
+    
+    if not completed_phases:
+        return 0
+    
+    return max(completed_phases)
+
+
+def reconstruct_initial_population_from_config(experiment_dir: str, api_keys: dict, 
+                                              temperature_settings: dict, shadow: float):
+    """
+    Reconstruct the initial population from the experiment configuration file.
+    This recreates the population as it was at the start of the experiment.
+    """
+    config_file = os.path.join(experiment_dir, "config.json")
+    
+    if not os.path.exists(config_file):
+        print(f"⚠️  No config.json found in {experiment_dir}")
+        return None, None
+    
+    try:
+        with open(config_file, 'r') as f:
+            config = json.load(f)
+        
+        print(f"📋 Reconstructing initial population from config.json")
+        print(f"   Original experiment timestamp: {config.get('timestamp', 'unknown')}")
+        
+        # Use the temperature settings from the config if they exist
+        config_temp_settings = config.get('temperature_settings', temperature_settings)
+        
+        # Create agents exactly as they were in the original experiment
+        initial_agents = create_agents(api_keys, config_temp_settings, shadow, include_classical=True)
+        
+        # Convert to population dictionary
+        initial_population = {}
+        for agent in initial_agents:
+            agent_name = agent.name
+            if agent_name in initial_population:
+                initial_population[agent_name] += 1
+            else:
+                initial_population[agent_name] = 1
+        
+        print(f"📊 Reconstructed initial population with {len(initial_agents)} agents:")
+        agent_counts = {}
+        for agent in initial_agents:
+            agent_type = "LLM" if any(x in agent.name for x in ['GPT', 'Claude', 'Mistral', 'Gemini']) else "Classical"
+            agent_counts[agent_type] = agent_counts.get(agent_type, 0) + 1
+        
+        for agent_type, count in agent_counts.items():
+            print(f"   - {count} {agent_type} agents")
+        
+        return initial_population, initial_agents
+        
+    except Exception as e:
+        print(f"⚠️  Error reading config file: {e}")
+        return None, None
+
+
+def find_best_resume_point_with_csv_fallback(experiment_dir: str, shadow: float, 
+                                            target_phases: int, api_keys: dict,
+                                            temperature_settings: dict):
+    """
+    Enhanced checkpoint finder that falls back to CSV detection when checkpoints are missing.
+    
+    Fallback order:
+    1. Try checkpoint files (newest to oldest)
+    2. If no checkpoints, detect completed phases from CSV files
+    3. If CSV files found, reconstruct initial population and resume from next phase
+    4. If nothing found, start from beginning with initial population
+    
+    Returns:
+        tuple: (start_phase, current_population, population_history, source_info)
+    """
+    # First try the normal checkpoint fallback
+    initial_agents = create_agents(api_keys, temperature_settings, shadow, include_classical=True)
+    start_phase, current_population, population_history, checkpoint_file = find_checkpoint_with_fallback(
+        experiment_dir, shadow, target_phases, initial_agents
+    )
+    
+    if checkpoint_file:
+        return start_phase, current_population, population_history, f"checkpoint:{os.path.basename(checkpoint_file)}"
+    
+    # If no checkpoints found, try CSV detection
+    print(f"🔍 No checkpoint files found, looking for completed CSV files...")
+    completed_phases = find_completed_phases_from_csv(experiment_dir, shadow)
+    
+    if completed_phases > 0:
+        print(f"📄 Found CSV files for phases 1-{completed_phases}")
+        
+        if completed_phases >= target_phases:
+            print(f"✅ All {target_phases} phases already completed (CSV files exist)")
+            # Reconstruct final population (same as initial for now)
+            reconstructed_pop, reconstructed_agents = reconstruct_initial_population_from_config(
+                experiment_dir, api_keys, temperature_settings, shadow
+            )
+            if reconstructed_pop:
+                return target_phases, reconstructed_pop, [reconstructed_pop], f"csv:completed_all_{completed_phases}_phases"
+        else:
+            print(f"🔄 Resuming from phase {completed_phases + 1} (CSV-based detection)")
+            print(f"📋 Will use initial population distribution for phase {completed_phases + 1}")
+            
+            # Reconstruct initial population to continue from
+            reconstructed_pop, reconstructed_agents = reconstruct_initial_population_from_config(
+                experiment_dir, api_keys, temperature_settings, shadow
+            )
+            
+            if reconstructed_pop:
+                # Create a population history with just the initial population
+                # We don't have the evolution history, so we start fresh with initial population
+                return completed_phases, reconstructed_pop, [reconstructed_pop], f"csv:resume_from_phase_{completed_phases + 1}"
+    
+    # Final fallback - no CSV files or checkpoints found
+    print(f"📋 No CSV files or checkpoints found, starting fresh")
+    initial_population = {}
+    for agent in initial_agents:
+        agent_name = agent.name
+        if agent_name in initial_population:
+            initial_population[agent_name] += 1
+        else:
+            initial_population[agent_name] = 1
+    
+    return 0, initial_population, [initial_population], "fresh_start"
+
+
 def validate_and_fix_population(current_population: dict, initial_agents: list, 
                                total_expected: int = None):
     """
@@ -726,6 +873,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
     
     # Run experiments for each shadow condition
     all_results = {}
+    all_agents_used = []  # Track all agents used across conditions for LLM showdown
     
     for i, shadow in enumerate(shadow_conditions):
         print(f"\n{'='*60}")
@@ -740,24 +888,35 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
         if evolutionary:
             # Create initial agents first (needed for fallback logic)
             initial_agents = create_agents(api_keys, temperature_settings, shadow, include_classical=True)
+            all_agents_used.extend(initial_agents)  # Track agents for LLM showdown
             
-            # Use fallback system to find best checkpoint or initial population
+            # Use enhanced fallback system with CSV detection
             if resume_experiment:
-                # Look for the most recent valid checkpoint, with fallback
-                start_phase, current_population, population_history, found_checkpoint = find_checkpoint_with_fallback(
-                    experiment_dir, shadow, n_phases, initial_agents
+                # Look for checkpoints first, then fall back to CSV detection
+                start_phase, current_population, population_history, source_info = find_best_resume_point_with_csv_fallback(
+                    experiment_dir, shadow, n_phases, api_keys, temperature_settings
                 )
                 
                 if start_phase >= n_phases:
                     print(f"✅ Shadow condition {shadow*100}% already completed ({start_phase}/{n_phases} phases)")
                     continue
                 
-                if found_checkpoint:
+                # Provide detailed information about the resume source
+                if source_info.startswith("checkpoint:"):
+                    checkpoint_name = source_info.split(":", 1)[1]
                     print(f"\n🔄 Resuming evolutionary mode from phase {start_phase+1}/{n_phases}...")
-                    print(f"📂 Using checkpoint: {os.path.basename(found_checkpoint)}")
-                else:
-                    print(f"\n🆕 Starting evolutionary mode from beginning (no valid checkpoints found)")
-                    print(f"📋 Using initial population configuration")
+                    print(f"📂 Using checkpoint: {checkpoint_name}")
+                elif source_info.startswith("csv:resume_from_phase_"):
+                    resume_phase = source_info.split("_")[-1]
+                    print(f"\n🔄 Resuming evolutionary mode from phase {resume_phase}/{n_phases}...")
+                    print(f"📄 CSV-based resume: phases 1-{start_phase} completed, starting with initial population")
+                elif source_info.startswith("csv:completed_all_"):
+                    completed_count = source_info.split("_")[3]
+                    print(f"✅ All phases already completed (found CSV files for {completed_count} phases)")
+                    continue
+                else:  # fresh_start
+                    print(f"\n🆕 Starting evolutionary mode from beginning")
+                    print(f"📋 No previous progress found - using initial population configuration")
             else:
                 print(f"\nRunning evolutionary mode with {n_phases} phases...")
                 
@@ -867,6 +1026,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
             # Create agents for this condition
             agents = create_agents(api_keys, temperature_settings, shadow, 
                                  include_classical=True)
+            all_agents_used.extend(agents)  # Track agents for LLM showdown
             
             # Run tournaments
             tournament = Tournament(agents, termination_prob=shadow, verbose=True, max_concurrent=50)
@@ -903,7 +1063,8 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
     print("LLM SHOWDOWN")
     print(f"{'='*60}")
     
-    llm_agents = [a for a in agents if any(x in a.name for x in ['GPT', 'Claude', 'Mistral', 'Gemini'])]
+    # Get LLM agents from all agents used across conditions
+    llm_agents = [a for a in all_agents_used if any(x in a.name for x in ['GPT', 'Claude', 'Mistral', 'Gemini'])]
     
     if len(llm_agents) >= 2:
         showdown = LLMShowdown(llm_agents, shadow_conditions, 
@@ -939,7 +1100,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
     # Calculate total API usage
     total_api_calls = 0
     total_tokens = 0
-    for agent in agents:
+    for agent in all_agents_used:
         if hasattr(agent, 'api_calls'):
             total_api_calls += agent.api_calls
             total_tokens += agent.total_tokens
