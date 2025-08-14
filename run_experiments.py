@@ -41,6 +41,263 @@ from ipd_suite.utils import (
 
 # Import evolution functions
 from collections import defaultdict
+import glob
+
+
+def save_population_checkpoint(experiment_dir: str, shadow: float, phase: int, 
+                              current_population: dict, population_history: list,
+                              initial_agents: list, experiment_config: dict):
+    """Save population checkpoint after each phase for resume functionality"""
+    checkpoint_data = {
+        'timestamp': datetime.now().isoformat(),
+        'shadow_condition': shadow,
+        'completed_phases': phase,
+        'current_population': current_population,
+        'population_history': population_history,
+        'initial_agents_config': [
+            {
+                'name': agent.name,
+                'class': agent.__class__.__name__,
+                'model': getattr(agent, 'model', None),
+                'temperature': getattr(agent, 'temperature', None),
+                'is_llm': any(x in agent.name for x in ['GPT4', 'Claude', 'Mistral', 'Ministral', 'Gemini', 'o3', 'GPT5'])
+            }
+            for agent in initial_agents
+        ],
+        'experiment_config': experiment_config
+    }
+    
+    checkpoint_file = os.path.join(experiment_dir, 
+                                   f"checkpoint_shadow{int(shadow*100)}_phase{phase}.json")
+    
+    with open(checkpoint_file, 'w') as f:
+        json.dump(checkpoint_data, f, indent=2)
+    
+    print(f"📁 Saved checkpoint: {checkpoint_file}")
+    return checkpoint_file
+
+
+def load_population_checkpoint(checkpoint_file: str):
+    """Load population checkpoint for resuming experiments"""
+    with open(checkpoint_file, 'r') as f:
+        checkpoint_data = json.load(f)
+    
+    print(f"📂 Loaded checkpoint: {checkpoint_file}")
+    print(f"   Shadow condition: {checkpoint_data['shadow_condition']}")
+    print(f"   Completed phases: {checkpoint_data['completed_phases']}")
+    print(f"   Current population: {checkpoint_data['current_population']}")
+    
+    return checkpoint_data
+
+
+def find_latest_checkpoint(experiment_dir: str, shadow: float):
+    """Find the latest checkpoint file for a given shadow condition"""
+    pattern = os.path.join(experiment_dir, f"checkpoint_shadow{int(shadow*100)}_phase*.json")
+    checkpoint_files = glob.glob(pattern)
+    
+    if not checkpoint_files:
+        return None
+    
+    # Extract phase numbers and find the latest
+    phase_files = []
+    for file in checkpoint_files:
+        basename = os.path.basename(file)
+        # Extract phase number from filename like "checkpoint_shadow75_phase3.json"
+        parts = basename.split('_')
+        for part in parts:
+            if part.startswith('phase') and part.endswith('.json'):
+                try:
+                    phase_num = int(part.replace('phase', '').replace('.json', ''))
+                    phase_files.append((phase_num, file))
+                except ValueError:
+                    continue
+    
+    if not phase_files:
+        return None
+    
+    # Return the file with the highest phase number
+    latest_phase, latest_file = max(phase_files, key=lambda x: x[0])
+    return latest_file
+
+
+def find_checkpoint_with_fallback(experiment_dir: str, shadow: float, target_phase: int, 
+                                  initial_agents: list):
+    """
+    Find the best available checkpoint for resuming, with fallback logic.
+    
+    Fallback chain:
+    1. Try to find checkpoint for (target_phase - 1) - the completed phase before target
+    2. If missing, try previous phases in descending order
+    3. If no checkpoints exist, return initial population
+    
+    Returns:
+        tuple: (start_phase, current_population, population_history, found_checkpoint_path)
+    """
+    # Create initial population as ultimate fallback
+    initial_population = {}
+    for agent in initial_agents:
+        agent_name = agent.name
+        if agent_name in initial_population:
+            initial_population[agent_name] += 1
+        else:
+            initial_population[agent_name] = 1
+    
+    # If target_phase is 0 (start from beginning), return initial population
+    if target_phase == 0:
+        return 0, initial_population.copy(), [initial_population.copy()], None
+    
+    # Try to find the most recent checkpoint before target_phase
+    for phase in range(target_phase - 1, -1, -1):  # target_phase-1 down to 0
+        checkpoint_file = os.path.join(experiment_dir, 
+                                     f"checkpoint_shadow{int(shadow*100)}_phase{phase+1}.json")
+        
+        if os.path.exists(checkpoint_file):
+            try:
+                print(f"🔍 Attempting to load checkpoint: {checkpoint_file}")
+                checkpoint_data = load_population_checkpoint(checkpoint_file)
+                
+                # Validate checkpoint data
+                if ('current_population' in checkpoint_data and 
+                    'population_history' in checkpoint_data and
+                    'completed_phases' in checkpoint_data):
+                    
+                    # The checkpoint represents the state AFTER phase (phase+1) was completed
+                    # So we resume from phase (phase+2) = checkpoint_data['completed_phases'] + 1
+                    resume_phase = checkpoint_data['completed_phases']
+                    
+                    print(f"✅ Successfully loaded checkpoint from phase {resume_phase}")
+                    print(f"🔄 Resuming from phase {resume_phase + 1}")
+                    
+                    # Validate and fix population if needed
+                    expected_total = len(initial_agents)
+                    validated_population = validate_and_fix_population(
+                        checkpoint_data['current_population'], 
+                        initial_agents, 
+                        expected_total
+                    )
+                    
+                    return (resume_phase, 
+                            validated_population,
+                            checkpoint_data['population_history'],
+                            checkpoint_file)
+                else:
+                    print(f"⚠️  Invalid checkpoint data in {checkpoint_file}, trying previous phase...")
+                    continue
+                    
+            except Exception as e:
+                print(f"⚠️  Could not load checkpoint {checkpoint_file}: {e}")
+                print(f"🔄 Trying previous phase checkpoint...")
+                continue
+    
+    # No valid checkpoints found, return initial population
+    print(f"📋 No valid checkpoints found, starting from initial population")
+    return 0, initial_population.copy(), [initial_population.copy()], None
+
+
+def validate_and_fix_population(current_population: dict, initial_agents: list, 
+                               total_expected: int = None):
+    """
+    Validate population integrity and fix if needed.
+    Ensures that:
+    1. All strategies in population exist in initial_agents
+    2. Total population count matches expected (if provided)
+    3. No negative or zero counts
+    """
+    # Get list of valid agent names from initial agents
+    valid_agent_names = {agent.name for agent in initial_agents}
+    
+    # Remove invalid agents and fix counts
+    cleaned_population = {}
+    for agent_name, count in current_population.items():
+        if agent_name in valid_agent_names and count > 0:
+            cleaned_population[agent_name] = count
+        elif agent_name not in valid_agent_names:
+            print(f"⚠️  Removing invalid agent '{agent_name}' from population")
+        elif count <= 0:
+            print(f"⚠️  Removing agent '{agent_name}' with invalid count {count}")
+    
+    # If total count is specified, adjust population to match
+    if total_expected:
+        current_total = sum(cleaned_population.values())
+        
+        if current_total != total_expected:
+            print(f"⚠️  Population total mismatch: expected {total_expected}, found {current_total}")
+            
+            if current_total == 0:
+                # If population is empty, recreate initial population
+                print(f"🔄 Population is empty, recreating initial population")
+                for agent in initial_agents:
+                    if agent.name in cleaned_population:
+                        cleaned_population[agent.name] += 1
+                    else:
+                        cleaned_population[agent.name] = 1
+            elif current_total < total_expected:
+                # Add missing agents (distribute evenly among existing strategies)
+                deficit = total_expected - current_total
+                strategies = list(cleaned_population.keys())
+                if strategies:
+                    per_strategy = deficit // len(strategies)
+                    remainder = deficit % len(strategies)
+                    
+                    for i, strategy in enumerate(strategies):
+                        cleaned_population[strategy] += per_strategy
+                        if i < remainder:  # Distribute remainder
+                            cleaned_population[strategy] += 1
+                    
+                    print(f"🔧 Added {deficit} agents to reach target population of {total_expected}")
+            elif current_total > total_expected:
+                # Remove excess agents (prefer removing from strategies with highest counts)
+                excess = current_total - total_expected
+                while excess > 0 and cleaned_population:
+                    # Find strategy with highest count
+                    max_strategy = max(cleaned_population.keys(), 
+                                     key=lambda x: cleaned_population[x])
+                    if cleaned_population[max_strategy] > 1:
+                        cleaned_population[max_strategy] -= 1
+                        excess -= 1
+                    else:
+                        # If all strategies have count 1, remove entire strategy
+                        del cleaned_population[max_strategy]
+                        excess -= 1
+                
+                print(f"🔧 Removed {current_total - sum(cleaned_population.values())} agents to reach target population")
+    
+    return cleaned_population
+
+
+def detect_resume_opportunity(output_dir: str, shadow_conditions: list, n_phases: int):
+    """Detect if there are any incomplete experiments that can be resumed"""
+    resume_options = []
+    
+    # Look for existing experiment directories
+    if os.path.exists(output_dir):
+        for item in os.listdir(output_dir):
+            experiment_path = os.path.join(output_dir, item)
+            if os.path.isdir(experiment_path) and item.startswith('experiment_'):
+                
+                # Check for checkpoints in this experiment
+                for shadow in shadow_conditions:
+                    latest_checkpoint = find_latest_checkpoint(experiment_path, shadow)
+                    if latest_checkpoint:
+                        try:
+                            checkpoint_data = load_population_checkpoint(latest_checkpoint)
+                            completed_phases = checkpoint_data['completed_phases']
+                            
+                            # Check if experiment is incomplete
+                            if completed_phases < n_phases:
+                                resume_options.append({
+                                    'experiment_dir': experiment_path,
+                                    'shadow_condition': shadow,
+                                    'completed_phases': completed_phases,
+                                    'remaining_phases': n_phases - completed_phases,
+                                    'checkpoint_file': latest_checkpoint,
+                                    'experiment_name': item
+                                })
+                        except Exception as e:
+                            print(f"Warning: Could not load checkpoint {latest_checkpoint}: {e}")
+                            continue
+    
+    return resume_options
 
 
 def create_agents(api_keys: Dict[str, str], 
@@ -307,7 +564,8 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                         n_phases: int = 5,
                         output_dir: str = "results",
                         evolutionary: bool = False,
-                        auto_confirm: bool = False):
+                        auto_confirm: bool = False,
+                        resume_experiment: str = None):
     """Run the main experimental suite
     
     Args:
@@ -319,6 +577,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
         evolutionary: If True, use evolutionary mode where population changes
                      based on performance. If False, run repeated identical tournaments.
         auto_confirm: If True, automatically confirm all prompts (skip cost confirmation)
+        resume_experiment: Path to experiment directory to resume from checkpoint
     """
     print("="*60)
     print("IPD EXPERIMENT RUNNER")
@@ -327,6 +586,26 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
         print("Mode: EVOLUTIONARY (population evolves based on performance)")
     else:
         print("Mode: STANDARD (repeated identical tournaments)")
+    
+    # Handle resume functionality
+    if resume_experiment:
+        print(f"Mode: RESUME from {resume_experiment}")
+    elif evolutionary and not resume_experiment:
+        # Check for resume opportunities
+        resume_options = detect_resume_opportunity(output_dir, shadow_conditions, n_phases)
+        if resume_options:
+            print(f"🔄 Found {len(resume_options)} incomplete experiment(s) that can be resumed:")
+            for i, option in enumerate(resume_options, 1):
+                print(f"   {i}. {option['experiment_name']}: Shadow {option['shadow_condition']*100}% - {option['completed_phases']}/{n_phases} phases complete")
+            
+            if not auto_confirm:
+                response = input(f"\nResume incomplete experiment? (1-{len(resume_options)}/n): ")
+                if response.isdigit() and 1 <= int(response) <= len(resume_options):
+                    resume_experiment = resume_options[int(response)-1]['experiment_dir']
+                    print(f"🔄 Resuming: {resume_experiment}")
+                elif response.lower() != 'n':
+                    print("Invalid selection. Starting new experiment.")
+    
     print("="*60)
     
     # Default temperature settings - model-specific to respect API constraints
@@ -403,23 +682,47 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
             print("Experiments cancelled.")
             return
     
-    # Create output directory
-    os.makedirs(output_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    experiment_dir = os.path.join(output_dir, f"experiment_{timestamp}")
-    os.makedirs(experiment_dir, exist_ok=True)
-    
-    # Save experiment configuration
-    config = create_experiment_config(shadow_conditions, temperature_settings, 
-                                     {api: "default" for api in available_apis})
-    save_experiment_metadata(config, os.path.join(experiment_dir, "config.json"))
-    
-    # Create progress file
-    progress_file = create_progress_file(os.path.join(experiment_dir, "progress.json"))
-    update_progress(progress_file, {
-        'total_conditions': len(shadow_conditions),
-        'total_matches': n_matches * len(shadow_conditions) * n_tournaments
-    })
+    # Handle experiment directory creation or resumption
+    if resume_experiment:
+        experiment_dir = resume_experiment
+        print(f"📁 Using existing experiment directory: {experiment_dir}")
+        # Load existing config
+        config_file = os.path.join(experiment_dir, "config.json")
+        if os.path.exists(config_file):
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+        else:
+            # Create config if missing
+            config = create_experiment_config(shadow_conditions, temperature_settings, 
+                                            {api: "default" for api in available_apis})
+            save_experiment_metadata(config, config_file)
+        
+        # Load existing progress file
+        progress_file = os.path.join(experiment_dir, "progress.json")
+        if not os.path.exists(progress_file):
+            progress_file = create_progress_file(progress_file)
+            update_progress(progress_file, {
+                'total_conditions': len(shadow_conditions),
+                'total_matches': n_matches * len(shadow_conditions) * n_tournaments
+            })
+    else:
+        # Create new experiment directory
+        os.makedirs(output_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        experiment_dir = os.path.join(output_dir, f"experiment_{timestamp}")
+        os.makedirs(experiment_dir, exist_ok=True)
+        
+        # Save experiment configuration
+        config = create_experiment_config(shadow_conditions, temperature_settings, 
+                                         {api: "default" for api in available_apis})
+        save_experiment_metadata(config, os.path.join(experiment_dir, "config.json"))
+        
+        # Create progress file
+        progress_file = create_progress_file(os.path.join(experiment_dir, "progress.json"))
+        update_progress(progress_file, {
+            'total_conditions': len(shadow_conditions),
+            'total_matches': n_matches * len(shadow_conditions) * n_tournaments
+        })
     
     # Run experiments for each shadow condition
     all_results = {}
@@ -435,27 +738,46 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
         })
         
         if evolutionary:
-            # Run evolutionary tournaments
-            print(f"\nRunning evolutionary mode with {n_phases} phases...")
-            
-            # Create initial population from agents
+            # Create initial agents first (needed for fallback logic)
             initial_agents = create_agents(api_keys, temperature_settings, shadow, include_classical=True)
             
-            # Convert to population dictionary
-            initial_population = {}
-            for agent in initial_agents:
-                agent_name = agent.name
-                if agent_name in initial_population:
-                    initial_population[agent_name] += 1
+            # Use fallback system to find best checkpoint or initial population
+            if resume_experiment:
+                # Look for the most recent valid checkpoint, with fallback
+                start_phase, current_population, population_history, found_checkpoint = find_checkpoint_with_fallback(
+                    experiment_dir, shadow, n_phases, initial_agents
+                )
+                
+                if start_phase >= n_phases:
+                    print(f"✅ Shadow condition {shadow*100}% already completed ({start_phase}/{n_phases} phases)")
+                    continue
+                
+                if found_checkpoint:
+                    print(f"\n🔄 Resuming evolutionary mode from phase {start_phase+1}/{n_phases}...")
+                    print(f"📂 Using checkpoint: {os.path.basename(found_checkpoint)}")
                 else:
-                    initial_population[agent_name] = 1
+                    print(f"\n🆕 Starting evolutionary mode from beginning (no valid checkpoints found)")
+                    print(f"📋 Using initial population configuration")
+            else:
+                print(f"\nRunning evolutionary mode with {n_phases} phases...")
+                
+                # Create initial population from agents
+                initial_population = {}
+                for agent in initial_agents:
+                    agent_name = agent.name
+                    if agent_name in initial_population:
+                        initial_population[agent_name] += 1
+                    else:
+                        initial_population[agent_name] = 1
+                
+                start_phase = 0
+                current_population = initial_population.copy()
+                population_history = [initial_population.copy()]
             
-            current_population = initial_population.copy()
-            population_history = [initial_population.copy()]
             results = []
             
             with Timer(f"Shadow {shadow*100}% evolutionary tournaments"):
-                for phase in range(n_phases):
+                for phase in range(start_phase, n_phases):
                     print(f"\n{'='*50}")
                     print(f"Phase {phase+1}/{n_phases} - Shadow {shadow*100}%")
                     print(f"{'='*50}")
@@ -533,6 +855,13 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                                 change = curr_count - prev_count
                                 change_str = f"(+{change})" if change > 0 else f"({change})" if change < 0 else ""
                                 print(f"  {strategy}: {prev_count} → {curr_count} {change_str}")
+                    
+                    # Save checkpoint after each phase
+                    save_population_checkpoint(
+                        experiment_dir, shadow, phase + 1, 
+                        current_population, population_history, 
+                        initial_agents, config
+                    )
         else:
             # Run standard tournaments (original behavior)
             # Create agents for this condition
@@ -1037,6 +1366,8 @@ if __name__ == "__main__":
                        help="Run test experiment in evolutionary mode")
     parser.add_argument("--yes", "-y", action="store_true",
                        help="Automatically confirm all prompts (skip cost confirmation)")
+    parser.add_argument("--resume", type=str,
+                       help="Resume experiment from checkpoint (provide experiment directory path)")
     
     args = parser.parse_args()
     
@@ -1075,5 +1406,6 @@ if __name__ == "__main__":
             n_phases=args.phases,
             output_dir=args.output,
             evolutionary=args.evolutionary,
-            auto_confirm=args.yes
+            auto_confirm=args.yes,
+            resume_experiment=args.resume
         )

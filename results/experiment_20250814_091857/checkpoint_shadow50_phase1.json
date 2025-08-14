@@ -1,0 +1,230 @@
+{
+  "timestamp": "2025-08-14T09:22:00.634140",
+  "shadow_condition": 0.5,
+  "completed_phases": 1,
+  "current_population": {
+    "TitForTat": 1,
+    "GrimTrigger": 1,
+    "WinStayLoseShift": 1,
+    "GenerousTitForTat": 1,
+    "SuspiciousTitForTat": 2,
+    "Prober": 1,
+    "Random": 1,
+    "Gradual": 1,
+    "Bayesian": 1,
+    "ForgivingGrimTrigger": 1,
+    "Detective": 1,
+    "SoftGrudger": 1,
+    "QLearning": 2,
+    "ThompsonSampling": 2,
+    "GradientMetaLearner": 1,
+    "GPT4o_T1": 1
+  },
+  "population_history": [
+    {
+      "TitForTat": 1,
+      "GrimTrigger": 1,
+      "WinStayLoseShift": 1,
+      "GenerousTitForTat": 1,
+      "SuspiciousTitForTat": 1,
+      "Prober": 1,
+      "Random": 1,
+      "Gradual": 1,
+      "Alternator": 1,
+      "Bayesian": 1,
+      "ForgivingGrimTrigger": 1,
+      "Detective": 1,
+      "SoftGrudger": 1,
+      "QLearning": 1,
+      "ThompsonSampling": 1,
+      "GradientMetaLearner": 1,
+      "o3_T1": 1,
+      "GPT4o_T1": 1,
+      "GPT5_T1": 1
+    },
+    {
+      "TitForTat": 1,
+      "GrimTrigger": 1,
+      "WinStayLoseShift": 1,
+      "GenerousTitForTat": 1,
+      "SuspiciousTitForTat": 2,
+      "Prober": 1,
+      "Random": 1,
+      "Gradual": 1,
+      "Bayesian": 1,
+      "ForgivingGrimTrigger": 1,
+      "Detective": 1,
+      "SoftGrudger": 1,
+      "QLearning": 2,
+      "ThompsonSampling": 2,
+      "GradientMetaLearner": 1,
+      "GPT4o_T1": 1
+    }
+  ],
+  "initial_agents_config": [
+    {
+      "name": "TitForTat",
+      "class": "TitForTat",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "GrimTrigger",
+      "class": "GrimTrigger",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "WinStayLoseShift",
+      "class": "WinStayLoseShift",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "GenerousTitForTat",
+      "class": "GenerousTitForTat",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "SuspiciousTitForTat",
+      "class": "SuspiciousTitForTat",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "Prober",
+      "class": "Prober",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "Random",
+      "class": "Random",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "Gradual",
+      "class": "Gradual",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "Alternator",
+      "class": "Alternator",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "Bayesian",
+      "class": "Bayesian",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "ForgivingGrimTrigger",
+      "class": "ForgivingGrimTrigger",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "Detective",
+      "class": "Detective",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "SoftGrudger",
+      "class": "SoftGrudger",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "QLearning",
+      "class": "QLearningAgent",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "ThompsonSampling",
+      "class": "ThompsonSampling",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "GradientMetaLearner",
+      "class": "GradientMetaLearner",
+      "model": null,
+      "temperature": null,
+      "is_llm": false
+    },
+    {
+      "name": "o3_T1",
+      "class": "GPT4Agent",
+      "model": "o3",
+      "temperature": 1.0,
+      "is_llm": true
+    },
+    {
+      "name": "GPT4o_T1",
+      "class": "GPT4Agent",
+      "model": "gpt-4o",
+      "temperature": 1.0,
+      "is_llm": true
+    },
+    {
+      "name": "GPT5_T1",
+      "class": "GPT4Agent",
+      "model": "gpt-5",
+      "temperature": 1.0,
+      "is_llm": true
+    }
+  ],
+  "experiment_config": {
+    "timestamp": "2025-08-14T09:18:57.683282",
+    "shadow_conditions": [
+      0.5
+    ],
+    "temperature_settings": {},
+    "llm_models": {
+      "OPENAI": "default",
+      "ANTHROPIC": "default",
+      "GOOGLE": "default",
+      "MISTRAL": "default"
+    },
+    "classical_strategies": [
+      "TitForTat",
+      "AlwaysCooperate",
+      "AlwaysDefect",
+      "Random",
+      "GrimTrigger",
+      "Pavlov"
+    ],
+    "behavioral_strategies": [
+      "ForgivingGrimTrigger",
+      "Detective",
+      "SoftGrudger"
+    ],
+    "adaptive_strategies": [
+      "QLearning",
+      "ThompsonSampling",
+      "GradientMetaLearner"
+    ]
+  }
+}

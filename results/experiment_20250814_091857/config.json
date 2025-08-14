@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-08-14T09:18:57.683282",
+  "shadow_conditions": [
+    0.5
+  ],
+  "temperature_settings": {},
+  "llm_models": {
+    "OPENAI": "default",
+    "ANTHROPIC": "default",
+    "GOOGLE": "default",
+    "MISTRAL": "default"
+  },
+  "classical_strategies": [
+    "TitForTat",
+    "AlwaysCooperate",
+    "AlwaysDefect",
+    "Random",
+    "GrimTrigger",
+    "Pavlov"
+  ],
+  "behavioral_strategies": [
+    "ForgivingGrimTrigger",
+    "Detective",
+    "SoftGrudger"
+  ],
+  "adaptive_strategies": [
+    "QLearning",
+    "ThompsonSampling",
+    "GradientMetaLearner"
+  ]
+}
