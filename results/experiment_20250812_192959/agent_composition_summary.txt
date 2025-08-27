@@ -1,0 +1,575 @@
+================================================================================
+COMPREHENSIVE AGENT COMPOSITION ANALYSIS REPORT
+================================================================================
+Experiment: experiment_20250812_192959
+Analysis Date: 2025-08-25T16:19:58.814935
+Total Phases Analyzed: 5
+
+Experiment Metadata:
+  shadow_condition: 0.25
+  timestamp: 2025-08-12T19:58:16.986503
+
+Phase: shadow_25_phase_1
+============================================================
+Shadow Condition: 25%
+Phase Number: 1
+Total Unique Agents: 28
+Total Matches: 378
+Total Rounds: 1440
+Average Rounds per Match: 3.81
+
+Agents by Type:
+  Adaptive: 4 (14.3%)
+  Behavioral: 3 (10.7%)
+  Classical: 9 (32.1%)
+  LLM_Anthropic: 3 (10.7%)
+  LLM_Gemini: 3 (10.7%)
+  LLM_Mistral: 3 (10.7%)
+  LLM_OpenAI: 3 (10.7%)
+
+Agents by Strategy:
+  Alternator: 1 (3.6%)
+  Bayesian: 1 (3.6%)
+  Claude4-Sonnet_T02: 1 (3.6%)
+  Claude4-Sonnet_T05: 1 (3.6%)
+  Claude4-Sonnet_T08: 1 (3.6%)
+  Detective: 1 (3.6%)
+  ForgivingGrimTrigger: 1 (3.6%)
+  GPT4o_T1: 1 (3.6%)
+  GPT5_T1: 1 (3.6%)
+  Gemini25Pro_T02: 1 (3.6%)
+  Gemini25Pro_T07: 1 (3.6%)
+  Gemini25Pro_T12: 1 (3.6%)
+  GenerousTitForTat: 1 (3.6%)
+  GradientMetaLearner: 1 (3.6%)
+  Gradual: 1 (3.6%)
+  GrimTrigger: 1 (3.6%)
+  Mistral-Large_T02: 1 (3.6%)
+  Mistral-Large_T07: 1 (3.6%)
+  Mistral-Large_T12: 1 (3.6%)
+  Prober: 1 (3.6%)
+  QLearning: 1 (3.6%)
+  Random: 1 (3.6%)
+  SoftGrudger: 1 (3.6%)
+  SuspiciousTitForTat: 1 (3.6%)
+  ThompsonSampling: 1 (3.6%)
+  TitForTat: 1 (3.6%)
+  WinStayLoseShift: 1 (3.6%)
+  o3_T1: 1 (3.6%)
+
+Strategy Performance Metrics:
+Strategy               | Score/Move | Score/Match | Total Score | Rounds | Matches
+-------------------------------------------------------------------------------------
+ForgivingGrimTrigger   |      2.893 |       9.000 |       243.0 |     84 |      27
+SuspiciousTitForTat    |      2.868 |      11.259 |       304.0 |    106 |      27
+WinStayLoseShift       |      2.830 |      11.741 |       317.0 |    112 |      27
+Gradual                |      2.809 |       9.778 |       264.0 |     94 |      27
+Prober                 |      2.800 |       8.815 |       238.0 |     85 |      27
+GrimTrigger            |      2.778 |       6.481 |       175.0 |     63 |      27
+Bayesian               |      2.721 |      11.185 |       302.0 |    111 |      27
+TitForTat              |      2.702 |       8.407 |       227.0 |     84 |      27
+o3_T1                  |      2.700 |       8.000 |       216.0 |     80 |      27
+SoftGrudger            |      2.690 |       8.370 |       226.0 |     84 |      27
+GPT4o_T1               |      2.684 |       7.852 |       212.0 |     79 |      27
+Gemini25Pro_T12        |      2.677 |      13.185 |       356.0 |    133 |      27
+Detective              |      2.674 |       9.407 |       254.0 |     95 |      27
+Alternator             |      2.673 |       9.704 |       262.0 |     98 |      27
+Gemini25Pro_T07        |      2.663 |       7.889 |       213.0 |     80 |      27
+Gemini25Pro_T02        |      2.644 |      11.556 |       312.0 |    118 |      27
+Random                 |      2.634 |      13.074 |       353.0 |    134 |      27
+ThompsonSampling       |      2.631 |      10.037 |       271.0 |    103 |      27
+GPT5_T1                |      2.598 |       8.852 |       239.0 |     92 |      27
+GenerousTitForTat      |      2.593 |      11.333 |       306.0 |    118 |      27
+GradientMetaLearner    |      2.588 |      10.926 |       295.0 |    114 |      27
+Claude4-Sonnet_T08     |      2.574 |       9.630 |       260.0 |    101 |      27
+QLearning              |      2.522 |      10.741 |       290.0 |    115 |      27
+Mistral-Large_T02      |      2.504 |      11.407 |       308.0 |    123 |      27
+Claude4-Sonnet_T05     |      2.477 |      10.185 |       275.0 |    111 |      27
+Mistral-Large_T12      |      2.435 |      12.444 |       336.0 |    138 |      27
+Claude4-Sonnet_T02     |      2.372 |      10.630 |       287.0 |    121 |      27
+Mistral-Large_T07      |      2.135 |       8.222 |       222.0 |    104 |      27
+
+Evolutionary Fitness Metrics:
+Strategy               | Fitness | Relative | Raw Count | Mean Fitness
+----------------------------------------------------------------------
+ForgivingGrimTrigger   |   2.893 |    1.202 |     1.202 |       2.638
+SuspiciousTitForTat    |   2.868 |    1.182 |     1.182 |       2.638
+WinStayLoseShift       |   2.830 |    1.151 |     1.151 |       2.638
+Gradual                |   2.809 |    1.133 |     1.133 |       2.638
+Prober                 |   2.800 |    1.126 |     1.126 |       2.638
+GrimTrigger            |   2.778 |    1.109 |     1.109 |       2.638
+Bayesian               |   2.721 |    1.064 |     1.064 |       2.638
+TitForTat              |   2.702 |    1.049 |     1.049 |       2.638
+o3_T1                  |   2.700 |    1.047 |     1.047 |       2.638
+SoftGrudger            |   2.690 |    1.040 |     1.040 |       2.638
+GPT4o_T1               |   2.684 |    1.035 |     1.035 |       2.638
+Gemini25Pro_T12        |   2.677 |    1.029 |     1.029 |       2.638
+Detective              |   2.674 |    1.027 |     1.027 |       2.638
+Alternator             |   2.673 |    1.027 |     1.027 |       2.638
+Gemini25Pro_T07        |   2.663 |    1.019 |     1.019 |       2.638
+Gemini25Pro_T02        |   2.644 |    1.004 |     1.004 |       2.638
+Random                 |   2.634 |    0.997 |     0.997 |       2.638
+ThompsonSampling       |   2.631 |    0.995 |     0.995 |       2.638
+GPT5_T1                |   2.598 |    0.970 |     0.970 |       2.638
+GenerousTitForTat      |   2.593 |    0.966 |     0.966 |       2.638
+GradientMetaLearner    |   2.588 |    0.962 |     0.962 |       2.638
+Claude4-Sonnet_T08     |   2.574 |    0.952 |     0.952 |       2.638
+QLearning              |   2.522 |    0.914 |     0.914 |       2.638
+Mistral-Large_T02      |   2.504 |    0.901 |     0.901 |       2.638
+Claude4-Sonnet_T05     |   2.477 |    0.882 |     0.882 |       2.638
+Mistral-Large_T12      |   2.435 |    0.852 |     0.852 |       2.638
+Claude4-Sonnet_T02     |   2.372 |    0.808 |     0.808 |       2.638
+Mistral-Large_T07      |   2.135 |    0.655 |     0.655 |       2.638
+
+
+Phase: shadow_25_phase_2
+============================================================
+Shadow Condition: 25%
+Phase Number: 2
+Total Unique Agents: 28
+Total Matches: 378
+Total Rounds: 1544
+Average Rounds per Match: 4.08
+
+Agents by Type:
+  Adaptive: 4 (14.3%)
+  Behavioral: 3 (10.7%)
+  Classical: 9 (32.1%)
+  LLM_Anthropic: 3 (10.7%)
+  LLM_Gemini: 3 (10.7%)
+  LLM_Mistral: 3 (10.7%)
+  LLM_OpenAI: 3 (10.7%)
+
+Agents by Strategy:
+  Alternator: 1 (3.6%)
+  Bayesian: 1 (3.6%)
+  Claude4-Sonnet_T02: 1 (3.6%)
+  Claude4-Sonnet_T05: 1 (3.6%)
+  Claude4-Sonnet_T08: 1 (3.6%)
+  Detective: 1 (3.6%)
+  ForgivingGrimTrigger: 1 (3.6%)
+  GPT4o_T1: 1 (3.6%)
+  GPT5_T1: 1 (3.6%)
+  Gemini25Pro_T02: 1 (3.6%)
+  Gemini25Pro_T07: 1 (3.6%)
+  Gemini25Pro_T12: 1 (3.6%)
+  GenerousTitForTat: 1 (3.6%)
+  GradientMetaLearner: 1 (3.6%)
+  Gradual: 1 (3.6%)
+  GrimTrigger: 1 (3.6%)
+  Mistral-Large_T02: 1 (3.6%)
+  Mistral-Large_T07: 1 (3.6%)
+  Mistral-Large_T12: 1 (3.6%)
+  Prober: 1 (3.6%)
+  QLearning: 1 (3.6%)
+  Random: 1 (3.6%)
+  SoftGrudger: 1 (3.6%)
+  SuspiciousTitForTat: 1 (3.6%)
+  ThompsonSampling: 1 (3.6%)
+  TitForTat: 1 (3.6%)
+  WinStayLoseShift: 1 (3.6%)
+  o3_T1: 1 (3.6%)
+
+Strategy Performance Metrics:
+Strategy               | Score/Move | Score/Match | Total Score | Rounds | Matches
+-------------------------------------------------------------------------------------
+Detective              |      2.883 |      11.000 |       297.0 |    103 |      27
+Prober                 |      2.865 |      11.037 |       298.0 |    104 |      27
+ForgivingGrimTrigger   |      2.812 |      15.000 |       405.0 |    144 |      27
+GrimTrigger            |      2.805 |       9.037 |       244.0 |     87 |      27
+Gradual                |      2.761 |      11.556 |       312.0 |    113 |      27
+Claude4-Sonnet_T02     |      2.754 |      11.630 |       314.0 |    114 |      27
+Gemini25Pro_T12        |      2.748 |      11.296 |       305.0 |    111 |      27
+Bayesian               |      2.685 |      12.630 |       341.0 |    127 |      27
+SoftGrudger            |      2.684 |       9.741 |       263.0 |     98 |      27
+TitForTat              |      2.661 |      12.222 |       330.0 |    124 |      27
+SuspiciousTitForTat    |      2.650 |       9.815 |       265.0 |    100 |      27
+Gemini25Pro_T07        |      2.645 |      10.778 |       291.0 |    110 |      27
+GPT5_T1                |      2.644 |      10.185 |       275.0 |    104 |      27
+Gemini25Pro_T02        |      2.639 |      11.926 |       322.0 |    122 |      27
+Random                 |      2.628 |       9.148 |       247.0 |     94 |      27
+Mistral-Large_T02      |      2.627 |      11.481 |       310.0 |    118 |      27
+Claude4-Sonnet_T05     |      2.615 |       9.296 |       251.0 |     96 |      27
+Mistral-Large_T12      |      2.608 |      12.074 |       326.0 |    125 |      27
+WinStayLoseShift       |      2.604 |       9.741 |       263.0 |    101 |      27
+Claude4-Sonnet_T08     |      2.602 |      10.889 |       294.0 |    113 |      27
+GenerousTitForTat      |      2.582 |      10.519 |       284.0 |    110 |      27
+QLearning              |      2.567 |      12.741 |       344.0 |    134 |      27
+Alternator             |      2.565 |       8.074 |       218.0 |     85 |      27
+ThompsonSampling       |      2.473 |      10.074 |       272.0 |    110 |      27
+GPT4o_T1               |      2.441 |      10.037 |       271.0 |    111 |      27
+o3_T1                  |      2.388 |       8.667 |       234.0 |     98 |      27
+GradientMetaLearner    |      2.347 |      10.778 |       291.0 |    124 |      27
+Mistral-Large_T07      |      2.343 |       9.370 |       253.0 |    108 |      27
+
+Evolutionary Fitness Metrics:
+Strategy               | Fitness | Relative | Raw Count | Mean Fitness
+----------------------------------------------------------------------
+Detective              |   2.883 |    1.203 |     1.203 |       2.630
+Prober                 |   2.865 |    1.187 |     1.187 |       2.630
+ForgivingGrimTrigger   |   2.812 |    1.144 |     1.144 |       2.630
+GrimTrigger            |   2.805 |    1.138 |     1.138 |       2.630
+Gradual                |   2.761 |    1.103 |     1.103 |       2.630
+Claude4-Sonnet_T02     |   2.754 |    1.097 |     1.097 |       2.630
+Gemini25Pro_T12        |   2.748 |    1.092 |     1.092 |       2.630
+Bayesian               |   2.685 |    1.043 |     1.043 |       2.630
+SoftGrudger            |   2.684 |    1.042 |     1.042 |       2.630
+TitForTat              |   2.661 |    1.024 |     1.024 |       2.630
+SuspiciousTitForTat    |   2.650 |    1.016 |     1.016 |       2.630
+Gemini25Pro_T07        |   2.645 |    1.012 |     1.012 |       2.630
+GPT5_T1                |   2.644 |    1.011 |     1.011 |       2.630
+Gemini25Pro_T02        |   2.639 |    1.007 |     1.007 |       2.630
+Random                 |   2.628 |    0.999 |     0.999 |       2.630
+Mistral-Large_T02      |   2.627 |    0.998 |     0.998 |       2.630
+Claude4-Sonnet_T05     |   2.615 |    0.989 |     0.989 |       2.630
+Mistral-Large_T12      |   2.608 |    0.984 |     0.984 |       2.630
+WinStayLoseShift       |   2.604 |    0.981 |     0.981 |       2.630
+Claude4-Sonnet_T08     |   2.602 |    0.979 |     0.979 |       2.630
+GenerousTitForTat      |   2.582 |    0.964 |     0.964 |       2.630
+QLearning              |   2.567 |    0.953 |     0.953 |       2.630
+Alternator             |   2.565 |    0.951 |     0.951 |       2.630
+ThompsonSampling       |   2.473 |    0.884 |     0.884 |       2.630
+GPT4o_T1               |   2.441 |    0.862 |     0.862 |       2.630
+o3_T1                  |   2.388 |    0.825 |     0.825 |       2.630
+GradientMetaLearner    |   2.347 |    0.797 |     0.797 |       2.630
+Mistral-Large_T07      |   2.343 |    0.794 |     0.794 |       2.630
+
+
+Phase: shadow_25_phase_3
+============================================================
+Shadow Condition: 25%
+Phase Number: 3
+Total Unique Agents: 28
+Total Matches: 378
+Total Rounds: 1453
+Average Rounds per Match: 3.84
+
+Agents by Type:
+  Adaptive: 4 (14.3%)
+  Behavioral: 3 (10.7%)
+  Classical: 9 (32.1%)
+  LLM_Anthropic: 3 (10.7%)
+  LLM_Gemini: 3 (10.7%)
+  LLM_Mistral: 3 (10.7%)
+  LLM_OpenAI: 3 (10.7%)
+
+Agents by Strategy:
+  Alternator: 1 (3.6%)
+  Bayesian: 1 (3.6%)
+  Claude4-Sonnet_T02: 1 (3.6%)
+  Claude4-Sonnet_T05: 1 (3.6%)
+  Claude4-Sonnet_T08: 1 (3.6%)
+  Detective: 1 (3.6%)
+  ForgivingGrimTrigger: 1 (3.6%)
+  GPT4o_T1: 1 (3.6%)
+  GPT5_T1: 1 (3.6%)
+  Gemini25Pro_T02: 1 (3.6%)
+  Gemini25Pro_T07: 1 (3.6%)
+  Gemini25Pro_T12: 1 (3.6%)
+  GenerousTitForTat: 1 (3.6%)
+  GradientMetaLearner: 1 (3.6%)
+  Gradual: 1 (3.6%)
+  GrimTrigger: 1 (3.6%)
+  Mistral-Large_T02: 1 (3.6%)
+  Mistral-Large_T07: 1 (3.6%)
+  Mistral-Large_T12: 1 (3.6%)
+  Prober: 1 (3.6%)
+  QLearning: 1 (3.6%)
+  Random: 1 (3.6%)
+  SoftGrudger: 1 (3.6%)
+  SuspiciousTitForTat: 1 (3.6%)
+  ThompsonSampling: 1 (3.6%)
+  TitForTat: 1 (3.6%)
+  WinStayLoseShift: 1 (3.6%)
+  o3_T1: 1 (3.6%)
+
+Strategy Performance Metrics:
+Strategy               | Score/Move | Score/Match | Total Score | Rounds | Matches
+-------------------------------------------------------------------------------------
+SuspiciousTitForTat    |      3.000 |       9.222 |       249.0 |     83 |      27
+Alternator             |      2.872 |       9.148 |       247.0 |     86 |      27
+Prober                 |      2.868 |      14.444 |       390.0 |    136 |      27
+Claude4-Sonnet_T08     |      2.819 |      10.963 |       296.0 |    105 |      27
+GenerousTitForTat      |      2.767 |      10.556 |       285.0 |    103 |      27
+Gemini25Pro_T12        |      2.717 |      11.370 |       307.0 |    113 |      27
+Gemini25Pro_T02        |      2.709 |      11.037 |       298.0 |    110 |      27
+SoftGrudger            |      2.703 |       9.111 |       246.0 |     91 |      27
+QLearning              |      2.688 |       9.556 |       258.0 |     96 |      27
+GPT4o_T1               |      2.679 |       8.037 |       217.0 |     81 |      27
+Gemini25Pro_T07        |      2.677 |       9.222 |       249.0 |     93 |      27
+o3_T1                  |      2.669 |      12.259 |       331.0 |    124 |      27
+Claude4-Sonnet_T05     |      2.649 |      10.889 |       294.0 |    111 |      27
+Mistral-Large_T07      |      2.644 |       8.815 |       238.0 |     90 |      27
+Random                 |      2.644 |      10.185 |       275.0 |    104 |      27
+Mistral-Large_T02      |      2.642 |      10.370 |       280.0 |    106 |      27
+ForgivingGrimTrigger   |      2.626 |       8.852 |       239.0 |     91 |      27
+Bayesian               |      2.619 |      10.963 |       296.0 |    113 |      27
+GrimTrigger            |      2.610 |       9.667 |       261.0 |    100 |      27
+Gradual                |      2.547 |      10.000 |       270.0 |    106 |      27
+Detective              |      2.546 |       9.148 |       247.0 |     97 |      27
+TitForTat              |      2.533 |       9.852 |       266.0 |    105 |      27
+GPT5_T1                |      2.528 |      13.296 |       359.0 |    142 |      27
+ThompsonSampling       |      2.522 |      10.556 |       285.0 |    113 |      27
+GradientMetaLearner    |      2.500 |       9.630 |       260.0 |    104 |      27
+Claude4-Sonnet_T02     |      2.500 |       9.259 |       250.0 |    100 |      27
+WinStayLoseShift       |      2.482 |       7.815 |       211.0 |     85 |      27
+Mistral-Large_T12      |      2.203 |       9.630 |       260.0 |    118 |      27
+
+Evolutionary Fitness Metrics:
+Strategy               | Fitness | Relative | Raw Count | Mean Fitness
+----------------------------------------------------------------------
+SuspiciousTitForTat    |   3.000 |    1.290 |     1.290 |       2.642
+Alternator             |   2.872 |    1.182 |     1.182 |       2.642
+Prober                 |   2.868 |    1.178 |     1.178 |       2.642
+Claude4-Sonnet_T08     |   2.819 |    1.139 |     1.139 |       2.642
+GenerousTitForTat      |   2.767 |    1.097 |     1.097 |       2.642
+Gemini25Pro_T12        |   2.717 |    1.058 |     1.058 |       2.642
+Gemini25Pro_T02        |   2.709 |    1.052 |     1.052 |       2.642
+SoftGrudger            |   2.703 |    1.047 |     1.047 |       2.642
+QLearning              |   2.688 |    1.035 |     1.035 |       2.642
+GPT4o_T1               |   2.679 |    1.028 |     1.028 |       2.642
+Gemini25Pro_T07        |   2.677 |    1.027 |     1.027 |       2.642
+o3_T1                  |   2.669 |    1.021 |     1.021 |       2.642
+Claude4-Sonnet_T05     |   2.649 |    1.005 |     1.005 |       2.642
+Mistral-Large_T07      |   2.644 |    1.002 |     1.002 |       2.642
+Random                 |   2.644 |    1.002 |     1.002 |       2.642
+Mistral-Large_T02      |   2.642 |    1.000 |     1.000 |       2.642
+ForgivingGrimTrigger   |   2.626 |    0.988 |     0.988 |       2.642
+Bayesian               |   2.619 |    0.983 |     0.983 |       2.642
+GrimTrigger            |   2.610 |    0.976 |     0.976 |       2.642
+Gradual                |   2.547 |    0.930 |     0.930 |       2.642
+Detective              |   2.546 |    0.929 |     0.929 |       2.642
+TitForTat              |   2.533 |    0.920 |     0.920 |       2.642
+GPT5_T1                |   2.528 |    0.916 |     0.916 |       2.642
+ThompsonSampling       |   2.522 |    0.912 |     0.912 |       2.642
+GradientMetaLearner    |   2.500 |    0.896 |     0.896 |       2.642
+Claude4-Sonnet_T02     |   2.500 |    0.896 |     0.896 |       2.642
+WinStayLoseShift       |   2.482 |    0.883 |     0.883 |       2.642
+Mistral-Large_T12      |   2.203 |    0.696 |     0.696 |       2.642
+
+
+Phase: shadow_25_phase_4
+============================================================
+Shadow Condition: 25%
+Phase Number: 4
+Total Unique Agents: 28
+Total Matches: 378
+Total Rounds: 1415
+Average Rounds per Match: 3.74
+
+Agents by Type:
+  Adaptive: 4 (14.3%)
+  Behavioral: 3 (10.7%)
+  Classical: 9 (32.1%)
+  LLM_Anthropic: 3 (10.7%)
+  LLM_Gemini: 3 (10.7%)
+  LLM_Mistral: 3 (10.7%)
+  LLM_OpenAI: 3 (10.7%)
+
+Agents by Strategy:
+  Alternator: 1 (3.6%)
+  Bayesian: 1 (3.6%)
+  Claude4-Sonnet_T02: 1 (3.6%)
+  Claude4-Sonnet_T05: 1 (3.6%)
+  Claude4-Sonnet_T08: 1 (3.6%)
+  Detective: 1 (3.6%)
+  ForgivingGrimTrigger: 1 (3.6%)
+  GPT4o_T1: 1 (3.6%)
+  GPT5_T1: 1 (3.6%)
+  Gemini25Pro_T02: 1 (3.6%)
+  Gemini25Pro_T07: 1 (3.6%)
+  Gemini25Pro_T12: 1 (3.6%)
+  GenerousTitForTat: 1 (3.6%)
+  GradientMetaLearner: 1 (3.6%)
+  Gradual: 1 (3.6%)
+  GrimTrigger: 1 (3.6%)
+  Mistral-Large_T02: 1 (3.6%)
+  Mistral-Large_T07: 1 (3.6%)
+  Mistral-Large_T12: 1 (3.6%)
+  Prober: 1 (3.6%)
+  QLearning: 1 (3.6%)
+  Random: 1 (3.6%)
+  SoftGrudger: 1 (3.6%)
+  SuspiciousTitForTat: 1 (3.6%)
+  ThompsonSampling: 1 (3.6%)
+  TitForTat: 1 (3.6%)
+  WinStayLoseShift: 1 (3.6%)
+  o3_T1: 1 (3.6%)
+
+Strategy Performance Metrics:
+Strategy               | Score/Move | Score/Match | Total Score | Rounds | Matches
+-------------------------------------------------------------------------------------
+SuspiciousTitForTat    |      2.867 |      11.148 |       301.0 |    105 |      27
+GrimTrigger            |      2.814 |      10.630 |       287.0 |    102 |      27
+Detective              |      2.802 |      10.481 |       283.0 |    101 |      27
+QLearning              |      2.800 |      10.370 |       280.0 |    100 |      27
+Claude4-Sonnet_T05     |      2.779 |       8.852 |       239.0 |     86 |      27
+TitForTat              |      2.776 |      12.852 |       347.0 |    125 |      27
+WinStayLoseShift       |      2.756 |       7.963 |       215.0 |     78 |      27
+GenerousTitForTat      |      2.716 |      10.963 |       296.0 |    109 |      27
+Gemini25Pro_T07        |      2.702 |      12.407 |       335.0 |    124 |      27
+Bayesian               |      2.681 |      11.519 |       311.0 |    116 |      27
+Prober                 |      2.663 |       8.185 |       221.0 |     83 |      27
+SoftGrudger            |      2.655 |       8.556 |       231.0 |     87 |      27
+Gemini25Pro_T12        |      2.653 |       9.333 |       252.0 |     95 |      27
+GradientMetaLearner    |      2.649 |       7.259 |       196.0 |     74 |      27
+ForgivingGrimTrigger   |      2.628 |       9.148 |       247.0 |     94 |      27
+Claude4-Sonnet_T02     |      2.612 |      12.481 |       337.0 |    129 |      27
+o3_T1                  |      2.606 |       9.074 |       245.0 |     94 |      27
+Mistral-Large_T12      |      2.590 |       7.481 |       202.0 |     78 |      27
+Mistral-Large_T07      |      2.587 |      10.444 |       282.0 |    109 |      27
+Gradual                |      2.573 |       7.815 |       211.0 |     82 |      27
+GPT4o_T1               |      2.530 |       7.778 |       210.0 |     83 |      27
+Alternator             |      2.529 |      12.926 |       349.0 |    138 |      27
+GPT5_T1                |      2.523 |      10.185 |       275.0 |    109 |      27
+Claude4-Sonnet_T08     |      2.515 |      12.111 |       327.0 |    130 |      27
+Gemini25Pro_T02        |      2.500 |       7.778 |       210.0 |     84 |      27
+ThompsonSampling       |      2.477 |      11.926 |       322.0 |    130 |      27
+Random                 |      2.423 |       8.704 |       235.0 |     97 |      27
+Mistral-Large_T02      |      2.330 |       7.593 |       205.0 |     88 |      27
+
+Evolutionary Fitness Metrics:
+Strategy               | Fitness | Relative | Raw Count | Mean Fitness
+----------------------------------------------------------------------
+SuspiciousTitForTat    |   2.867 |    1.185 |     1.185 |       2.633
+GrimTrigger            |   2.814 |    1.142 |     1.142 |       2.633
+Detective              |   2.802 |    1.132 |     1.132 |       2.633
+QLearning              |   2.800 |    1.131 |     1.131 |       2.633
+Claude4-Sonnet_T05     |   2.779 |    1.114 |     1.114 |       2.633
+TitForTat              |   2.776 |    1.111 |     1.111 |       2.633
+WinStayLoseShift       |   2.756 |    1.096 |     1.096 |       2.633
+GenerousTitForTat      |   2.716 |    1.063 |     1.063 |       2.633
+Gemini25Pro_T07        |   2.702 |    1.053 |     1.053 |       2.633
+Bayesian               |   2.681 |    1.037 |     1.037 |       2.633
+Prober                 |   2.663 |    1.022 |     1.022 |       2.633
+SoftGrudger            |   2.655 |    1.017 |     1.017 |       2.633
+Gemini25Pro_T12        |   2.653 |    1.015 |     1.015 |       2.633
+GradientMetaLearner    |   2.649 |    1.012 |     1.012 |       2.633
+ForgivingGrimTrigger   |   2.628 |    0.996 |     0.996 |       2.633
+Claude4-Sonnet_T02     |   2.612 |    0.984 |     0.984 |       2.633
+o3_T1                  |   2.606 |    0.980 |     0.980 |       2.633
+Mistral-Large_T12      |   2.590 |    0.967 |     0.967 |       2.633
+Mistral-Large_T07      |   2.587 |    0.965 |     0.965 |       2.633
+Gradual                |   2.573 |    0.955 |     0.955 |       2.633
+GPT4o_T1               |   2.530 |    0.923 |     0.923 |       2.633
+Alternator             |   2.529 |    0.922 |     0.922 |       2.633
+GPT5_T1                |   2.523 |    0.918 |     0.918 |       2.633
+Claude4-Sonnet_T08     |   2.515 |    0.912 |     0.912 |       2.633
+Gemini25Pro_T02        |   2.500 |    0.901 |     0.901 |       2.633
+ThompsonSampling       |   2.477 |    0.885 |     0.885 |       2.633
+Random                 |   2.423 |    0.846 |     0.846 |       2.633
+Mistral-Large_T02      |   2.330 |    0.783 |     0.783 |       2.633
+
+
+Phase: shadow_25_phase_5
+============================================================
+Shadow Condition: 25%
+Phase Number: 5
+Total Unique Agents: 28
+Total Matches: 378
+Total Rounds: 1538
+Average Rounds per Match: 4.07
+
+Agents by Type:
+  Adaptive: 4 (14.3%)
+  Behavioral: 3 (10.7%)
+  Classical: 9 (32.1%)
+  LLM_Anthropic: 3 (10.7%)
+  LLM_Gemini: 3 (10.7%)
+  LLM_Mistral: 3 (10.7%)
+  LLM_OpenAI: 3 (10.7%)
+
+Agents by Strategy:
+  Alternator: 1 (3.6%)
+  Bayesian: 1 (3.6%)
+  Claude4-Sonnet_T02: 1 (3.6%)
+  Claude4-Sonnet_T05: 1 (3.6%)
+  Claude4-Sonnet_T08: 1 (3.6%)
+  Detective: 1 (3.6%)
+  ForgivingGrimTrigger: 1 (3.6%)
+  GPT4o_T1: 1 (3.6%)
+  GPT5_T1: 1 (3.6%)
+  Gemini25Pro_T02: 1 (3.6%)
+  Gemini25Pro_T07: 1 (3.6%)
+  Gemini25Pro_T12: 1 (3.6%)
+  GenerousTitForTat: 1 (3.6%)
+  GradientMetaLearner: 1 (3.6%)
+  Gradual: 1 (3.6%)
+  GrimTrigger: 1 (3.6%)
+  Mistral-Large_T02: 1 (3.6%)
+  Mistral-Large_T07: 1 (3.6%)
+  Mistral-Large_T12: 1 (3.6%)
+  Prober: 1 (3.6%)
+  QLearning: 1 (3.6%)
+  Random: 1 (3.6%)
+  SoftGrudger: 1 (3.6%)
+  SuspiciousTitForTat: 1 (3.6%)
+  ThompsonSampling: 1 (3.6%)
+  TitForTat: 1 (3.6%)
+  WinStayLoseShift: 1 (3.6%)
+  o3_T1: 1 (3.6%)
+
+Strategy Performance Metrics:
+Strategy               | Score/Move | Score/Match | Total Score | Rounds | Matches
+-------------------------------------------------------------------------------------
+SuspiciousTitForTat    |      3.094 |       9.741 |       263.0 |     85 |      27
+Gemini25Pro_T02        |      2.896 |      11.370 |       307.0 |    106 |      27
+ForgivingGrimTrigger   |      2.794 |       7.037 |       190.0 |     68 |      27
+WinStayLoseShift       |      2.790 |      12.815 |       346.0 |    124 |      27
+Mistral-Large_T07      |      2.787 |       9.704 |       262.0 |     94 |      27
+GradientMetaLearner    |      2.777 |      12.444 |       336.0 |    121 |      27
+Detective              |      2.759 |       8.889 |       240.0 |     87 |      27
+GPT5_T1                |      2.726 |      11.815 |       319.0 |    117 |      27
+SoftGrudger            |      2.722 |      11.593 |       313.0 |    115 |      27
+Bayesian               |      2.718 |      11.074 |       299.0 |    110 |      27
+TitForTat              |      2.702 |      13.111 |       354.0 |    131 |      27
+Gradual                |      2.702 |      10.407 |       281.0 |    104 |      27
+GPT4o_T1               |      2.698 |      10.593 |       286.0 |    106 |      27
+Random                 |      2.696 |      12.481 |       337.0 |    125 |      27
+GenerousTitForTat      |      2.688 |       9.259 |       250.0 |     93 |      27
+o3_T1                  |      2.676 |      14.667 |       396.0 |    148 |      27
+QLearning              |      2.648 |       8.630 |       233.0 |     88 |      27
+Gemini25Pro_T12        |      2.648 |      10.296 |       278.0 |    105 |      27
+Claude4-Sonnet_T02     |      2.647 |      13.333 |       360.0 |    136 |      27
+GrimTrigger            |      2.629 |      10.222 |       276.0 |    105 |      27
+Claude4-Sonnet_T05     |      2.629 |      10.222 |       276.0 |    105 |      27
+ThompsonSampling       |      2.529 |      13.111 |       354.0 |    140 |      27
+Gemini25Pro_T07        |      2.516 |       8.667 |       234.0 |     93 |      27
+Prober                 |      2.402 |       8.185 |       221.0 |     92 |      27
+Alternator             |      2.375 |       9.852 |       266.0 |    112 |      27
+Claude4-Sonnet_T08     |      2.371 |      10.889 |       294.0 |    124 |      27
+Mistral-Large_T12      |      2.362 |       8.222 |       222.0 |     94 |      27
+Mistral-Large_T02      |      2.101 |      11.519 |       311.0 |    148 |      27
+
+Evolutionary Fitness Metrics:
+Strategy               | Fitness | Relative | Raw Count | Mean Fitness
+----------------------------------------------------------------------
+SuspiciousTitForTat    |   3.094 |    1.368 |     1.368 |       2.646
+Gemini25Pro_T02        |   2.896 |    1.198 |     1.198 |       2.646
+ForgivingGrimTrigger   |   2.794 |    1.115 |     1.115 |       2.646
+WinStayLoseShift       |   2.790 |    1.112 |     1.112 |       2.646
+Mistral-Large_T07      |   2.787 |    1.110 |     1.110 |       2.646
+GradientMetaLearner    |   2.777 |    1.102 |     1.102 |       2.646
+Detective              |   2.759 |    1.087 |     1.087 |       2.646
+GPT5_T1                |   2.726 |    1.062 |     1.062 |       2.646
+SoftGrudger            |   2.722 |    1.058 |     1.058 |       2.646
+Bayesian               |   2.718 |    1.055 |     1.055 |       2.646
+TitForTat              |   2.702 |    1.043 |     1.043 |       2.646
+Gradual                |   2.702 |    1.043 |     1.043 |       2.646
+GPT4o_T1               |   2.698 |    1.040 |     1.040 |       2.646
+Random                 |   2.696 |    1.038 |     1.038 |       2.646
+GenerousTitForTat      |   2.688 |    1.032 |     1.032 |       2.646
+o3_T1                  |   2.676 |    1.023 |     1.023 |       2.646
+QLearning              |   2.648 |    1.001 |     1.001 |       2.646
+Gemini25Pro_T12        |   2.648 |    1.001 |     1.001 |       2.646
+Claude4-Sonnet_T02     |   2.647 |    1.001 |     1.001 |       2.646
+GrimTrigger            |   2.629 |    0.987 |     0.987 |       2.646
+Claude4-Sonnet_T05     |   2.629 |    0.987 |     0.987 |       2.646
+ThompsonSampling       |   2.529 |    0.913 |     0.913 |       2.646
+Gemini25Pro_T07        |   2.516 |    0.904 |     0.904 |       2.646
+Prober                 |   2.402 |    0.824 |     0.824 |       2.646
+Alternator             |   2.375 |    0.806 |     0.806 |       2.646
+Claude4-Sonnet_T08     |   2.371 |    0.803 |     0.803 |       2.646
+Mistral-Large_T12      |   2.362 |    0.797 |     0.797 |       2.646
+Mistral-Large_T02      |   2.101 |    0.631 |     0.631 |       2.646
+

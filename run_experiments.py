@@ -677,16 +677,15 @@ def evolve_population(current_population, phase_result, min_count=0, verbose=Tru
     
     while sum(new_population.values()) < total_agents and adjustment_attempts < max_adjustments:
         adjustment_attempts += 1
-        # Find strategy with highest fitness that exists in new_population to increment
-        available_strategies = [s for s in strategy_fitness.keys() if s in new_population]
-        if available_strategies:
-            strategy = max(available_strategies, key=strategy_fitness.get)
+        # Find strategy with highest fitness to increment
+        strategy = max(strategy_fitness, key=strategy_fitness.get)
+        if strategy in new_population:
             new_population[strategy] += 1
-            if verbose and adjustment_attempts <= 5:  # Only show first few adjustments
-                print(f"Adjusting up: {strategy} (highest fitness)")
         else:
-            # If no strategies available, break to avoid infinite loop
-            break
+            # Reintroduce eliminated strategy
+            new_population[strategy] = 1
+        if verbose and adjustment_attempts <= 5:  # Only show first few adjustments
+            print(f"Adjusting up: {strategy} (highest fitness)")
     
     # Verify all strategies have at least min_count
     for strategy in new_population:
@@ -712,7 +711,8 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                         output_dir: str = "results",
                         evolutionary: bool = False,
                         auto_confirm: bool = False,
-                        resume_experiment: str = None):
+                        resume_experiment: str = None,
+                        max_concurrent: int = 50):
     """Run the main experimental suite
     
     Args:
@@ -725,6 +725,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                      based on performance. If False, run repeated identical tournaments.
         auto_confirm: If True, automatically confirm all prompts (skip cost confirmation)
         resume_experiment: Path to experiment directory to resume from checkpoint
+        max_concurrent: Maximum number of concurrent matches within each tournament
     """
     print("="*60)
     print("IPD EXPERIMENT RUNNER")
@@ -977,7 +978,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
                             phase_agents.append(new_agent)
                     
                     # Run tournament for this phase
-                    tournament = Tournament(phase_agents, termination_prob=shadow, verbose=True, max_concurrent=50)
+                    tournament = Tournament(phase_agents, termination_prob=shadow, verbose=True, max_concurrent=max_concurrent)
                     result = tournament.run_tournament()
                     
                     # Save phase results
@@ -1029,7 +1030,7 @@ def run_main_experiments(shadow_conditions: List[float] = [0.1, 0.25, 0.75],
             all_agents_used.extend(agents)  # Track agents for LLM showdown
             
             # Run tournaments
-            tournament = Tournament(agents, termination_prob=shadow, verbose=True, max_concurrent=50)
+            tournament = Tournament(agents, termination_prob=shadow, verbose=True, max_concurrent=max_concurrent)
             
             with Timer(f"Shadow {shadow*100}% tournaments"):
                 results = []
@@ -1180,7 +1181,7 @@ def test_mistral_temperature():
         
         try:
             # Run very short tournament
-            tournament = Tournament(test_agents, termination_prob=0.7, max_rounds=5, max_concurrent=50)
+            tournament = Tournament(test_agents, termination_prob=0.7, max_rounds=5, max_concurrent=100)
             
             with Timer(f"{mistral_agent.name} test"):
                 result = tournament.run_tournament()
@@ -1401,7 +1402,7 @@ def run_test_experiment():
     
     # Run short tournament (fewer rounds for quick testing)
     print(f"\nRunning test tournament with {test_termination_prob*100}% termination probability...")
-    tournament = Tournament(agents, termination_prob=test_termination_prob, max_rounds=8, max_concurrent=50)
+    tournament = Tournament(agents, termination_prob=test_termination_prob, max_rounds=8, max_concurrent=100)
     
     with Timer("Test tournament"):
         result = tournament.run_tournament()
@@ -1529,6 +1530,8 @@ if __name__ == "__main__":
                        help="Automatically confirm all prompts (skip cost confirmation)")
     parser.add_argument("--resume", type=str,
                        help="Resume experiment from checkpoint (provide experiment directory path)")
+    parser.add_argument("--max-concurrent", type=int, default=50,
+                       help="Maximum number of concurrent matches within each tournament (default: 50)")
     
     args = parser.parse_args()
     
@@ -1568,5 +1571,6 @@ if __name__ == "__main__":
             output_dir=args.output,
             evolutionary=args.evolutionary,
             auto_confirm=args.yes,
-            resume_experiment=args.resume
+            resume_experiment=args.resume,
+            max_concurrent=args.max_concurrent
         )

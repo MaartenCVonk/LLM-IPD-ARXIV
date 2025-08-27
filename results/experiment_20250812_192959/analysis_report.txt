@@ -1,0 +1,72 @@
+IPD EXPERIMENT ANALYSIS REPORT
+==================================================
+
+OVERALL PERFORMANCE RANKINGS
+------------------------------
+1. SuspiciousTitForTat_p5i1: 3.094 points/move
+2. GPT4o_T1: 3.000 points/move
+3. Claude4-Sonnet_T05: 3.000 points/move
+4. Gemini25Pro_T12: 3.000 points/move
+5. Gemini25Pro_T02: 3.000 points/move
+6. GPT5_T1: 2.991 points/move
+7. Claude4-Sonnet_T02: 2.984 points/move
+8. Claude4-Sonnet_T08: 2.935 points/move
+9. Gemini25Pro_T07: 2.909 points/move
+10. Gemini25Pro_T02_p5i1: 2.896 points/move
+11. ForgivingGrimTrigger_p5i1: 2.794 points/move
+12. WinStayLoseShift_p5i1: 2.790 points/move
+13. Ministral-Large_T07_p5i1: 2.787 points/move
+14. GradientMetaLearner_p5i1: 2.777 points/move
+15. Detective_p5i1: 2.759 points/move
+16. GPT5_T1_p5i1: 2.726 points/move
+17. SoftGrudger_p5i1: 2.722 points/move
+18. Bayesian_p5i1: 2.718 points/move
+19. TitForTat_p5i1: 2.702 points/move
+20. Gradual_p5i1: 2.702 points/move
+21. GPT4o_T1_p5i1: 2.698 points/move
+22. Random_p5i1: 2.696 points/move
+23. GenerousTitForTat_p5i1: 2.688 points/move
+24. o3_T1_p5i1: 2.676 points/move
+25. QLearning_p5i1: 2.648 points/move
+26. Gemini25Pro_T12_p5i1: 2.648 points/move
+27. Claude4-Sonnet_T02_p5i1: 2.647 points/move
+28. Claude4-Sonnet_T05_p5i1: 2.629 points/move
+29. GrimTrigger_p5i1: 2.629 points/move
+30. ThompsonSampling_p5i1: 2.529 points/move
+31. Gemini25Pro_T07_p5i1: 2.516 points/move
+32. Prober_p5i1: 2.402 points/move
+33. Alternator_p5i1: 2.375 points/move
+34. Claude4-Sonnet_T08_p5i1: 2.371 points/move
+35. Ministral-Large_T12_p5i1: 2.362 points/move
+36. Ministral-Large_T02_p5i1: 2.101 points/move
+
+
+STRATEGIC FINGERPRINT SUMMARY
+------------------------------
+
+shadow_25:
+  Alternator_p5i1: P(C|CC)=0.000, P(C|CD)=0.000, P(C|DC)=1.000, P(C|DD)=1.000
+  Bayesian_p5i1: P(C|CC)=1.000, P(C|CD)=0.000, P(C|DC)=0.455, P(C|DD)=0.000
+  Claude4-Sonnet_T02: P(C|CC)=1.000, P(C|CD)=0.500, P(C|DC)=0.500, P(C|DD)=0.500
+  Claude4-Sonnet_T02_p5i1: P(C|CC)=1.000, P(C|CD)=0.105, P(C|DC)=0.818, P(C|DD)=0.400
+  Claude4-Sonnet_T05: P(C|CC)=1.000, P(C|CD)=0.500, P(C|DC)=0.500, P(C|DD)=0.500
+
+
+HORIZON AWARENESS ANALYSIS
+------------------------------
+Claude4-Sonnet_T02: 1.000
+Claude4-Sonnet_T05: 1.000
+Claude4-Sonnet_T05_p5i1: 1.000
+Claude4-Sonnet_T08: 1.000
+GPT4o_T1_p5i1: 1.000
+Claude4-Sonnet_T08_p5i1: 1.000
+GPT5_T1_p5i1: 1.000
+Claude4-Sonnet_T02_p5i1: 0.978
+Gemini25Pro_T02: 0.963
+Gemini25Pro_T07: 0.960
+Gemini25Pro_T02_p5i1: 0.953
+Gemini25Pro_T12: 0.950
+GPT4o_T1: 0.943
+Gemini25Pro_T07_p5i1: 0.935
+GPT5_T1: 0.933
+Gemini25Pro_T12_p5i1: 0.914
