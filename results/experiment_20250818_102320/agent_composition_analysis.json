@@ -1,0 +1,4366 @@
+{
+  "experiment_path": "results/experiment_20250818_102320",
+  "experiment_name": "experiment_20250818_102320",
+  "timestamp": "2025-08-25T16:19:59.664869",
+  "phases": {
+    "shadow_10_phase_1": {
+      "shadow_condition": 0.1,
+      "phase_number": 1,
+      "csv_file": "results/experiment_20250818_102320/evolutionary_shadow10_phase1.csv",
+      "agents_by_type": {
+        "Behavioral": 3,
+        "Classical": 9,
+        "LLM_Gemini": 3,
+        "Adaptive": 4,
+        "LLM_OpenAI": 3,
+        "LLM_Mistral": 3,
+        "LLM_Anthropic": 3
+      },
+      "agents_by_strategy": {
+        "ForgivingGrimTrigger": 1,
+        "Random": 1,
+        "Gemini25Pro_T12": 1,
+        "TitForTat": 1,
+        "Bayesian": 1,
+        "Detective": 1,
+        "GrimTrigger": 1,
+        "GPT5_T1": 1,
+        "Gemini25Pro_T07": 1,
+        "Mistral-Large_T02": 1,
+        "GenerousTitForTat": 1,
+        "GradientMetaLearner": 1,
+        "Mistral-Large_T12": 1,
+        "Claude4-Sonnet_T08": 1,
+        "Alternator": 1,
+        "SuspiciousTitForTat": 1,
+        "Mistral-Large_T07": 1,
+        "Prober": 1,
+        "SoftGrudger": 1,
+        "ThompsonSampling": 1,
+        "Gradual": 1,
+        "Claude4-Sonnet_T02": 1,
+        "Gemini25Pro_T02": 1,
+        "o3_T1": 1,
+        "GPT4o_T1": 1,
+        "WinStayLoseShift": 1,
+        "QLearning": 1,
+        "Claude4-Sonnet_T05": 1
+      },
+      "unique_agents": [
+        "ForgivingGrimTrigger_p1i1",
+        "Gemini25Pro_T12_p1i1",
+        "Random_p1i1",
+        "TitForTat_p1i1",
+        "Bayesian_p1i1",
+        "Detective_p1i1",
+        "GrimTrigger_p1i1",
+        "GPT5_T1_p1i1",
+        "Gemini25Pro_T07_p1i1",
+        "Ministral-Large_T02_p1i1",
+        "GenerousTitForTat_p1i1",
+        "GradientMetaLearner_p1i1",
+        "Ministral-Large_T12_p1i1",
+        "Claude4-Sonnet_T08_p1i1",
+        "Alternator_p1i1",
+        "SuspiciousTitForTat_p1i1",
+        "Ministral-Large_T07_p1i1",
+        "Prober_p1i1",
+        "SoftGrudger_p1i1",
+        "ThompsonSampling_p1i1",
+        "Gradual_p1i1",
+        "Claude4-Sonnet_T02_p1i1",
+        "Gemini25Pro_T02_p1i1",
+        "o3_T1_p1i1",
+        "GPT4o_T1_p1i1",
+        "WinStayLoseShift_p1i1",
+        "QLearning_p1i1",
+        "Claude4-Sonnet_T05_p1i1"
+      ],
+      "strategy_performance": {
+        "TitForTat": {
+          "score_per_move": 2.430962343096234,
+          "score_per_match": 21.51851851851852,
+          "total_score": 581,
+          "total_rounds": 239,
+          "matches_played": 27
+        },
+        "GrimTrigger": {
+          "score_per_move": 2.1732522796352582,
+          "score_per_match": 26.48148148148148,
+          "total_score": 715,
+          "total_rounds": 329,
+          "matches_played": 27
+        },
+        "WinStayLoseShift": {
+          "score_per_move": 2.4924471299093653,
+          "score_per_match": 30.555555555555557,
+          "total_score": 825,
+          "total_rounds": 331,
+          "matches_played": 27
+        },
+        "GenerousTitForTat": {
+          "score_per_move": 2.6815286624203822,
+          "score_per_match": 31.185185185185187,
+          "total_score": 842,
+          "total_rounds": 314,
+          "matches_played": 27
+        },
+        "SuspiciousTitForTat": {
+          "score_per_move": 2.4056939501779357,
+          "score_per_match": 25.037037037037038,
+          "total_score": 676,
+          "total_rounds": 281,
+          "matches_played": 27
+        },
+        "Prober": {
+          "score_per_move": 2.467289719626168,
+          "score_per_match": 29.333333333333332,
+          "total_score": 792,
+          "total_rounds": 321,
+          "matches_played": 27
+        },
+        "Random": {
+          "score_per_move": 2.54251012145749,
+          "score_per_match": 23.25925925925926,
+          "total_score": 628,
+          "total_rounds": 247,
+          "matches_played": 27
+        },
+        "Gradual": {
+          "score_per_move": 2.271698113207547,
+          "score_per_match": 22.296296296296298,
+          "total_score": 602,
+          "total_rounds": 265,
+          "matches_played": 27
+        },
+        "Alternator": {
+          "score_per_move": 2.3493589743589745,
+          "score_per_match": 27.14814814814815,
+          "total_score": 733,
+          "total_rounds": 312,
+          "matches_played": 27
+        },
+        "Bayesian": {
+          "score_per_move": 2.42964824120603,
+          "score_per_match": 35.81481481481482,
+          "total_score": 967,
+          "total_rounds": 398,
+          "matches_played": 27
+        },
+        "ForgivingGrimTrigger": {
+          "score_per_move": 2.322834645669291,
+          "score_per_match": 21.85185185185185,
+          "total_score": 590,
+          "total_rounds": 254,
+          "matches_played": 27
+        },
+        "Detective": {
+          "score_per_move": 2.4836363636363634,
+          "score_per_match": 25.296296296296298,
+          "total_score": 683,
+          "total_rounds": 275,
+          "matches_played": 27
+        },
+        "SoftGrudger": {
+          "score_per_move": 2.7180851063829787,
+          "score_per_match": 18.925925925925927,
+          "total_score": 511,
+          "total_rounds": 188,
+          "matches_played": 27
+        },
+        "QLearning": {
+          "score_per_move": 2.5017182130584192,
+          "score_per_match": 26.962962962962962,
+          "total_score": 728,
+          "total_rounds": 291,
+          "matches_played": 27
+        },
+        "ThompsonSampling": {
+          "score_per_move": 2.1379310344827585,
+          "score_per_match": 16.074074074074073,
+          "total_score": 434,
+          "total_rounds": 203,
+          "matches_played": 27
+        },
+        "GradientMetaLearner": {
+          "score_per_move": 2.454183266932271,
+          "score_per_match": 22.814814814814813,
+          "total_score": 616,
+          "total_rounds": 251,
+          "matches_played": 27
+        },
+        "o3_T1": {
+          "score_per_move": 2.6733870967741935,
+          "score_per_match": 24.555555555555557,
+          "total_score": 663,
+          "total_rounds": 248,
+          "matches_played": 27
+        },
+        "GPT4o_T1": {
+          "score_per_move": 2.7245989304812834,
+          "score_per_match": 37.74074074074074,
+          "total_score": 1019,
+          "total_rounds": 374,
+          "matches_played": 27
+        },
+        "GPT5_T1": {
+          "score_per_move": 2.5104477611940297,
+          "score_per_match": 31.14814814814815,
+          "total_score": 841,
+          "total_rounds": 335,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T02": {
+          "score_per_move": 2.3460207612456747,
+          "score_per_match": 25.11111111111111,
+          "total_score": 678,
+          "total_rounds": 289,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T05": {
+          "score_per_move": 2.57201646090535,
+          "score_per_match": 23.14814814814815,
+          "total_score": 625,
+          "total_rounds": 243,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T08": {
+          "score_per_move": 2.668769716088328,
+          "score_per_match": 31.333333333333332,
+          "total_score": 846,
+          "total_rounds": 317,
+          "matches_played": 27
+        },
+        "Mistral-Large_T02": {
+          "score_per_move": 2.3835616438356166,
+          "score_per_match": 19.333333333333332,
+          "total_score": 522,
+          "total_rounds": 219,
+          "matches_played": 27
+        },
+        "Mistral-Large_T07": {
+          "score_per_move": 2.310344827586207,
+          "score_per_match": 19.85185185185185,
+          "total_score": 536,
+          "total_rounds": 232,
+          "matches_played": 27
+        },
+        "Mistral-Large_T12": {
+          "score_per_move": 2.435215946843854,
+          "score_per_match": 27.14814814814815,
+          "total_score": 733,
+          "total_rounds": 301,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T02": {
+          "score_per_move": 2.7312925170068025,
+          "score_per_match": 29.74074074074074,
+          "total_score": 803,
+          "total_rounds": 294,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T07": {
+          "score_per_move": 2.6282527881040894,
+          "score_per_match": 26.185185185185187,
+          "total_score": 707,
+          "total_rounds": 269,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T12": {
+          "score_per_move": 2.5777027027027026,
+          "score_per_match": 28.25925925925926,
+          "total_score": 763,
+          "total_rounds": 296,
+          "matches_played": 27
+        }
+      },
+      "evolutionary_metrics": {
+        "TitForTat": {
+          "fitness": 2.430962343096234,
+          "relative_fitness": 0.9612766410398811,
+          "raw_count": 0.9612766410398811,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "GrimTrigger": {
+          "fitness": 2.1732522796352582,
+          "relative_fitness": 0.7682670618216835,
+          "raw_count": 0.7682670618216835,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "WinStayLoseShift": {
+          "fitness": 2.4924471299093653,
+          "relative_fitness": 1.0105174925758948,
+          "raw_count": 1.0105174925758948,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "GenerousTitForTat": {
+          "fitness": 2.6815286624203822,
+          "relative_fitness": 1.1696523913744965,
+          "raw_count": 1.1696523913744965,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "SuspiciousTitForTat": {
+          "fitness": 2.4056939501779357,
+          "relative_fitness": 0.9413967145596193,
+          "raw_count": 0.9413967145596193,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Prober": {
+          "fitness": 2.467289719626168,
+          "relative_fitness": 0.9902212103433156,
+          "raw_count": 0.9902212103433156,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Random": {
+          "fitness": 2.54251012145749,
+          "relative_fitness": 1.0515194425500363,
+          "raw_count": 1.0515194425500363,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Gradual": {
+          "fitness": 2.271698113207547,
+          "relative_fitness": 0.8394467670775734,
+          "raw_count": 0.8394467670775734,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Alternator": {
+          "fitness": 2.3493589743589745,
+          "relative_fitness": 0.8978229187899857,
+          "raw_count": 0.8978229187899857,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Bayesian": {
+          "fitness": 2.42964824120603,
+          "relative_fitness": 0.9602376500186607,
+          "raw_count": 0.9602376500186607,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "ForgivingGrimTrigger": {
+          "fitness": 2.322834645669291,
+          "relative_fitness": 0.877664467697733,
+          "raw_count": 0.877664467697733,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Detective": {
+          "fitness": 2.4836363636363634,
+          "relative_fitness": 1.0033857892968774,
+          "raw_count": 1.0033857892968774,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "SoftGrudger": {
+          "fitness": 2.7180851063829787,
+          "relative_fitness": 1.2017607840294209,
+          "raw_count": 1.2017607840294209,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "QLearning": {
+          "fitness": 2.5017182130584192,
+          "relative_fitness": 1.0180490591425329,
+          "raw_count": 1.0180490591425329,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "ThompsonSampling": {
+          "fitness": 2.1379310344827585,
+          "relative_fitness": 0.7434971522577013,
+          "raw_count": 0.7434971522577013,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "GradientMetaLearner": {
+          "fitness": 2.454183266932271,
+          "relative_fitness": 0.979728874186848,
+          "raw_count": 0.979728874186848,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "o3_T1": {
+          "fitness": 2.6733870967741935,
+          "relative_fitness": 1.1625606563814423,
+          "raw_count": 1.1625606563814423,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "GPT4o_T1": {
+          "fitness": 2.7245989304812834,
+          "relative_fitness": 1.207527666171302,
+          "raw_count": 1.207527666171302,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "GPT5_T1": {
+          "fitness": 2.5104477611940297,
+          "relative_fitness": 1.0251662585544836,
+          "raw_count": 1.0251662585544836,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Claude4-Sonnet_T02": {
+          "fitness": 2.3460207612456747,
+          "relative_fitness": 0.8952732914567517,
+          "raw_count": 0.8952732914567517,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Claude4-Sonnet_T05": {
+          "fitness": 2.57201646090535,
+          "relative_fitness": 1.076067249584632,
+          "raw_count": 1.076067249584632,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Claude4-Sonnet_T08": {
+          "fitness": 2.668769716088328,
+          "relative_fitness": 1.1585482562098979,
+          "raw_count": 1.1585482562098979,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Mistral-Large_T02": {
+          "fitness": 2.3835616438356166,
+          "relative_fitness": 0.9241547553134479,
+          "raw_count": 0.9241547553134479,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Mistral-Large_T07": {
+          "fitness": 2.310344827586207,
+          "relative_fitness": 0.8682514871188403,
+          "raw_count": 0.8682514871188403,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Mistral-Large_T12": {
+          "fitness": 2.435215946843854,
+          "relative_fitness": 0.9646435934116881,
+          "raw_count": 0.9646435934116881,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Gemini25Pro_T02": {
+          "fitness": 2.7312925170068025,
+          "relative_fitness": 1.2134680776526026,
+          "raw_count": 1.2134680776526026,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Gemini25Pro_T07": {
+          "fitness": 2.6282527881040894,
+          "relative_fitness": 1.1236374198181087,
+          "raw_count": 1.1236374198181087,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        },
+        "Gemini25Pro_T12": {
+          "fitness": 2.5777027027027026,
+          "relative_fitness": 1.0808304712788677,
+          "raw_count": 1.0808304712788677,
+          "total_fitness_pool": 69.42438931802562,
+          "mean_fitness": 2.479442475643772
+        }
+      },
+      "match_statistics": {
+        "total_matches": 378,
+        "total_rounds": 3958,
+        "avg_rounds_per_match": 10.470899470899472,
+        "unique_match_ids": 378
+      },
+      "detailed_agent_info": [
+        {
+          "agent_name": "ForgivingGrimTrigger_p1i1",
+          "agent_type": "Behavioral",
+          "strategy": "ForgivingGrimTrigger",
+          "clean_name": "ForgivingGrimTrigger",
+          "score_per_move": 2.322834645669291,
+          "score_per_match": 21.85185185185185,
+          "total_score": 590,
+          "total_rounds": 254,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.322834645669291,
+          "relative_fitness": 0.877664467697733,
+          "raw_count": 0.877664467697733
+        },
+        {
+          "agent_name": "Random_p1i1",
+          "agent_type": "Classical",
+          "strategy": "Random",
+          "clean_name": "Random",
+          "score_per_move": 2.54251012145749,
+          "score_per_match": 23.25925925925926,
+          "total_score": 628,
+          "total_rounds": 247,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.54251012145749,
+          "relative_fitness": 1.0515194425500363,
+          "raw_count": 1.0515194425500363
+        },
+        {
+          "agent_name": "Gemini25Pro_T12_p1i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T12",
+          "clean_name": "Gemini25Pro_T12",
+          "score_per_move": 2.5777027027027026,
+          "score_per_match": 28.25925925925926,
+          "total_score": 763,
+          "total_rounds": 296,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5777027027027026,
+          "relative_fitness": 1.0808304712788677,
+          "raw_count": 1.0808304712788677
+        },
+        {
+          "agent_name": "TitForTat_p1i1",
+          "agent_type": "Classical",
+          "strategy": "TitForTat",
+          "clean_name": "TitForTat",
+          "score_per_move": 2.430962343096234,
+          "score_per_match": 21.51851851851852,
+          "total_score": 581,
+          "total_rounds": 239,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.430962343096234,
+          "relative_fitness": 0.9612766410398811,
+          "raw_count": 0.9612766410398811
+        },
+        {
+          "agent_name": "Bayesian_p1i1",
+          "agent_type": "Adaptive",
+          "strategy": "Bayesian",
+          "clean_name": "Bayesian",
+          "score_per_move": 2.42964824120603,
+          "score_per_match": 35.81481481481482,
+          "total_score": 967,
+          "total_rounds": 398,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.42964824120603,
+          "relative_fitness": 0.9602376500186607,
+          "raw_count": 0.9602376500186607
+        },
+        {
+          "agent_name": "Detective_p1i1",
+          "agent_type": "Behavioral",
+          "strategy": "Detective",
+          "clean_name": "Detective",
+          "score_per_move": 2.4836363636363634,
+          "score_per_match": 25.296296296296298,
+          "total_score": 683,
+          "total_rounds": 275,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.4836363636363634,
+          "relative_fitness": 1.0033857892968774,
+          "raw_count": 1.0033857892968774
+        },
+        {
+          "agent_name": "GrimTrigger_p1i1",
+          "agent_type": "Classical",
+          "strategy": "GrimTrigger",
+          "clean_name": "GrimTrigger",
+          "score_per_move": 2.1732522796352582,
+          "score_per_match": 26.48148148148148,
+          "total_score": 715,
+          "total_rounds": 329,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.1732522796352582,
+          "relative_fitness": 0.7682670618216835,
+          "raw_count": 0.7682670618216835
+        },
+        {
+          "agent_name": "GPT5_T1_p1i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT5_T1",
+          "clean_name": "GPT5_T1",
+          "score_per_move": 2.5104477611940297,
+          "score_per_match": 31.14814814814815,
+          "total_score": 841,
+          "total_rounds": 335,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5104477611940297,
+          "relative_fitness": 1.0251662585544836,
+          "raw_count": 1.0251662585544836
+        },
+        {
+          "agent_name": "Gemini25Pro_T07_p1i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T07",
+          "clean_name": "Gemini25Pro_T07",
+          "score_per_move": 2.6282527881040894,
+          "score_per_match": 26.185185185185187,
+          "total_score": 707,
+          "total_rounds": 269,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6282527881040894,
+          "relative_fitness": 1.1236374198181087,
+          "raw_count": 1.1236374198181087
+        },
+        {
+          "agent_name": "Ministral-Large_T02_p1i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T02",
+          "clean_name": "Ministral-Large_T02",
+          "score_per_move": 2.3835616438356166,
+          "score_per_match": 19.333333333333332,
+          "total_score": 522,
+          "total_rounds": 219,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.3835616438356166,
+          "relative_fitness": 0.9241547553134479,
+          "raw_count": 0.9241547553134479
+        },
+        {
+          "agent_name": "GenerousTitForTat_p1i1",
+          "agent_type": "Classical",
+          "strategy": "GenerousTitForTat",
+          "clean_name": "GenerousTitForTat",
+          "score_per_move": 2.6815286624203822,
+          "score_per_match": 31.185185185185187,
+          "total_score": 842,
+          "total_rounds": 314,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6815286624203822,
+          "relative_fitness": 1.1696523913744965,
+          "raw_count": 1.1696523913744965
+        },
+        {
+          "agent_name": "GradientMetaLearner_p1i1",
+          "agent_type": "Adaptive",
+          "strategy": "GradientMetaLearner",
+          "clean_name": "GradientMetaLearner",
+          "score_per_move": 2.454183266932271,
+          "score_per_match": 22.814814814814813,
+          "total_score": 616,
+          "total_rounds": 251,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.454183266932271,
+          "relative_fitness": 0.979728874186848,
+          "raw_count": 0.979728874186848
+        },
+        {
+          "agent_name": "Ministral-Large_T12_p1i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T12",
+          "clean_name": "Ministral-Large_T12",
+          "score_per_move": 2.435215946843854,
+          "score_per_match": 27.14814814814815,
+          "total_score": 733,
+          "total_rounds": 301,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.435215946843854,
+          "relative_fitness": 0.9646435934116881,
+          "raw_count": 0.9646435934116881
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T08_p1i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T08",
+          "clean_name": "Claude4-Sonnet_T08",
+          "score_per_move": 2.668769716088328,
+          "score_per_match": 31.333333333333332,
+          "total_score": 846,
+          "total_rounds": 317,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.668769716088328,
+          "relative_fitness": 1.1585482562098979,
+          "raw_count": 1.1585482562098979
+        },
+        {
+          "agent_name": "Alternator_p1i1",
+          "agent_type": "Classical",
+          "strategy": "Alternator",
+          "clean_name": "Alternator",
+          "score_per_move": 2.3493589743589745,
+          "score_per_match": 27.14814814814815,
+          "total_score": 733,
+          "total_rounds": 312,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.3493589743589745,
+          "relative_fitness": 0.8978229187899857,
+          "raw_count": 0.8978229187899857
+        },
+        {
+          "agent_name": "SuspiciousTitForTat_p1i1",
+          "agent_type": "Classical",
+          "strategy": "SuspiciousTitForTat",
+          "clean_name": "SuspiciousTitForTat",
+          "score_per_move": 2.4056939501779357,
+          "score_per_match": 25.037037037037038,
+          "total_score": 676,
+          "total_rounds": 281,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.4056939501779357,
+          "relative_fitness": 0.9413967145596193,
+          "raw_count": 0.9413967145596193
+        },
+        {
+          "agent_name": "Ministral-Large_T07_p1i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T07",
+          "clean_name": "Ministral-Large_T07",
+          "score_per_move": 2.310344827586207,
+          "score_per_match": 19.85185185185185,
+          "total_score": 536,
+          "total_rounds": 232,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.310344827586207,
+          "relative_fitness": 0.8682514871188403,
+          "raw_count": 0.8682514871188403
+        },
+        {
+          "agent_name": "Prober_p1i1",
+          "agent_type": "Classical",
+          "strategy": "Prober",
+          "clean_name": "Prober",
+          "score_per_move": 2.467289719626168,
+          "score_per_match": 29.333333333333332,
+          "total_score": 792,
+          "total_rounds": 321,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.467289719626168,
+          "relative_fitness": 0.9902212103433156,
+          "raw_count": 0.9902212103433156
+        },
+        {
+          "agent_name": "SoftGrudger_p1i1",
+          "agent_type": "Behavioral",
+          "strategy": "SoftGrudger",
+          "clean_name": "SoftGrudger",
+          "score_per_move": 2.7180851063829787,
+          "score_per_match": 18.925925925925927,
+          "total_score": 511,
+          "total_rounds": 188,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7180851063829787,
+          "relative_fitness": 1.2017607840294209,
+          "raw_count": 1.2017607840294209
+        },
+        {
+          "agent_name": "ThompsonSampling_p1i1",
+          "agent_type": "Adaptive",
+          "strategy": "ThompsonSampling",
+          "clean_name": "ThompsonSampling",
+          "score_per_move": 2.1379310344827585,
+          "score_per_match": 16.074074074074073,
+          "total_score": 434,
+          "total_rounds": 203,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.1379310344827585,
+          "relative_fitness": 0.7434971522577013,
+          "raw_count": 0.7434971522577013
+        },
+        {
+          "agent_name": "Gradual_p1i1",
+          "agent_type": "Classical",
+          "strategy": "Gradual",
+          "clean_name": "Gradual",
+          "score_per_move": 2.271698113207547,
+          "score_per_match": 22.296296296296298,
+          "total_score": 602,
+          "total_rounds": 265,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.271698113207547,
+          "relative_fitness": 0.8394467670775734,
+          "raw_count": 0.8394467670775734
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T02_p1i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T02",
+          "clean_name": "Claude4-Sonnet_T02",
+          "score_per_move": 2.3460207612456747,
+          "score_per_match": 25.11111111111111,
+          "total_score": 678,
+          "total_rounds": 289,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.3460207612456747,
+          "relative_fitness": 0.8952732914567517,
+          "raw_count": 0.8952732914567517
+        },
+        {
+          "agent_name": "Gemini25Pro_T02_p1i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T02",
+          "clean_name": "Gemini25Pro_T02",
+          "score_per_move": 2.7312925170068025,
+          "score_per_match": 29.74074074074074,
+          "total_score": 803,
+          "total_rounds": 294,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7312925170068025,
+          "relative_fitness": 1.2134680776526026,
+          "raw_count": 1.2134680776526026
+        },
+        {
+          "agent_name": "o3_T1_p1i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "o3_T1",
+          "clean_name": "o3_T1",
+          "score_per_move": 2.6733870967741935,
+          "score_per_match": 24.555555555555557,
+          "total_score": 663,
+          "total_rounds": 248,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6733870967741935,
+          "relative_fitness": 1.1625606563814423,
+          "raw_count": 1.1625606563814423
+        },
+        {
+          "agent_name": "GPT4o_T1_p1i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT4o_T1",
+          "clean_name": "GPT4o_T1",
+          "score_per_move": 2.7245989304812834,
+          "score_per_match": 37.74074074074074,
+          "total_score": 1019,
+          "total_rounds": 374,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7245989304812834,
+          "relative_fitness": 1.207527666171302,
+          "raw_count": 1.207527666171302
+        },
+        {
+          "agent_name": "WinStayLoseShift_p1i1",
+          "agent_type": "Classical",
+          "strategy": "WinStayLoseShift",
+          "clean_name": "WinStayLoseShift",
+          "score_per_move": 2.4924471299093653,
+          "score_per_match": 30.555555555555557,
+          "total_score": 825,
+          "total_rounds": 331,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.4924471299093653,
+          "relative_fitness": 1.0105174925758948,
+          "raw_count": 1.0105174925758948
+        },
+        {
+          "agent_name": "QLearning_p1i1",
+          "agent_type": "Adaptive",
+          "strategy": "QLearning",
+          "clean_name": "QLearning",
+          "score_per_move": 2.5017182130584192,
+          "score_per_match": 26.962962962962962,
+          "total_score": 728,
+          "total_rounds": 291,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5017182130584192,
+          "relative_fitness": 1.0180490591425329,
+          "raw_count": 1.0180490591425329
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T05_p1i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T05",
+          "clean_name": "Claude4-Sonnet_T05",
+          "score_per_move": 2.57201646090535,
+          "score_per_match": 23.14814814814815,
+          "total_score": 625,
+          "total_rounds": 243,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.57201646090535,
+          "relative_fitness": 1.076067249584632,
+          "raw_count": 1.076067249584632
+        }
+      ],
+      "total_unique_agents": 28
+    },
+    "shadow_10_phase_2": {
+      "shadow_condition": 0.1,
+      "phase_number": 2,
+      "csv_file": "results/experiment_20250818_102320/evolutionary_shadow10_phase2.csv",
+      "agents_by_type": {
+        "Classical": 9,
+        "LLM_Anthropic": 3,
+        "LLM_Mistral": 3,
+        "LLM_Gemini": 3,
+        "Behavioral": 3,
+        "LLM_OpenAI": 3,
+        "Adaptive": 4
+      },
+      "agents_by_strategy": {
+        "SuspiciousTitForTat": 1,
+        "Claude4-Sonnet_T08": 1,
+        "Claude4-Sonnet_T05": 1,
+        "Mistral-Large_T02": 1,
+        "Gradual": 1,
+        "Alternator": 1,
+        "TitForTat": 1,
+        "Claude4-Sonnet_T02": 1,
+        "Gemini25Pro_T07": 1,
+        "Mistral-Large_T07": 1,
+        "SoftGrudger": 1,
+        "GPT5_T1": 1,
+        "Bayesian": 1,
+        "Mistral-Large_T12": 1,
+        "o3_T1": 1,
+        "Prober": 1,
+        "Gemini25Pro_T02": 1,
+        "Random": 1,
+        "GrimTrigger": 1,
+        "GPT4o_T1": 1,
+        "WinStayLoseShift": 1,
+        "ForgivingGrimTrigger": 1,
+        "Gemini25Pro_T12": 1,
+        "QLearning": 1,
+        "Detective": 1,
+        "ThompsonSampling": 1,
+        "GradientMetaLearner": 1,
+        "GenerousTitForTat": 1
+      },
+      "unique_agents": [
+        "SuspiciousTitForTat_p2i1",
+        "Claude4-Sonnet_T08_p2i1",
+        "Claude4-Sonnet_T05_p2i1",
+        "Ministral-Large_T02_p2i1",
+        "Gradual_p2i1",
+        "Alternator_p2i1",
+        "TitForTat_p2i1",
+        "Claude4-Sonnet_T02_p2i1",
+        "Gemini25Pro_T07_p2i1",
+        "Ministral-Large_T07_p2i1",
+        "SoftGrudger_p2i1",
+        "GPT5_T1_p2i1",
+        "Bayesian_p2i1",
+        "Ministral-Large_T12_p2i1",
+        "o3_T1_p2i1",
+        "Prober_p2i1",
+        "Gemini25Pro_T02_p2i1",
+        "Random_p2i1",
+        "GrimTrigger_p2i1",
+        "GPT4o_T1_p2i1",
+        "WinStayLoseShift_p2i1",
+        "ForgivingGrimTrigger_p2i1",
+        "Gemini25Pro_T12_p2i1",
+        "QLearning_p2i1",
+        "Detective_p2i1",
+        "ThompsonSampling_p2i1",
+        "GradientMetaLearner_p2i1",
+        "GenerousTitForTat_p2i1"
+      ],
+      "strategy_performance": {
+        "TitForTat": {
+          "score_per_move": 2.7379912663755457,
+          "score_per_match": 23.22222222222222,
+          "total_score": 627,
+          "total_rounds": 229,
+          "matches_played": 27
+        },
+        "GrimTrigger": {
+          "score_per_move": 2.8085106382978724,
+          "score_per_match": 24.444444444444443,
+          "total_score": 660,
+          "total_rounds": 235,
+          "matches_played": 27
+        },
+        "WinStayLoseShift": {
+          "score_per_move": 2.7598784194528876,
+          "score_per_match": 33.629629629629626,
+          "total_score": 908,
+          "total_rounds": 329,
+          "matches_played": 27
+        },
+        "GenerousTitForTat": {
+          "score_per_move": 2.5658536585365854,
+          "score_per_match": 19.48148148148148,
+          "total_score": 526,
+          "total_rounds": 205,
+          "matches_played": 27
+        },
+        "SuspiciousTitForTat": {
+          "score_per_move": 2.5708661417322833,
+          "score_per_match": 24.185185185185187,
+          "total_score": 653,
+          "total_rounds": 254,
+          "matches_played": 27
+        },
+        "Prober": {
+          "score_per_move": 2.4641509433962265,
+          "score_per_match": 24.185185185185187,
+          "total_score": 653,
+          "total_rounds": 265,
+          "matches_played": 27
+        },
+        "Random": {
+          "score_per_move": 2.29136690647482,
+          "score_per_match": 23.59259259259259,
+          "total_score": 637,
+          "total_rounds": 278,
+          "matches_played": 27
+        },
+        "Gradual": {
+          "score_per_move": 2.5825242718446604,
+          "score_per_match": 19.703703703703702,
+          "total_score": 532,
+          "total_rounds": 206,
+          "matches_played": 27
+        },
+        "Alternator": {
+          "score_per_move": 1.8784313725490196,
+          "score_per_match": 17.74074074074074,
+          "total_score": 479,
+          "total_rounds": 255,
+          "matches_played": 27
+        },
+        "Bayesian": {
+          "score_per_move": 2.7419354838709675,
+          "score_per_match": 25.185185185185187,
+          "total_score": 680,
+          "total_rounds": 248,
+          "matches_played": 27
+        },
+        "ForgivingGrimTrigger": {
+          "score_per_move": 2.724264705882353,
+          "score_per_match": 27.444444444444443,
+          "total_score": 741,
+          "total_rounds": 272,
+          "matches_played": 27
+        },
+        "Detective": {
+          "score_per_move": 2.450980392156863,
+          "score_per_match": 27.77777777777778,
+          "total_score": 750,
+          "total_rounds": 306,
+          "matches_played": 27
+        },
+        "SoftGrudger": {
+          "score_per_move": 2.6964285714285716,
+          "score_per_match": 22.37037037037037,
+          "total_score": 604,
+          "total_rounds": 224,
+          "matches_played": 27
+        },
+        "QLearning": {
+          "score_per_move": 2.566265060240964,
+          "score_per_match": 15.777777777777779,
+          "total_score": 426,
+          "total_rounds": 166,
+          "matches_played": 27
+        },
+        "ThompsonSampling": {
+          "score_per_move": 2.427906976744186,
+          "score_per_match": 19.333333333333332,
+          "total_score": 522,
+          "total_rounds": 215,
+          "matches_played": 27
+        },
+        "GradientMetaLearner": {
+          "score_per_move": 2.308080808080808,
+          "score_per_match": 16.925925925925927,
+          "total_score": 457,
+          "total_rounds": 198,
+          "matches_played": 27
+        },
+        "o3_T1": {
+          "score_per_move": 2.7279411764705883,
+          "score_per_match": 27.48148148148148,
+          "total_score": 742,
+          "total_rounds": 272,
+          "matches_played": 27
+        },
+        "GPT4o_T1": {
+          "score_per_move": 2.797752808988764,
+          "score_per_match": 27.666666666666668,
+          "total_score": 747,
+          "total_rounds": 267,
+          "matches_played": 27
+        },
+        "GPT5_T1": {
+          "score_per_move": 2.8252032520325203,
+          "score_per_match": 25.74074074074074,
+          "total_score": 695,
+          "total_rounds": 246,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T02": {
+          "score_per_move": 2.645021645021645,
+          "score_per_match": 22.62962962962963,
+          "total_score": 611,
+          "total_rounds": 231,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T05": {
+          "score_per_move": 2.806060606060606,
+          "score_per_match": 34.2962962962963,
+          "total_score": 926,
+          "total_rounds": 330,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T08": {
+          "score_per_move": 2.674540682414698,
+          "score_per_match": 37.74074074074074,
+          "total_score": 1019,
+          "total_rounds": 381,
+          "matches_played": 27
+        },
+        "Mistral-Large_T02": {
+          "score_per_move": 2.368181818181818,
+          "score_per_match": 19.296296296296298,
+          "total_score": 521,
+          "total_rounds": 220,
+          "matches_played": 27
+        },
+        "Mistral-Large_T07": {
+          "score_per_move": 2.7106227106227108,
+          "score_per_match": 27.40740740740741,
+          "total_score": 740,
+          "total_rounds": 273,
+          "matches_played": 27
+        },
+        "Mistral-Large_T12": {
+          "score_per_move": 2.4601769911504423,
+          "score_per_match": 20.59259259259259,
+          "total_score": 556,
+          "total_rounds": 226,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T02": {
+          "score_per_move": 2.697986577181208,
+          "score_per_match": 29.77777777777778,
+          "total_score": 804,
+          "total_rounds": 298,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T07": {
+          "score_per_move": 2.809061488673139,
+          "score_per_match": 32.148148148148145,
+          "total_score": 868,
+          "total_rounds": 309,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T12": {
+          "score_per_move": 2.5921052631578947,
+          "score_per_match": 21.88888888888889,
+          "total_score": 591,
+          "total_rounds": 228,
+          "matches_played": 27
+        }
+      },
+      "evolutionary_metrics": {
+        "TitForTat": {
+          "fitness": 2.7379912663755457,
+          "relative_fitness": 1.1123200328193552,
+          "raw_count": 1.1123200328193552,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "GrimTrigger": {
+          "fitness": 2.8085106382978724,
+          "relative_fitness": 1.170355467819606,
+          "raw_count": 1.170355467819606,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "WinStayLoseShift": {
+          "fitness": 2.7598784194528876,
+          "relative_fitness": 1.130174601324497,
+          "raw_count": 1.130174601324497,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "GenerousTitForTat": {
+          "fitness": 2.5658536585365854,
+          "relative_fitness": 0.9768534353001327,
+          "raw_count": 0.9768534353001327,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "SuspiciousTitForTat": {
+          "fitness": 2.5708661417322833,
+          "relative_fitness": 0.9806737966956726,
+          "raw_count": 0.9806737966956726,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Prober": {
+          "fitness": 2.4641509433962265,
+          "relative_fitness": 0.9009491017104737,
+          "raw_count": 0.9009491017104737,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Random": {
+          "fitness": 2.29136690647482,
+          "relative_fitness": 0.7790313136539059,
+          "raw_count": 0.7790313136539059,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Gradual": {
+          "fitness": 2.5825242718446604,
+          "relative_fitness": 0.989588103665092,
+          "raw_count": 0.989588103665092,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Alternator": {
+          "fitness": 1.8784313725490196,
+          "relative_fitness": 0.5235477625177221,
+          "raw_count": 0.5235477625177221,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Bayesian": {
+          "fitness": 2.7419354838709675,
+          "relative_fitness": 1.1155270497334286,
+          "raw_count": 1.1155270497334286,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "ForgivingGrimTrigger": {
+          "fitness": 2.724264705882353,
+          "relative_fitness": 1.1011950482193253,
+          "raw_count": 1.1011950482193253,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Detective": {
+          "fitness": 2.450980392156863,
+          "relative_fitness": 0.8913439391106438,
+          "raw_count": 0.8913439391106438,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "SoftGrudger": {
+          "fitness": 2.6964285714285716,
+          "relative_fitness": 1.0788063211811492,
+          "raw_count": 1.0788063211811492,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "QLearning": {
+          "fitness": 2.566265060240964,
+          "relative_fitness": 0.9771667122362172,
+          "raw_count": 0.9771667122362172,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "ThompsonSampling": {
+          "fitness": 2.427906976744186,
+          "relative_fitness": 0.8746407914871052,
+          "raw_count": 0.8746407914871052,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "GradientMetaLearner": {
+          "fitness": 2.308080808080808,
+          "relative_fitness": 0.7904377286767771,
+          "raw_count": 0.7904377286767771,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "o3_T1": {
+          "fitness": 2.7279411764705883,
+          "relative_fitness": 1.1041692401081529,
+          "raw_count": 1.1041692401081529,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "GPT4o_T1": {
+          "fitness": 2.797752808988764,
+          "relative_fitness": 1.1614066886055499,
+          "raw_count": 1.1614066886055499,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "GPT5_T1": {
+          "fitness": 2.8252032520325203,
+          "relative_fitness": 1.1843090197605948,
+          "raw_count": 1.1843090197605948,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Claude4-Sonnet_T02": {
+          "fitness": 2.645021645021645,
+          "relative_fitness": 1.0380639345880645,
+          "raw_count": 1.0380639345880645,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Claude4-Sonnet_T05": {
+          "fitness": 2.806060606060606,
+          "relative_fitness": 1.1683144159682133,
+          "raw_count": 1.1683144159682133,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Claude4-Sonnet_T08": {
+          "fitness": 2.674540682414698,
+          "relative_fitness": 1.0613632808049602,
+          "raw_count": 1.0613632808049602,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Mistral-Large_T02": {
+          "fitness": 2.368181818181818,
+          "relative_fitness": 0.8321387130553651,
+          "raw_count": 0.8321387130553651,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Mistral-Large_T07": {
+          "fitness": 2.7106227106227108,
+          "relative_fitness": 1.0901939994916143,
+          "raw_count": 1.0901939994916143,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Mistral-Large_T12": {
+          "fitness": 2.4601769911504423,
+          "relative_fitness": 0.8980455119722095,
+          "raw_count": 0.8980455119722095,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Gemini25Pro_T02": {
+          "fitness": 2.697986577181208,
+          "relative_fitness": 1.0800533573936477,
+          "raw_count": 1.0800533573936477,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Gemini25Pro_T07": {
+          "fitness": 2.809061488673139,
+          "relative_fitness": 1.1708146107998194,
+          "raw_count": 1.1708146107998194,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        },
+        "Gemini25Pro_T12": {
+          "fitness": 2.5921052631578947,
+          "relative_fitness": 0.9969443345439322,
+          "raw_count": 0.9969443345439322,
+          "total_fitness_pool": 72.69009063702065,
+          "mean_fitness": 2.59607466560788
+        }
+      },
+      "match_statistics": {
+        "total_matches": 378,
+        "total_rounds": 3583,
+        "avg_rounds_per_match": 9.47883597883598,
+        "unique_match_ids": 378
+      },
+      "detailed_agent_info": [
+        {
+          "agent_name": "SuspiciousTitForTat_p2i1",
+          "agent_type": "Classical",
+          "strategy": "SuspiciousTitForTat",
+          "clean_name": "SuspiciousTitForTat",
+          "score_per_move": 2.5708661417322833,
+          "score_per_match": 24.185185185185187,
+          "total_score": 653,
+          "total_rounds": 254,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5708661417322833,
+          "relative_fitness": 0.9806737966956726,
+          "raw_count": 0.9806737966956726
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T08_p2i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T08",
+          "clean_name": "Claude4-Sonnet_T08",
+          "score_per_move": 2.674540682414698,
+          "score_per_match": 37.74074074074074,
+          "total_score": 1019,
+          "total_rounds": 381,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.674540682414698,
+          "relative_fitness": 1.0613632808049602,
+          "raw_count": 1.0613632808049602
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T05_p2i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T05",
+          "clean_name": "Claude4-Sonnet_T05",
+          "score_per_move": 2.806060606060606,
+          "score_per_match": 34.2962962962963,
+          "total_score": 926,
+          "total_rounds": 330,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.806060606060606,
+          "relative_fitness": 1.1683144159682133,
+          "raw_count": 1.1683144159682133
+        },
+        {
+          "agent_name": "Ministral-Large_T02_p2i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T02",
+          "clean_name": "Ministral-Large_T02",
+          "score_per_move": 2.368181818181818,
+          "score_per_match": 19.296296296296298,
+          "total_score": 521,
+          "total_rounds": 220,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.368181818181818,
+          "relative_fitness": 0.8321387130553651,
+          "raw_count": 0.8321387130553651
+        },
+        {
+          "agent_name": "Gradual_p2i1",
+          "agent_type": "Classical",
+          "strategy": "Gradual",
+          "clean_name": "Gradual",
+          "score_per_move": 2.5825242718446604,
+          "score_per_match": 19.703703703703702,
+          "total_score": 532,
+          "total_rounds": 206,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5825242718446604,
+          "relative_fitness": 0.989588103665092,
+          "raw_count": 0.989588103665092
+        },
+        {
+          "agent_name": "Alternator_p2i1",
+          "agent_type": "Classical",
+          "strategy": "Alternator",
+          "clean_name": "Alternator",
+          "score_per_move": 1.8784313725490196,
+          "score_per_match": 17.74074074074074,
+          "total_score": 479,
+          "total_rounds": 255,
+          "matches_played": 27,
+          "evolutionary_fitness": 1.8784313725490196,
+          "relative_fitness": 0.5235477625177221,
+          "raw_count": 0.5235477625177221
+        },
+        {
+          "agent_name": "TitForTat_p2i1",
+          "agent_type": "Classical",
+          "strategy": "TitForTat",
+          "clean_name": "TitForTat",
+          "score_per_move": 2.7379912663755457,
+          "score_per_match": 23.22222222222222,
+          "total_score": 627,
+          "total_rounds": 229,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7379912663755457,
+          "relative_fitness": 1.1123200328193552,
+          "raw_count": 1.1123200328193552
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T02_p2i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T02",
+          "clean_name": "Claude4-Sonnet_T02",
+          "score_per_move": 2.645021645021645,
+          "score_per_match": 22.62962962962963,
+          "total_score": 611,
+          "total_rounds": 231,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.645021645021645,
+          "relative_fitness": 1.0380639345880645,
+          "raw_count": 1.0380639345880645
+        },
+        {
+          "agent_name": "Gemini25Pro_T07_p2i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T07",
+          "clean_name": "Gemini25Pro_T07",
+          "score_per_move": 2.809061488673139,
+          "score_per_match": 32.148148148148145,
+          "total_score": 868,
+          "total_rounds": 309,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.809061488673139,
+          "relative_fitness": 1.1708146107998194,
+          "raw_count": 1.1708146107998194
+        },
+        {
+          "agent_name": "Ministral-Large_T07_p2i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T07",
+          "clean_name": "Ministral-Large_T07",
+          "score_per_move": 2.7106227106227108,
+          "score_per_match": 27.40740740740741,
+          "total_score": 740,
+          "total_rounds": 273,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7106227106227108,
+          "relative_fitness": 1.0901939994916143,
+          "raw_count": 1.0901939994916143
+        },
+        {
+          "agent_name": "SoftGrudger_p2i1",
+          "agent_type": "Behavioral",
+          "strategy": "SoftGrudger",
+          "clean_name": "SoftGrudger",
+          "score_per_move": 2.6964285714285716,
+          "score_per_match": 22.37037037037037,
+          "total_score": 604,
+          "total_rounds": 224,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6964285714285716,
+          "relative_fitness": 1.0788063211811492,
+          "raw_count": 1.0788063211811492
+        },
+        {
+          "agent_name": "GPT5_T1_p2i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT5_T1",
+          "clean_name": "GPT5_T1",
+          "score_per_move": 2.8252032520325203,
+          "score_per_match": 25.74074074074074,
+          "total_score": 695,
+          "total_rounds": 246,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.8252032520325203,
+          "relative_fitness": 1.1843090197605948,
+          "raw_count": 1.1843090197605948
+        },
+        {
+          "agent_name": "Bayesian_p2i1",
+          "agent_type": "Adaptive",
+          "strategy": "Bayesian",
+          "clean_name": "Bayesian",
+          "score_per_move": 2.7419354838709675,
+          "score_per_match": 25.185185185185187,
+          "total_score": 680,
+          "total_rounds": 248,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7419354838709675,
+          "relative_fitness": 1.1155270497334286,
+          "raw_count": 1.1155270497334286
+        },
+        {
+          "agent_name": "Ministral-Large_T12_p2i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T12",
+          "clean_name": "Ministral-Large_T12",
+          "score_per_move": 2.4601769911504423,
+          "score_per_match": 20.59259259259259,
+          "total_score": 556,
+          "total_rounds": 226,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.4601769911504423,
+          "relative_fitness": 0.8980455119722095,
+          "raw_count": 0.8980455119722095
+        },
+        {
+          "agent_name": "o3_T1_p2i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "o3_T1",
+          "clean_name": "o3_T1",
+          "score_per_move": 2.7279411764705883,
+          "score_per_match": 27.48148148148148,
+          "total_score": 742,
+          "total_rounds": 272,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7279411764705883,
+          "relative_fitness": 1.1041692401081529,
+          "raw_count": 1.1041692401081529
+        },
+        {
+          "agent_name": "Prober_p2i1",
+          "agent_type": "Classical",
+          "strategy": "Prober",
+          "clean_name": "Prober",
+          "score_per_move": 2.4641509433962265,
+          "score_per_match": 24.185185185185187,
+          "total_score": 653,
+          "total_rounds": 265,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.4641509433962265,
+          "relative_fitness": 0.9009491017104737,
+          "raw_count": 0.9009491017104737
+        },
+        {
+          "agent_name": "Gemini25Pro_T02_p2i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T02",
+          "clean_name": "Gemini25Pro_T02",
+          "score_per_move": 2.697986577181208,
+          "score_per_match": 29.77777777777778,
+          "total_score": 804,
+          "total_rounds": 298,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.697986577181208,
+          "relative_fitness": 1.0800533573936477,
+          "raw_count": 1.0800533573936477
+        },
+        {
+          "agent_name": "Random_p2i1",
+          "agent_type": "Classical",
+          "strategy": "Random",
+          "clean_name": "Random",
+          "score_per_move": 2.29136690647482,
+          "score_per_match": 23.59259259259259,
+          "total_score": 637,
+          "total_rounds": 278,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.29136690647482,
+          "relative_fitness": 0.7790313136539059,
+          "raw_count": 0.7790313136539059
+        },
+        {
+          "agent_name": "GrimTrigger_p2i1",
+          "agent_type": "Classical",
+          "strategy": "GrimTrigger",
+          "clean_name": "GrimTrigger",
+          "score_per_move": 2.8085106382978724,
+          "score_per_match": 24.444444444444443,
+          "total_score": 660,
+          "total_rounds": 235,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.8085106382978724,
+          "relative_fitness": 1.170355467819606,
+          "raw_count": 1.170355467819606
+        },
+        {
+          "agent_name": "GPT4o_T1_p2i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT4o_T1",
+          "clean_name": "GPT4o_T1",
+          "score_per_move": 2.797752808988764,
+          "score_per_match": 27.666666666666668,
+          "total_score": 747,
+          "total_rounds": 267,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.797752808988764,
+          "relative_fitness": 1.1614066886055499,
+          "raw_count": 1.1614066886055499
+        },
+        {
+          "agent_name": "WinStayLoseShift_p2i1",
+          "agent_type": "Classical",
+          "strategy": "WinStayLoseShift",
+          "clean_name": "WinStayLoseShift",
+          "score_per_move": 2.7598784194528876,
+          "score_per_match": 33.629629629629626,
+          "total_score": 908,
+          "total_rounds": 329,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7598784194528876,
+          "relative_fitness": 1.130174601324497,
+          "raw_count": 1.130174601324497
+        },
+        {
+          "agent_name": "ForgivingGrimTrigger_p2i1",
+          "agent_type": "Behavioral",
+          "strategy": "ForgivingGrimTrigger",
+          "clean_name": "ForgivingGrimTrigger",
+          "score_per_move": 2.724264705882353,
+          "score_per_match": 27.444444444444443,
+          "total_score": 741,
+          "total_rounds": 272,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.724264705882353,
+          "relative_fitness": 1.1011950482193253,
+          "raw_count": 1.1011950482193253
+        },
+        {
+          "agent_name": "Gemini25Pro_T12_p2i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T12",
+          "clean_name": "Gemini25Pro_T12",
+          "score_per_move": 2.5921052631578947,
+          "score_per_match": 21.88888888888889,
+          "total_score": 591,
+          "total_rounds": 228,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5921052631578947,
+          "relative_fitness": 0.9969443345439322,
+          "raw_count": 0.9969443345439322
+        },
+        {
+          "agent_name": "QLearning_p2i1",
+          "agent_type": "Adaptive",
+          "strategy": "QLearning",
+          "clean_name": "QLearning",
+          "score_per_move": 2.566265060240964,
+          "score_per_match": 15.777777777777779,
+          "total_score": 426,
+          "total_rounds": 166,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.566265060240964,
+          "relative_fitness": 0.9771667122362172,
+          "raw_count": 0.9771667122362172
+        },
+        {
+          "agent_name": "Detective_p2i1",
+          "agent_type": "Behavioral",
+          "strategy": "Detective",
+          "clean_name": "Detective",
+          "score_per_move": 2.450980392156863,
+          "score_per_match": 27.77777777777778,
+          "total_score": 750,
+          "total_rounds": 306,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.450980392156863,
+          "relative_fitness": 0.8913439391106438,
+          "raw_count": 0.8913439391106438
+        },
+        {
+          "agent_name": "ThompsonSampling_p2i1",
+          "agent_type": "Adaptive",
+          "strategy": "ThompsonSampling",
+          "clean_name": "ThompsonSampling",
+          "score_per_move": 2.427906976744186,
+          "score_per_match": 19.333333333333332,
+          "total_score": 522,
+          "total_rounds": 215,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.427906976744186,
+          "relative_fitness": 0.8746407914871052,
+          "raw_count": 0.8746407914871052
+        },
+        {
+          "agent_name": "GradientMetaLearner_p2i1",
+          "agent_type": "Adaptive",
+          "strategy": "GradientMetaLearner",
+          "clean_name": "GradientMetaLearner",
+          "score_per_move": 2.308080808080808,
+          "score_per_match": 16.925925925925927,
+          "total_score": 457,
+          "total_rounds": 198,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.308080808080808,
+          "relative_fitness": 0.7904377286767771,
+          "raw_count": 0.7904377286767771
+        },
+        {
+          "agent_name": "GenerousTitForTat_p2i1",
+          "agent_type": "Classical",
+          "strategy": "GenerousTitForTat",
+          "clean_name": "GenerousTitForTat",
+          "score_per_move": 2.5658536585365854,
+          "score_per_match": 19.48148148148148,
+          "total_score": 526,
+          "total_rounds": 205,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5658536585365854,
+          "relative_fitness": 0.9768534353001327,
+          "raw_count": 0.9768534353001327
+        }
+      ],
+      "total_unique_agents": 28
+    },
+    "shadow_10_phase_3": {
+      "shadow_condition": 0.1,
+      "phase_number": 3,
+      "csv_file": "results/experiment_20250818_102320/evolutionary_shadow10_phase3.csv",
+      "agents_by_type": {
+        "Adaptive": 4,
+        "Classical": 9,
+        "LLM_Mistral": 3,
+        "LLM_Anthropic": 3,
+        "LLM_Gemini": 3,
+        "Behavioral": 3,
+        "LLM_OpenAI": 3
+      },
+      "agents_by_strategy": {
+        "QLearning": 1,
+        "WinStayLoseShift": 1,
+        "TitForTat": 1,
+        "Bayesian": 1,
+        "Alternator": 1,
+        "Mistral-Large_T02": 1,
+        "ThompsonSampling": 1,
+        "Mistral-Large_T07": 1,
+        "GrimTrigger": 1,
+        "Claude4-Sonnet_T05": 1,
+        "Gemini25Pro_T07": 1,
+        "Claude4-Sonnet_T08": 1,
+        "GradientMetaLearner": 1,
+        "Gemini25Pro_T12": 1,
+        "Mistral-Large_T12": 1,
+        "ForgivingGrimTrigger": 1,
+        "o3_T1": 1,
+        "GPT4o_T1": 1,
+        "Detective": 1,
+        "SoftGrudger": 1,
+        "GenerousTitForTat": 1,
+        "Gemini25Pro_T02": 1,
+        "Prober": 1,
+        "Claude4-Sonnet_T02": 1,
+        "Random": 1,
+        "SuspiciousTitForTat": 1,
+        "GPT5_T1": 1,
+        "Gradual": 1
+      },
+      "unique_agents": [
+        "GPT5_T1_p3i1",
+        "QLearning_p3i1",
+        "WinStayLoseShift_p3i1",
+        "TitForTat_p3i1",
+        "Bayesian_p3i1",
+        "Alternator_p3i1",
+        "Ministral-Large_T02_p3i1",
+        "ThompsonSampling_p3i1",
+        "Ministral-Large_T07_p3i1",
+        "GrimTrigger_p3i1",
+        "Claude4-Sonnet_T05_p3i1",
+        "Gemini25Pro_T07_p3i1",
+        "Claude4-Sonnet_T08_p3i1",
+        "GradientMetaLearner_p3i1",
+        "Gemini25Pro_T12_p3i1",
+        "Ministral-Large_T12_p3i1",
+        "ForgivingGrimTrigger_p3i1",
+        "o3_T1_p3i1",
+        "GPT4o_T1_p3i1",
+        "Detective_p3i1",
+        "SoftGrudger_p3i1",
+        "GenerousTitForTat_p3i1",
+        "Gemini25Pro_T02_p3i1",
+        "Prober_p3i1",
+        "Random_p3i1",
+        "SuspiciousTitForTat_p3i1",
+        "Claude4-Sonnet_T02_p3i1",
+        "Gradual_p3i1"
+      ],
+      "strategy_performance": {
+        "TitForTat": {
+          "score_per_move": 2.8197183098591547,
+          "score_per_match": 37.074074074074076,
+          "total_score": 1001,
+          "total_rounds": 355,
+          "matches_played": 27
+        },
+        "GrimTrigger": {
+          "score_per_move": 2.7261306532663316,
+          "score_per_match": 40.18518518518518,
+          "total_score": 1085,
+          "total_rounds": 398,
+          "matches_played": 27
+        },
+        "WinStayLoseShift": {
+          "score_per_move": 2.912621359223301,
+          "score_per_match": 33.333333333333336,
+          "total_score": 900,
+          "total_rounds": 309,
+          "matches_played": 27
+        },
+        "GenerousTitForTat": {
+          "score_per_move": 2.749063670411985,
+          "score_per_match": 27.185185185185187,
+          "total_score": 734,
+          "total_rounds": 267,
+          "matches_played": 27
+        },
+        "SuspiciousTitForTat": {
+          "score_per_move": 2.655430711610487,
+          "score_per_match": 26.25925925925926,
+          "total_score": 709,
+          "total_rounds": 267,
+          "matches_played": 27
+        },
+        "Prober": {
+          "score_per_move": 2.27027027027027,
+          "score_per_match": 24.88888888888889,
+          "total_score": 672,
+          "total_rounds": 296,
+          "matches_played": 27
+        },
+        "Random": {
+          "score_per_move": 2.208,
+          "score_per_match": 20.444444444444443,
+          "total_score": 552,
+          "total_rounds": 250,
+          "matches_played": 27
+        },
+        "Gradual": {
+          "score_per_move": 2.7098214285714284,
+          "score_per_match": 22.48148148148148,
+          "total_score": 607,
+          "total_rounds": 224,
+          "matches_played": 27
+        },
+        "Alternator": {
+          "score_per_move": 2.176470588235294,
+          "score_per_match": 21.925925925925927,
+          "total_score": 592,
+          "total_rounds": 272,
+          "matches_played": 27
+        },
+        "Bayesian": {
+          "score_per_move": 2.723404255319149,
+          "score_per_match": 33.18518518518518,
+          "total_score": 896,
+          "total_rounds": 329,
+          "matches_played": 27
+        },
+        "ForgivingGrimTrigger": {
+          "score_per_move": 2.6106442577030813,
+          "score_per_match": 34.51851851851852,
+          "total_score": 932,
+          "total_rounds": 357,
+          "matches_played": 27
+        },
+        "Detective": {
+          "score_per_move": 2.408026755852843,
+          "score_per_match": 26.666666666666668,
+          "total_score": 720,
+          "total_rounds": 299,
+          "matches_played": 27
+        },
+        "SoftGrudger": {
+          "score_per_move": 2.7857142857142856,
+          "score_per_match": 28.88888888888889,
+          "total_score": 780,
+          "total_rounds": 280,
+          "matches_played": 27
+        },
+        "QLearning": {
+          "score_per_move": 2.3537735849056602,
+          "score_per_match": 18.48148148148148,
+          "total_score": 499,
+          "total_rounds": 212,
+          "matches_played": 27
+        },
+        "ThompsonSampling": {
+          "score_per_move": 2.2183098591549295,
+          "score_per_match": 23.333333333333332,
+          "total_score": 630,
+          "total_rounds": 284,
+          "matches_played": 27
+        },
+        "GradientMetaLearner": {
+          "score_per_move": 2.2968197879858656,
+          "score_per_match": 24.074074074074073,
+          "total_score": 650,
+          "total_rounds": 283,
+          "matches_played": 27
+        },
+        "o3_T1": {
+          "score_per_move": 2.6459143968871595,
+          "score_per_match": 25.185185185185187,
+          "total_score": 680,
+          "total_rounds": 257,
+          "matches_played": 27
+        },
+        "GPT4o_T1": {
+          "score_per_move": 2.5864406779661016,
+          "score_per_match": 28.25925925925926,
+          "total_score": 763,
+          "total_rounds": 295,
+          "matches_played": 27
+        },
+        "GPT5_T1": {
+          "score_per_move": 2.7097791798107256,
+          "score_per_match": 31.814814814814813,
+          "total_score": 859,
+          "total_rounds": 317,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T02": {
+          "score_per_move": 2.7951807228915664,
+          "score_per_match": 34.370370370370374,
+          "total_score": 928,
+          "total_rounds": 332,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T05": {
+          "score_per_move": 2.727272727272727,
+          "score_per_match": 34.44444444444444,
+          "total_score": 930,
+          "total_rounds": 341,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T08": {
+          "score_per_move": 2.756183745583039,
+          "score_per_match": 28.88888888888889,
+          "total_score": 780,
+          "total_rounds": 283,
+          "matches_played": 27
+        },
+        "Mistral-Large_T02": {
+          "score_per_move": 2.3663003663003663,
+          "score_per_match": 23.925925925925927,
+          "total_score": 646,
+          "total_rounds": 273,
+          "matches_played": 27
+        },
+        "Mistral-Large_T07": {
+          "score_per_move": 2.483425414364641,
+          "score_per_match": 33.2962962962963,
+          "total_score": 899,
+          "total_rounds": 362,
+          "matches_played": 27
+        },
+        "Mistral-Large_T12": {
+          "score_per_move": 2.6964285714285716,
+          "score_per_match": 22.37037037037037,
+          "total_score": 604,
+          "total_rounds": 224,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T02": {
+          "score_per_move": 2.7595307917888565,
+          "score_per_match": 34.851851851851855,
+          "total_score": 941,
+          "total_rounds": 341,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T07": {
+          "score_per_move": 2.7046413502109705,
+          "score_per_match": 23.74074074074074,
+          "total_score": 641,
+          "total_rounds": 237,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T12": {
+          "score_per_move": 2.781021897810219,
+          "score_per_match": 28.22222222222222,
+          "total_score": 762,
+          "total_rounds": 274,
+          "matches_played": 27
+        }
+      },
+      "evolutionary_metrics": {
+        "TitForTat": {
+          "fitness": 2.8197183098591547,
+          "relative_fitness": 1.1814615991744537,
+          "raw_count": 1.1814615991744537,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "GrimTrigger": {
+          "fitness": 2.7261306532663316,
+          "relative_fitness": 1.104336671087496,
+          "raw_count": 1.104336671087496,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "WinStayLoseShift": {
+          "fitness": 2.912621359223301,
+          "relative_fitness": 1.2605968616602545,
+          "raw_count": 1.2605968616602545,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "GenerousTitForTat": {
+          "fitness": 2.749063670411985,
+          "relative_fitness": 1.1229948346077865,
+          "raw_count": 1.1229948346077865,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "SuspiciousTitForTat": {
+          "fitness": 2.655430711610487,
+          "relative_fitness": 1.0477993125932277,
+          "raw_count": 1.0477993125932277,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Prober": {
+          "fitness": 2.27027027027027,
+          "relative_fitness": 0.7658845091743791,
+          "raw_count": 0.7658845091743791,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Random": {
+          "fitness": 2.208,
+          "relative_fitness": 0.7244464684781646,
+          "raw_count": 0.7244464684781646,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Gradual": {
+          "fitness": 2.7098214285714284,
+          "relative_fitness": 1.0911626881256735,
+          "raw_count": 1.0911626881256735,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Alternator": {
+          "fitness": 2.176470588235294,
+          "relative_fitness": 0.7039045410314928,
+          "raw_count": 0.7039045410314928,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Bayesian": {
+          "fitness": 2.723404255319149,
+          "relative_fitness": 1.1021288857407276,
+          "raw_count": 1.1021288857407276,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "ForgivingGrimTrigger": {
+          "fitness": 2.6106442577030813,
+          "relative_fitness": 1.0127530366256043,
+          "raw_count": 1.0127530366256043,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Detective": {
+          "fitness": 2.408026755852843,
+          "relative_fitness": 0.8616497726740971,
+          "raw_count": 0.8616497726740971,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "SoftGrudger": {
+          "fitness": 2.7857142857142856,
+          "relative_fitness": 1.1531380539820228,
+          "raw_count": 1.1531380539820228,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "QLearning": {
+          "fitness": 2.3537735849056602,
+          "relative_fitness": 0.8232609785770838,
+          "raw_count": 0.8232609785770838,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "ThompsonSampling": {
+          "fitness": 2.2183098591549295,
+          "relative_fitness": 0.7312276084185868,
+          "raw_count": 0.7312276084185868,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "GradientMetaLearner": {
+          "fitness": 2.2968197879858656,
+          "relative_fitness": 0.7839024175204963,
+          "raw_count": 0.7839024175204963,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "o3_T1": {
+          "fitness": 2.6459143968871595,
+          "relative_fitness": 1.0403027350932257,
+          "raw_count": 1.0403027350932257,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "GPT4o_T1": {
+          "fitness": 2.5864406779661016,
+          "relative_fitness": 0.9940613892434003,
+          "raw_count": 0.9940613892434003,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "GPT5_T1": {
+          "fitness": 2.7097791798107256,
+          "relative_fitness": 1.091128663808471,
+          "raw_count": 1.091128663808471,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Claude4-Sonnet_T02": {
+          "fitness": 2.7951807228915664,
+          "relative_fitness": 1.160988576633529,
+          "raw_count": 1.160988576633529,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Claude4-Sonnet_T05": {
+          "fitness": 2.727272727272727,
+          "relative_fitness": 1.1052621574672425,
+          "raw_count": 1.1052621574672425,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Claude4-Sonnet_T08": {
+          "fitness": 2.756183745583039,
+          "relative_fitness": 1.128819481229515,
+          "raw_count": 1.128819481229515,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Mistral-Large_T02": {
+          "fitness": 2.3663003663003663,
+          "relative_fitness": 0.8320470850746776,
+          "raw_count": 0.8320470850746776,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Mistral-Large_T07": {
+          "fitness": 2.483425414364641,
+          "relative_fitness": 0.9164534362689815,
+          "raw_count": 0.9164534362689815,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Mistral-Large_T12": {
+          "fitness": 2.6964285714285716,
+          "relative_fitness": 1.080403549015619,
+          "raw_count": 1.080403549015619,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Gemini25Pro_T02": {
+          "fitness": 2.7595307917888565,
+          "relative_fitness": 1.1315627707899778,
+          "raw_count": 1.1315627707899778,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Gemini25Pro_T07": {
+          "fitness": 2.7046413502109705,
+          "relative_fitness": 1.0869949553668017,
+          "raw_count": 1.0869949553668017,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        },
+        "Gemini25Pro_T12": {
+          "fitness": 2.781021897810219,
+          "relative_fitness": 1.1492565261188603,
+          "raw_count": 1.1492565261188603,
+          "total_fitness_pool": 72.63633962039901,
+          "mean_fitness": 2.5941549864428217
+        }
+      },
+      "match_statistics": {
+        "total_matches": 378,
+        "total_rounds": 4109,
+        "avg_rounds_per_match": 10.87037037037037,
+        "unique_match_ids": 378
+      },
+      "detailed_agent_info": [
+        {
+          "agent_name": "QLearning_p3i1",
+          "agent_type": "Adaptive",
+          "strategy": "QLearning",
+          "clean_name": "QLearning",
+          "score_per_move": 2.3537735849056602,
+          "score_per_match": 18.48148148148148,
+          "total_score": 499,
+          "total_rounds": 212,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.3537735849056602,
+          "relative_fitness": 0.8232609785770838,
+          "raw_count": 0.8232609785770838
+        },
+        {
+          "agent_name": "WinStayLoseShift_p3i1",
+          "agent_type": "Classical",
+          "strategy": "WinStayLoseShift",
+          "clean_name": "WinStayLoseShift",
+          "score_per_move": 2.912621359223301,
+          "score_per_match": 33.333333333333336,
+          "total_score": 900,
+          "total_rounds": 309,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.912621359223301,
+          "relative_fitness": 1.2605968616602545,
+          "raw_count": 1.2605968616602545
+        },
+        {
+          "agent_name": "TitForTat_p3i1",
+          "agent_type": "Classical",
+          "strategy": "TitForTat",
+          "clean_name": "TitForTat",
+          "score_per_move": 2.8197183098591547,
+          "score_per_match": 37.074074074074076,
+          "total_score": 1001,
+          "total_rounds": 355,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.8197183098591547,
+          "relative_fitness": 1.1814615991744537,
+          "raw_count": 1.1814615991744537
+        },
+        {
+          "agent_name": "Bayesian_p3i1",
+          "agent_type": "Adaptive",
+          "strategy": "Bayesian",
+          "clean_name": "Bayesian",
+          "score_per_move": 2.723404255319149,
+          "score_per_match": 33.18518518518518,
+          "total_score": 896,
+          "total_rounds": 329,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.723404255319149,
+          "relative_fitness": 1.1021288857407276,
+          "raw_count": 1.1021288857407276
+        },
+        {
+          "agent_name": "Alternator_p3i1",
+          "agent_type": "Classical",
+          "strategy": "Alternator",
+          "clean_name": "Alternator",
+          "score_per_move": 2.176470588235294,
+          "score_per_match": 21.925925925925927,
+          "total_score": 592,
+          "total_rounds": 272,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.176470588235294,
+          "relative_fitness": 0.7039045410314928,
+          "raw_count": 0.7039045410314928
+        },
+        {
+          "agent_name": "Ministral-Large_T02_p3i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T02",
+          "clean_name": "Ministral-Large_T02",
+          "score_per_move": 2.3663003663003663,
+          "score_per_match": 23.925925925925927,
+          "total_score": 646,
+          "total_rounds": 273,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.3663003663003663,
+          "relative_fitness": 0.8320470850746776,
+          "raw_count": 0.8320470850746776
+        },
+        {
+          "agent_name": "ThompsonSampling_p3i1",
+          "agent_type": "Adaptive",
+          "strategy": "ThompsonSampling",
+          "clean_name": "ThompsonSampling",
+          "score_per_move": 2.2183098591549295,
+          "score_per_match": 23.333333333333332,
+          "total_score": 630,
+          "total_rounds": 284,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.2183098591549295,
+          "relative_fitness": 0.7312276084185868,
+          "raw_count": 0.7312276084185868
+        },
+        {
+          "agent_name": "Ministral-Large_T07_p3i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T07",
+          "clean_name": "Ministral-Large_T07",
+          "score_per_move": 2.483425414364641,
+          "score_per_match": 33.2962962962963,
+          "total_score": 899,
+          "total_rounds": 362,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.483425414364641,
+          "relative_fitness": 0.9164534362689815,
+          "raw_count": 0.9164534362689815
+        },
+        {
+          "agent_name": "GrimTrigger_p3i1",
+          "agent_type": "Classical",
+          "strategy": "GrimTrigger",
+          "clean_name": "GrimTrigger",
+          "score_per_move": 2.7261306532663316,
+          "score_per_match": 40.18518518518518,
+          "total_score": 1085,
+          "total_rounds": 398,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7261306532663316,
+          "relative_fitness": 1.104336671087496,
+          "raw_count": 1.104336671087496
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T05_p3i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T05",
+          "clean_name": "Claude4-Sonnet_T05",
+          "score_per_move": 2.727272727272727,
+          "score_per_match": 34.44444444444444,
+          "total_score": 930,
+          "total_rounds": 341,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.727272727272727,
+          "relative_fitness": 1.1052621574672425,
+          "raw_count": 1.1052621574672425
+        },
+        {
+          "agent_name": "Gemini25Pro_T07_p3i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T07",
+          "clean_name": "Gemini25Pro_T07",
+          "score_per_move": 2.7046413502109705,
+          "score_per_match": 23.74074074074074,
+          "total_score": 641,
+          "total_rounds": 237,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7046413502109705,
+          "relative_fitness": 1.0869949553668017,
+          "raw_count": 1.0869949553668017
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T08_p3i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T08",
+          "clean_name": "Claude4-Sonnet_T08",
+          "score_per_move": 2.756183745583039,
+          "score_per_match": 28.88888888888889,
+          "total_score": 780,
+          "total_rounds": 283,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.756183745583039,
+          "relative_fitness": 1.128819481229515,
+          "raw_count": 1.128819481229515
+        },
+        {
+          "agent_name": "GradientMetaLearner_p3i1",
+          "agent_type": "Adaptive",
+          "strategy": "GradientMetaLearner",
+          "clean_name": "GradientMetaLearner",
+          "score_per_move": 2.2968197879858656,
+          "score_per_match": 24.074074074074073,
+          "total_score": 650,
+          "total_rounds": 283,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.2968197879858656,
+          "relative_fitness": 0.7839024175204963,
+          "raw_count": 0.7839024175204963
+        },
+        {
+          "agent_name": "Gemini25Pro_T12_p3i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T12",
+          "clean_name": "Gemini25Pro_T12",
+          "score_per_move": 2.781021897810219,
+          "score_per_match": 28.22222222222222,
+          "total_score": 762,
+          "total_rounds": 274,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.781021897810219,
+          "relative_fitness": 1.1492565261188603,
+          "raw_count": 1.1492565261188603
+        },
+        {
+          "agent_name": "Ministral-Large_T12_p3i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T12",
+          "clean_name": "Ministral-Large_T12",
+          "score_per_move": 2.6964285714285716,
+          "score_per_match": 22.37037037037037,
+          "total_score": 604,
+          "total_rounds": 224,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6964285714285716,
+          "relative_fitness": 1.080403549015619,
+          "raw_count": 1.080403549015619
+        },
+        {
+          "agent_name": "ForgivingGrimTrigger_p3i1",
+          "agent_type": "Behavioral",
+          "strategy": "ForgivingGrimTrigger",
+          "clean_name": "ForgivingGrimTrigger",
+          "score_per_move": 2.6106442577030813,
+          "score_per_match": 34.51851851851852,
+          "total_score": 932,
+          "total_rounds": 357,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6106442577030813,
+          "relative_fitness": 1.0127530366256043,
+          "raw_count": 1.0127530366256043
+        },
+        {
+          "agent_name": "o3_T1_p3i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "o3_T1",
+          "clean_name": "o3_T1",
+          "score_per_move": 2.6459143968871595,
+          "score_per_match": 25.185185185185187,
+          "total_score": 680,
+          "total_rounds": 257,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6459143968871595,
+          "relative_fitness": 1.0403027350932257,
+          "raw_count": 1.0403027350932257
+        },
+        {
+          "agent_name": "GPT4o_T1_p3i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT4o_T1",
+          "clean_name": "GPT4o_T1",
+          "score_per_move": 2.5864406779661016,
+          "score_per_match": 28.25925925925926,
+          "total_score": 763,
+          "total_rounds": 295,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5864406779661016,
+          "relative_fitness": 0.9940613892434003,
+          "raw_count": 0.9940613892434003
+        },
+        {
+          "agent_name": "Detective_p3i1",
+          "agent_type": "Behavioral",
+          "strategy": "Detective",
+          "clean_name": "Detective",
+          "score_per_move": 2.408026755852843,
+          "score_per_match": 26.666666666666668,
+          "total_score": 720,
+          "total_rounds": 299,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.408026755852843,
+          "relative_fitness": 0.8616497726740971,
+          "raw_count": 0.8616497726740971
+        },
+        {
+          "agent_name": "SoftGrudger_p3i1",
+          "agent_type": "Behavioral",
+          "strategy": "SoftGrudger",
+          "clean_name": "SoftGrudger",
+          "score_per_move": 2.7857142857142856,
+          "score_per_match": 28.88888888888889,
+          "total_score": 780,
+          "total_rounds": 280,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7857142857142856,
+          "relative_fitness": 1.1531380539820228,
+          "raw_count": 1.1531380539820228
+        },
+        {
+          "agent_name": "GenerousTitForTat_p3i1",
+          "agent_type": "Classical",
+          "strategy": "GenerousTitForTat",
+          "clean_name": "GenerousTitForTat",
+          "score_per_move": 2.749063670411985,
+          "score_per_match": 27.185185185185187,
+          "total_score": 734,
+          "total_rounds": 267,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.749063670411985,
+          "relative_fitness": 1.1229948346077865,
+          "raw_count": 1.1229948346077865
+        },
+        {
+          "agent_name": "Gemini25Pro_T02_p3i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T02",
+          "clean_name": "Gemini25Pro_T02",
+          "score_per_move": 2.7595307917888565,
+          "score_per_match": 34.851851851851855,
+          "total_score": 941,
+          "total_rounds": 341,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7595307917888565,
+          "relative_fitness": 1.1315627707899778,
+          "raw_count": 1.1315627707899778
+        },
+        {
+          "agent_name": "Prober_p3i1",
+          "agent_type": "Classical",
+          "strategy": "Prober",
+          "clean_name": "Prober",
+          "score_per_move": 2.27027027027027,
+          "score_per_match": 24.88888888888889,
+          "total_score": 672,
+          "total_rounds": 296,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.27027027027027,
+          "relative_fitness": 0.7658845091743791,
+          "raw_count": 0.7658845091743791
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T02_p3i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T02",
+          "clean_name": "Claude4-Sonnet_T02",
+          "score_per_move": 2.7951807228915664,
+          "score_per_match": 34.370370370370374,
+          "total_score": 928,
+          "total_rounds": 332,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7951807228915664,
+          "relative_fitness": 1.160988576633529,
+          "raw_count": 1.160988576633529
+        },
+        {
+          "agent_name": "Random_p3i1",
+          "agent_type": "Classical",
+          "strategy": "Random",
+          "clean_name": "Random",
+          "score_per_move": 2.208,
+          "score_per_match": 20.444444444444443,
+          "total_score": 552,
+          "total_rounds": 250,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.208,
+          "relative_fitness": 0.7244464684781646,
+          "raw_count": 0.7244464684781646
+        },
+        {
+          "agent_name": "SuspiciousTitForTat_p3i1",
+          "agent_type": "Classical",
+          "strategy": "SuspiciousTitForTat",
+          "clean_name": "SuspiciousTitForTat",
+          "score_per_move": 2.655430711610487,
+          "score_per_match": 26.25925925925926,
+          "total_score": 709,
+          "total_rounds": 267,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.655430711610487,
+          "relative_fitness": 1.0477993125932277,
+          "raw_count": 1.0477993125932277
+        },
+        {
+          "agent_name": "GPT5_T1_p3i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT5_T1",
+          "clean_name": "GPT5_T1",
+          "score_per_move": 2.7097791798107256,
+          "score_per_match": 31.814814814814813,
+          "total_score": 859,
+          "total_rounds": 317,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7097791798107256,
+          "relative_fitness": 1.091128663808471,
+          "raw_count": 1.091128663808471
+        },
+        {
+          "agent_name": "Gradual_p3i1",
+          "agent_type": "Classical",
+          "strategy": "Gradual",
+          "clean_name": "Gradual",
+          "score_per_move": 2.7098214285714284,
+          "score_per_match": 22.48148148148148,
+          "total_score": 607,
+          "total_rounds": 224,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7098214285714284,
+          "relative_fitness": 1.0911626881256735,
+          "raw_count": 1.0911626881256735
+        }
+      ],
+      "total_unique_agents": 28
+    },
+    "shadow_10_phase_4": {
+      "shadow_condition": 0.1,
+      "phase_number": 4,
+      "csv_file": "results/experiment_20250818_102320/evolutionary_shadow10_phase4.csv",
+      "agents_by_type": {
+        "Classical": 9,
+        "Adaptive": 4,
+        "LLM_Anthropic": 3,
+        "LLM_Mistral": 3,
+        "LLM_OpenAI": 3,
+        "LLM_Gemini": 3,
+        "Behavioral": 3
+      },
+      "agents_by_strategy": {
+        "TitForTat": 1,
+        "GenerousTitForTat": 1,
+        "ThompsonSampling": 1,
+        "GradientMetaLearner": 1,
+        "Claude4-Sonnet_T02": 1,
+        "Prober": 1,
+        "QLearning": 1,
+        "WinStayLoseShift": 1,
+        "SuspiciousTitForTat": 1,
+        "Mistral-Large_T02": 1,
+        "GPT4o_T1": 1,
+        "Gemini25Pro_T12": 1,
+        "GPT5_T1": 1,
+        "SoftGrudger": 1,
+        "Mistral-Large_T12": 1,
+        "Detective": 1,
+        "Claude4-Sonnet_T08": 1,
+        "o3_T1": 1,
+        "Random": 1,
+        "Mistral-Large_T07": 1,
+        "Alternator": 1,
+        "Gemini25Pro_T02": 1,
+        "Gemini25Pro_T07": 1,
+        "ForgivingGrimTrigger": 1,
+        "Gradual": 1,
+        "GrimTrigger": 1,
+        "Bayesian": 1,
+        "Claude4-Sonnet_T05": 1
+      },
+      "unique_agents": [
+        "TitForTat_p4i1",
+        "GenerousTitForTat_p4i1",
+        "ThompsonSampling_p4i1",
+        "GradientMetaLearner_p4i1",
+        "Claude4-Sonnet_T02_p4i1",
+        "Prober_p4i1",
+        "QLearning_p4i1",
+        "WinStayLoseShift_p4i1",
+        "SuspiciousTitForTat_p4i1",
+        "Ministral-Large_T02_p4i1",
+        "GPT4o_T1_p4i1",
+        "Gemini25Pro_T12_p4i1",
+        "GPT5_T1_p4i1",
+        "SoftGrudger_p4i1",
+        "Ministral-Large_T12_p4i1",
+        "Detective_p4i1",
+        "Claude4-Sonnet_T08_p4i1",
+        "o3_T1_p4i1",
+        "Random_p4i1",
+        "Ministral-Large_T07_p4i1",
+        "Alternator_p4i1",
+        "Gemini25Pro_T02_p4i1",
+        "Gemini25Pro_T07_p4i1",
+        "ForgivingGrimTrigger_p4i1",
+        "Gradual_p4i1",
+        "GrimTrigger_p4i1",
+        "Bayesian_p4i1",
+        "Claude4-Sonnet_T05_p4i1"
+      ],
+      "strategy_performance": {
+        "TitForTat": {
+          "score_per_move": 2.746312684365782,
+          "score_per_match": 34.48148148148148,
+          "total_score": 931,
+          "total_rounds": 339,
+          "matches_played": 27
+        },
+        "GrimTrigger": {
+          "score_per_move": 2.8707865168539324,
+          "score_per_match": 18.925925925925927,
+          "total_score": 511,
+          "total_rounds": 178,
+          "matches_played": 27
+        },
+        "WinStayLoseShift": {
+          "score_per_move": 2.7866666666666666,
+          "score_per_match": 23.22222222222222,
+          "total_score": 627,
+          "total_rounds": 225,
+          "matches_played": 27
+        },
+        "GenerousTitForTat": {
+          "score_per_move": 2.645945945945946,
+          "score_per_match": 36.25925925925926,
+          "total_score": 979,
+          "total_rounds": 370,
+          "matches_played": 27
+        },
+        "SuspiciousTitForTat": {
+          "score_per_move": 2.515151515151515,
+          "score_per_match": 24.59259259259259,
+          "total_score": 664,
+          "total_rounds": 264,
+          "matches_played": 27
+        },
+        "Prober": {
+          "score_per_move": 2.5535055350553506,
+          "score_per_match": 25.62962962962963,
+          "total_score": 692,
+          "total_rounds": 271,
+          "matches_played": 27
+        },
+        "Random": {
+          "score_per_move": 2.223826714801444,
+          "score_per_match": 22.814814814814813,
+          "total_score": 616,
+          "total_rounds": 277,
+          "matches_played": 27
+        },
+        "Gradual": {
+          "score_per_move": 2.6747404844290656,
+          "score_per_match": 28.62962962962963,
+          "total_score": 773,
+          "total_rounds": 289,
+          "matches_played": 27
+        },
+        "Alternator": {
+          "score_per_move": 2.1774744027303754,
+          "score_per_match": 23.62962962962963,
+          "total_score": 638,
+          "total_rounds": 293,
+          "matches_played": 27
+        },
+        "Bayesian": {
+          "score_per_move": 2.7209302325581395,
+          "score_per_match": 34.666666666666664,
+          "total_score": 936,
+          "total_rounds": 344,
+          "matches_played": 27
+        },
+        "ForgivingGrimTrigger": {
+          "score_per_move": 2.735294117647059,
+          "score_per_match": 31.0,
+          "total_score": 837,
+          "total_rounds": 306,
+          "matches_played": 27
+        },
+        "Detective": {
+          "score_per_move": 2.3444108761329305,
+          "score_per_match": 28.74074074074074,
+          "total_score": 776,
+          "total_rounds": 331,
+          "matches_played": 27
+        },
+        "SoftGrudger": {
+          "score_per_move": 2.704081632653061,
+          "score_per_match": 29.444444444444443,
+          "total_score": 795,
+          "total_rounds": 294,
+          "matches_played": 27
+        },
+        "QLearning": {
+          "score_per_move": 2.6179245283018866,
+          "score_per_match": 20.555555555555557,
+          "total_score": 555,
+          "total_rounds": 212,
+          "matches_played": 27
+        },
+        "ThompsonSampling": {
+          "score_per_move": 2.336683417085427,
+          "score_per_match": 17.22222222222222,
+          "total_score": 465,
+          "total_rounds": 199,
+          "matches_played": 27
+        },
+        "GradientMetaLearner": {
+          "score_per_move": 2.1,
+          "score_per_match": 28.0,
+          "total_score": 756,
+          "total_rounds": 360,
+          "matches_played": 27
+        },
+        "o3_T1": {
+          "score_per_move": 2.800796812749004,
+          "score_per_match": 26.037037037037038,
+          "total_score": 703,
+          "total_rounds": 251,
+          "matches_played": 27
+        },
+        "GPT4o_T1": {
+          "score_per_move": 2.6041666666666665,
+          "score_per_match": 23.14814814814815,
+          "total_score": 625,
+          "total_rounds": 240,
+          "matches_played": 27
+        },
+        "GPT5_T1": {
+          "score_per_move": 2.82972972972973,
+          "score_per_match": 38.77777777777778,
+          "total_score": 1047,
+          "total_rounds": 370,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T02": {
+          "score_per_move": 2.856230031948882,
+          "score_per_match": 33.111111111111114,
+          "total_score": 894,
+          "total_rounds": 313,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T05": {
+          "score_per_move": 2.7686567164179103,
+          "score_per_match": 27.48148148148148,
+          "total_score": 742,
+          "total_rounds": 268,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T08": {
+          "score_per_move": 2.731012658227848,
+          "score_per_match": 31.962962962962962,
+          "total_score": 863,
+          "total_rounds": 316,
+          "matches_played": 27
+        },
+        "Mistral-Large_T02": {
+          "score_per_move": 2.0051020408163267,
+          "score_per_match": 14.555555555555555,
+          "total_score": 393,
+          "total_rounds": 196,
+          "matches_played": 27
+        },
+        "Mistral-Large_T07": {
+          "score_per_move": 2.330188679245283,
+          "score_per_match": 18.296296296296298,
+          "total_score": 494,
+          "total_rounds": 212,
+          "matches_played": 27
+        },
+        "Mistral-Large_T12": {
+          "score_per_move": 2.526143790849673,
+          "score_per_match": 28.62962962962963,
+          "total_score": 773,
+          "total_rounds": 306,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T02": {
+          "score_per_move": 2.6526315789473682,
+          "score_per_match": 28.0,
+          "total_score": 756,
+          "total_rounds": 285,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T07": {
+          "score_per_move": 2.7950310559006213,
+          "score_per_match": 33.333333333333336,
+          "total_score": 900,
+          "total_rounds": 322,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T12": {
+          "score_per_move": 2.7338403041825097,
+          "score_per_match": 26.62962962962963,
+          "total_score": 719,
+          "total_rounds": 263,
+          "matches_played": 27
+        }
+      },
+      "evolutionary_metrics": {
+        "TitForTat": {
+          "fitness": 2.746312684365782,
+          "relative_fitness": 1.1284743396953671,
+          "raw_count": 1.1284743396953671,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "GrimTrigger": {
+          "fitness": 2.8707865168539324,
+          "relative_fitness": 1.233086429481982,
+          "raw_count": 1.233086429481982,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "WinStayLoseShift": {
+          "fitness": 2.7866666666666666,
+          "relative_fitness": 1.1618813161662553,
+          "raw_count": 1.1618813161662553,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "GenerousTitForTat": {
+          "fitness": 2.645945945945946,
+          "relative_fitness": 1.0474990989158455,
+          "raw_count": 1.0474990989158455,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "SuspiciousTitForTat": {
+          "fitness": 2.515151515151515,
+          "relative_fitness": 0.9464987125704053,
+          "raw_count": 0.9464987125704053,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Prober": {
+          "fitness": 2.5535055350553506,
+          "relative_fitness": 0.9755854840795714,
+          "raw_count": 0.9755854840795714,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Random": {
+          "fitness": 2.223826714801444,
+          "relative_fitness": 0.7399350650979003,
+          "raw_count": 0.7399350650979003,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Gradual": {
+          "fitness": 2.6747404844290656,
+          "relative_fitness": 1.0704219962651453,
+          "raw_count": 1.0704219962651453,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Alternator": {
+          "fitness": 2.1774744027303754,
+          "relative_fitness": 0.7094108710025506,
+          "raw_count": 0.7094108710025506,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Bayesian": {
+          "fitness": 2.7209302325581395,
+          "relative_fitness": 1.1077111695198056,
+          "raw_count": 1.1077111695198056,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "ForgivingGrimTrigger": {
+          "fitness": 2.735294117647059,
+          "relative_fitness": 1.1194373308268313,
+          "raw_count": 1.1194373308268313,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Detective": {
+          "fitness": 2.3444108761329305,
+          "relative_fitness": 0.8223546974517272,
+          "raw_count": 0.8223546974517272,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "SoftGrudger": {
+          "fitness": 2.704081632653061,
+          "relative_fitness": 1.094035259572579,
+          "raw_count": 1.094035259572579,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "QLearning": {
+          "fitness": 2.6179245283018866,
+          "relative_fitness": 1.0254298770917192,
+          "raw_count": 1.0254298770917192,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "ThompsonSampling": {
+          "fitness": 2.336683417085427,
+          "relative_fitness": 0.8169424726874427,
+          "raw_count": 0.8169424726874427,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "GradientMetaLearner": {
+          "fitness": 2.1,
+          "relative_fitness": 0.6598273482555156,
+          "raw_count": 0.6598273482555156,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "o3_T1": {
+          "fitness": 2.800796812749004,
+          "relative_fitness": 1.1736941221715846,
+          "raw_count": 1.1736941221715846,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "GPT4o_T1": {
+          "fitness": 2.6041666666666665,
+          "relative_fitness": 1.0146804056134682,
+          "raw_count": 1.0146804056134682,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "GPT5_T1": {
+          "fitness": 2.82972972972973,
+          "relative_fitness": 1.1980684671497155,
+          "raw_count": 1.1980684671497155,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Claude4-Sonnet_T02": {
+          "fitness": 2.856230031948882,
+          "relative_fitness": 1.220613264264202,
+          "raw_count": 1.220613264264202,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Claude4-Sonnet_T05": {
+          "fitness": 2.7686567164179103,
+          "relative_fitness": 1.1469115994961403,
+          "raw_count": 1.1469115994961403,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Claude4-Sonnet_T08": {
+          "fitness": 2.731012658227848,
+          "relative_fitness": 1.1159356419568716,
+          "raw_count": 1.1159356419568716,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Mistral-Large_T02": {
+          "fitness": 2.0051020408163267,
+          "relative_fitness": 0.6015402342674451,
+          "raw_count": 0.6015402342674451,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Mistral-Large_T07": {
+          "fitness": 2.330188679245283,
+          "relative_fitness": 0.8124074522715845,
+          "raw_count": 0.8124074522715845,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Mistral-Large_T12": {
+          "fitness": 2.526143790849673,
+          "relative_fitness": 0.9547899904957624,
+          "raw_count": 0.9547899904957624,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Gemini25Pro_T02": {
+          "fitness": 2.6526315789473682,
+          "relative_fitness": 1.0527993146680799,
+          "raw_count": 1.0527993146680799,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Gemini25Pro_T07": {
+          "fitness": 2.7950310559006213,
+          "relative_fitness": 1.1688667320995823,
+          "raw_count": 1.1688667320995823,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        },
+        "Gemini25Pro_T12": {
+          "fitness": 2.7338403041825097,
+          "relative_fitness": 1.1182476813798157,
+          "raw_count": 1.1182476813798157,
+          "total_fitness_pool": 72.3872653360604,
+          "mean_fitness": 2.585259476287871
+        }
+      },
+      "match_statistics": {
+        "total_matches": 378,
+        "total_rounds": 3947,
+        "avg_rounds_per_match": 10.441798941798941,
+        "unique_match_ids": 378
+      },
+      "detailed_agent_info": [
+        {
+          "agent_name": "TitForTat_p4i1",
+          "agent_type": "Classical",
+          "strategy": "TitForTat",
+          "clean_name": "TitForTat",
+          "score_per_move": 2.746312684365782,
+          "score_per_match": 34.48148148148148,
+          "total_score": 931,
+          "total_rounds": 339,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.746312684365782,
+          "relative_fitness": 1.1284743396953671,
+          "raw_count": 1.1284743396953671
+        },
+        {
+          "agent_name": "GenerousTitForTat_p4i1",
+          "agent_type": "Classical",
+          "strategy": "GenerousTitForTat",
+          "clean_name": "GenerousTitForTat",
+          "score_per_move": 2.645945945945946,
+          "score_per_match": 36.25925925925926,
+          "total_score": 979,
+          "total_rounds": 370,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.645945945945946,
+          "relative_fitness": 1.0474990989158455,
+          "raw_count": 1.0474990989158455
+        },
+        {
+          "agent_name": "ThompsonSampling_p4i1",
+          "agent_type": "Adaptive",
+          "strategy": "ThompsonSampling",
+          "clean_name": "ThompsonSampling",
+          "score_per_move": 2.336683417085427,
+          "score_per_match": 17.22222222222222,
+          "total_score": 465,
+          "total_rounds": 199,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.336683417085427,
+          "relative_fitness": 0.8169424726874427,
+          "raw_count": 0.8169424726874427
+        },
+        {
+          "agent_name": "GradientMetaLearner_p4i1",
+          "agent_type": "Adaptive",
+          "strategy": "GradientMetaLearner",
+          "clean_name": "GradientMetaLearner",
+          "score_per_move": 2.1,
+          "score_per_match": 28.0,
+          "total_score": 756,
+          "total_rounds": 360,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.1,
+          "relative_fitness": 0.6598273482555156,
+          "raw_count": 0.6598273482555156
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T02_p4i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T02",
+          "clean_name": "Claude4-Sonnet_T02",
+          "score_per_move": 2.856230031948882,
+          "score_per_match": 33.111111111111114,
+          "total_score": 894,
+          "total_rounds": 313,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.856230031948882,
+          "relative_fitness": 1.220613264264202,
+          "raw_count": 1.220613264264202
+        },
+        {
+          "agent_name": "Prober_p4i1",
+          "agent_type": "Classical",
+          "strategy": "Prober",
+          "clean_name": "Prober",
+          "score_per_move": 2.5535055350553506,
+          "score_per_match": 25.62962962962963,
+          "total_score": 692,
+          "total_rounds": 271,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5535055350553506,
+          "relative_fitness": 0.9755854840795714,
+          "raw_count": 0.9755854840795714
+        },
+        {
+          "agent_name": "QLearning_p4i1",
+          "agent_type": "Adaptive",
+          "strategy": "QLearning",
+          "clean_name": "QLearning",
+          "score_per_move": 2.6179245283018866,
+          "score_per_match": 20.555555555555557,
+          "total_score": 555,
+          "total_rounds": 212,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6179245283018866,
+          "relative_fitness": 1.0254298770917192,
+          "raw_count": 1.0254298770917192
+        },
+        {
+          "agent_name": "WinStayLoseShift_p4i1",
+          "agent_type": "Classical",
+          "strategy": "WinStayLoseShift",
+          "clean_name": "WinStayLoseShift",
+          "score_per_move": 2.7866666666666666,
+          "score_per_match": 23.22222222222222,
+          "total_score": 627,
+          "total_rounds": 225,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7866666666666666,
+          "relative_fitness": 1.1618813161662553,
+          "raw_count": 1.1618813161662553
+        },
+        {
+          "agent_name": "SuspiciousTitForTat_p4i1",
+          "agent_type": "Classical",
+          "strategy": "SuspiciousTitForTat",
+          "clean_name": "SuspiciousTitForTat",
+          "score_per_move": 2.515151515151515,
+          "score_per_match": 24.59259259259259,
+          "total_score": 664,
+          "total_rounds": 264,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.515151515151515,
+          "relative_fitness": 0.9464987125704053,
+          "raw_count": 0.9464987125704053
+        },
+        {
+          "agent_name": "Ministral-Large_T02_p4i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T02",
+          "clean_name": "Ministral-Large_T02",
+          "score_per_move": 2.0051020408163267,
+          "score_per_match": 14.555555555555555,
+          "total_score": 393,
+          "total_rounds": 196,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.0051020408163267,
+          "relative_fitness": 0.6015402342674451,
+          "raw_count": 0.6015402342674451
+        },
+        {
+          "agent_name": "GPT4o_T1_p4i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT4o_T1",
+          "clean_name": "GPT4o_T1",
+          "score_per_move": 2.6041666666666665,
+          "score_per_match": 23.14814814814815,
+          "total_score": 625,
+          "total_rounds": 240,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6041666666666665,
+          "relative_fitness": 1.0146804056134682,
+          "raw_count": 1.0146804056134682
+        },
+        {
+          "agent_name": "Gemini25Pro_T12_p4i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T12",
+          "clean_name": "Gemini25Pro_T12",
+          "score_per_move": 2.7338403041825097,
+          "score_per_match": 26.62962962962963,
+          "total_score": 719,
+          "total_rounds": 263,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7338403041825097,
+          "relative_fitness": 1.1182476813798157,
+          "raw_count": 1.1182476813798157
+        },
+        {
+          "agent_name": "GPT5_T1_p4i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT5_T1",
+          "clean_name": "GPT5_T1",
+          "score_per_move": 2.82972972972973,
+          "score_per_match": 38.77777777777778,
+          "total_score": 1047,
+          "total_rounds": 370,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.82972972972973,
+          "relative_fitness": 1.1980684671497155,
+          "raw_count": 1.1980684671497155
+        },
+        {
+          "agent_name": "SoftGrudger_p4i1",
+          "agent_type": "Behavioral",
+          "strategy": "SoftGrudger",
+          "clean_name": "SoftGrudger",
+          "score_per_move": 2.704081632653061,
+          "score_per_match": 29.444444444444443,
+          "total_score": 795,
+          "total_rounds": 294,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.704081632653061,
+          "relative_fitness": 1.094035259572579,
+          "raw_count": 1.094035259572579
+        },
+        {
+          "agent_name": "Ministral-Large_T12_p4i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T12",
+          "clean_name": "Ministral-Large_T12",
+          "score_per_move": 2.526143790849673,
+          "score_per_match": 28.62962962962963,
+          "total_score": 773,
+          "total_rounds": 306,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.526143790849673,
+          "relative_fitness": 0.9547899904957624,
+          "raw_count": 0.9547899904957624
+        },
+        {
+          "agent_name": "Detective_p4i1",
+          "agent_type": "Behavioral",
+          "strategy": "Detective",
+          "clean_name": "Detective",
+          "score_per_move": 2.3444108761329305,
+          "score_per_match": 28.74074074074074,
+          "total_score": 776,
+          "total_rounds": 331,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.3444108761329305,
+          "relative_fitness": 0.8223546974517272,
+          "raw_count": 0.8223546974517272
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T08_p4i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T08",
+          "clean_name": "Claude4-Sonnet_T08",
+          "score_per_move": 2.731012658227848,
+          "score_per_match": 31.962962962962962,
+          "total_score": 863,
+          "total_rounds": 316,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.731012658227848,
+          "relative_fitness": 1.1159356419568716,
+          "raw_count": 1.1159356419568716
+        },
+        {
+          "agent_name": "o3_T1_p4i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "o3_T1",
+          "clean_name": "o3_T1",
+          "score_per_move": 2.800796812749004,
+          "score_per_match": 26.037037037037038,
+          "total_score": 703,
+          "total_rounds": 251,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.800796812749004,
+          "relative_fitness": 1.1736941221715846,
+          "raw_count": 1.1736941221715846
+        },
+        {
+          "agent_name": "Random_p4i1",
+          "agent_type": "Classical",
+          "strategy": "Random",
+          "clean_name": "Random",
+          "score_per_move": 2.223826714801444,
+          "score_per_match": 22.814814814814813,
+          "total_score": 616,
+          "total_rounds": 277,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.223826714801444,
+          "relative_fitness": 0.7399350650979003,
+          "raw_count": 0.7399350650979003
+        },
+        {
+          "agent_name": "Ministral-Large_T07_p4i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T07",
+          "clean_name": "Ministral-Large_T07",
+          "score_per_move": 2.330188679245283,
+          "score_per_match": 18.296296296296298,
+          "total_score": 494,
+          "total_rounds": 212,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.330188679245283,
+          "relative_fitness": 0.8124074522715845,
+          "raw_count": 0.8124074522715845
+        },
+        {
+          "agent_name": "Alternator_p4i1",
+          "agent_type": "Classical",
+          "strategy": "Alternator",
+          "clean_name": "Alternator",
+          "score_per_move": 2.1774744027303754,
+          "score_per_match": 23.62962962962963,
+          "total_score": 638,
+          "total_rounds": 293,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.1774744027303754,
+          "relative_fitness": 0.7094108710025506,
+          "raw_count": 0.7094108710025506
+        },
+        {
+          "agent_name": "Gemini25Pro_T02_p4i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T02",
+          "clean_name": "Gemini25Pro_T02",
+          "score_per_move": 2.6526315789473682,
+          "score_per_match": 28.0,
+          "total_score": 756,
+          "total_rounds": 285,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6526315789473682,
+          "relative_fitness": 1.0527993146680799,
+          "raw_count": 1.0527993146680799
+        },
+        {
+          "agent_name": "Gemini25Pro_T07_p4i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T07",
+          "clean_name": "Gemini25Pro_T07",
+          "score_per_move": 2.7950310559006213,
+          "score_per_match": 33.333333333333336,
+          "total_score": 900,
+          "total_rounds": 322,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7950310559006213,
+          "relative_fitness": 1.1688667320995823,
+          "raw_count": 1.1688667320995823
+        },
+        {
+          "agent_name": "ForgivingGrimTrigger_p4i1",
+          "agent_type": "Behavioral",
+          "strategy": "ForgivingGrimTrigger",
+          "clean_name": "ForgivingGrimTrigger",
+          "score_per_move": 2.735294117647059,
+          "score_per_match": 31.0,
+          "total_score": 837,
+          "total_rounds": 306,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.735294117647059,
+          "relative_fitness": 1.1194373308268313,
+          "raw_count": 1.1194373308268313
+        },
+        {
+          "agent_name": "Gradual_p4i1",
+          "agent_type": "Classical",
+          "strategy": "Gradual",
+          "clean_name": "Gradual",
+          "score_per_move": 2.6747404844290656,
+          "score_per_match": 28.62962962962963,
+          "total_score": 773,
+          "total_rounds": 289,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6747404844290656,
+          "relative_fitness": 1.0704219962651453,
+          "raw_count": 1.0704219962651453
+        },
+        {
+          "agent_name": "GrimTrigger_p4i1",
+          "agent_type": "Classical",
+          "strategy": "GrimTrigger",
+          "clean_name": "GrimTrigger",
+          "score_per_move": 2.8707865168539324,
+          "score_per_match": 18.925925925925927,
+          "total_score": 511,
+          "total_rounds": 178,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.8707865168539324,
+          "relative_fitness": 1.233086429481982,
+          "raw_count": 1.233086429481982
+        },
+        {
+          "agent_name": "Bayesian_p4i1",
+          "agent_type": "Adaptive",
+          "strategy": "Bayesian",
+          "clean_name": "Bayesian",
+          "score_per_move": 2.7209302325581395,
+          "score_per_match": 34.666666666666664,
+          "total_score": 936,
+          "total_rounds": 344,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7209302325581395,
+          "relative_fitness": 1.1077111695198056,
+          "raw_count": 1.1077111695198056
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T05_p4i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T05",
+          "clean_name": "Claude4-Sonnet_T05",
+          "score_per_move": 2.7686567164179103,
+          "score_per_match": 27.48148148148148,
+          "total_score": 742,
+          "total_rounds": 268,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7686567164179103,
+          "relative_fitness": 1.1469115994961403,
+          "raw_count": 1.1469115994961403
+        }
+      ],
+      "total_unique_agents": 28
+    },
+    "shadow_10_phase_5": {
+      "shadow_condition": 0.1,
+      "phase_number": 5,
+      "csv_file": "results/experiment_20250818_102320/evolutionary_shadow10_phase5.csv",
+      "agents_by_type": {
+        "Classical": 9,
+        "LLM_Mistral": 3,
+        "Adaptive": 4,
+        "LLM_Gemini": 3,
+        "Behavioral": 3,
+        "LLM_Anthropic": 3,
+        "LLM_OpenAI": 3
+      },
+      "agents_by_strategy": {
+        "Prober": 1,
+        "TitForTat": 1,
+        "WinStayLoseShift": 1,
+        "SuspiciousTitForTat": 1,
+        "GenerousTitForTat": 1,
+        "Mistral-Large_T02": 1,
+        "ThompsonSampling": 1,
+        "Alternator": 1,
+        "GrimTrigger": 1,
+        "Mistral-Large_T12": 1,
+        "Random": 1,
+        "Gemini25Pro_T02": 1,
+        "Gradual": 1,
+        "SoftGrudger": 1,
+        "Gemini25Pro_T07": 1,
+        "Claude4-Sonnet_T05": 1,
+        "o3_T1": 1,
+        "GPT4o_T1": 1,
+        "GPT5_T1": 1,
+        "Gemini25Pro_T12": 1,
+        "Detective": 1,
+        "Bayesian": 1,
+        "Mistral-Large_T07": 1,
+        "ForgivingGrimTrigger": 1,
+        "GradientMetaLearner": 1,
+        "QLearning": 1,
+        "Claude4-Sonnet_T08": 1,
+        "Claude4-Sonnet_T02": 1
+      },
+      "unique_agents": [
+        "Prober_p5i1",
+        "TitForTat_p5i1",
+        "WinStayLoseShift_p5i1",
+        "SuspiciousTitForTat_p5i1",
+        "GenerousTitForTat_p5i1",
+        "Ministral-Large_T02_p5i1",
+        "ThompsonSampling_p5i1",
+        "Alternator_p5i1",
+        "GrimTrigger_p5i1",
+        "Ministral-Large_T12_p5i1",
+        "Random_p5i1",
+        "Gemini25Pro_T02_p5i1",
+        "Gradual_p5i1",
+        "SoftGrudger_p5i1",
+        "Gemini25Pro_T07_p5i1",
+        "Claude4-Sonnet_T05_p5i1",
+        "o3_T1_p5i1",
+        "GPT4o_T1_p5i1",
+        "GPT5_T1_p5i1",
+        "Gemini25Pro_T12_p5i1",
+        "Detective_p5i1",
+        "Bayesian_p5i1",
+        "Ministral-Large_T07_p5i1",
+        "ForgivingGrimTrigger_p5i1",
+        "GradientMetaLearner_p5i1",
+        "QLearning_p5i1",
+        "Claude4-Sonnet_T08_p5i1",
+        "Claude4-Sonnet_T02_p5i1"
+      ],
+      "strategy_performance": {
+        "TitForTat": {
+          "score_per_move": 2.819277108433735,
+          "score_per_match": 26.0,
+          "total_score": 702,
+          "total_rounds": 249,
+          "matches_played": 27
+        },
+        "GrimTrigger": {
+          "score_per_move": 2.8545454545454545,
+          "score_per_match": 23.25925925925926,
+          "total_score": 628,
+          "total_rounds": 220,
+          "matches_played": 27
+        },
+        "WinStayLoseShift": {
+          "score_per_move": 2.8469750889679717,
+          "score_per_match": 29.62962962962963,
+          "total_score": 800,
+          "total_rounds": 281,
+          "matches_played": 27
+        },
+        "GenerousTitForTat": {
+          "score_per_move": 2.673015873015873,
+          "score_per_match": 31.185185185185187,
+          "total_score": 842,
+          "total_rounds": 315,
+          "matches_played": 27
+        },
+        "SuspiciousTitForTat": {
+          "score_per_move": 2.5942028985507246,
+          "score_per_match": 19.88888888888889,
+          "total_score": 537,
+          "total_rounds": 207,
+          "matches_played": 27
+        },
+        "Prober": {
+          "score_per_move": 2.734246575342466,
+          "score_per_match": 36.96296296296296,
+          "total_score": 998,
+          "total_rounds": 365,
+          "matches_played": 27
+        },
+        "Random": {
+          "score_per_move": 2.490706319702602,
+          "score_per_match": 24.814814814814813,
+          "total_score": 670,
+          "total_rounds": 269,
+          "matches_played": 27
+        },
+        "Gradual": {
+          "score_per_move": 2.5441176470588234,
+          "score_per_match": 25.62962962962963,
+          "total_score": 692,
+          "total_rounds": 272,
+          "matches_played": 27
+        },
+        "Alternator": {
+          "score_per_move": 2.4879227053140096,
+          "score_per_match": 19.074074074074073,
+          "total_score": 515,
+          "total_rounds": 207,
+          "matches_played": 27
+        },
+        "Bayesian": {
+          "score_per_move": 2.7219917012448134,
+          "score_per_match": 24.296296296296298,
+          "total_score": 656,
+          "total_rounds": 241,
+          "matches_played": 27
+        },
+        "ForgivingGrimTrigger": {
+          "score_per_move": 2.9477611940298507,
+          "score_per_match": 29.25925925925926,
+          "total_score": 790,
+          "total_rounds": 268,
+          "matches_played": 27
+        },
+        "Detective": {
+          "score_per_move": 2.4703557312252964,
+          "score_per_match": 23.14814814814815,
+          "total_score": 625,
+          "total_rounds": 253,
+          "matches_played": 27
+        },
+        "SoftGrudger": {
+          "score_per_move": 2.6953846153846155,
+          "score_per_match": 32.44444444444444,
+          "total_score": 876,
+          "total_rounds": 325,
+          "matches_played": 27
+        },
+        "QLearning": {
+          "score_per_move": 2.16600790513834,
+          "score_per_match": 20.296296296296298,
+          "total_score": 548,
+          "total_rounds": 253,
+          "matches_played": 27
+        },
+        "ThompsonSampling": {
+          "score_per_move": 2.411764705882353,
+          "score_per_match": 22.77777777777778,
+          "total_score": 615,
+          "total_rounds": 255,
+          "matches_played": 27
+        },
+        "GradientMetaLearner": {
+          "score_per_move": 2.950413223140496,
+          "score_per_match": 39.666666666666664,
+          "total_score": 1071,
+          "total_rounds": 363,
+          "matches_played": 27
+        },
+        "o3_T1": {
+          "score_per_move": 2.803448275862069,
+          "score_per_match": 30.11111111111111,
+          "total_score": 813,
+          "total_rounds": 290,
+          "matches_played": 27
+        },
+        "GPT4o_T1": {
+          "score_per_move": 2.630901287553648,
+          "score_per_match": 22.703703703703702,
+          "total_score": 613,
+          "total_rounds": 233,
+          "matches_played": 27
+        },
+        "GPT5_T1": {
+          "score_per_move": 2.7154471544715446,
+          "score_per_match": 24.74074074074074,
+          "total_score": 668,
+          "total_rounds": 246,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T02": {
+          "score_per_move": 2.759375,
+          "score_per_match": 32.7037037037037,
+          "total_score": 883,
+          "total_rounds": 320,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T05": {
+          "score_per_move": 2.625,
+          "score_per_match": 21.0,
+          "total_score": 567,
+          "total_rounds": 216,
+          "matches_played": 27
+        },
+        "Claude4-Sonnet_T08": {
+          "score_per_move": 2.711743772241993,
+          "score_per_match": 28.22222222222222,
+          "total_score": 762,
+          "total_rounds": 281,
+          "matches_played": 27
+        },
+        "Mistral-Large_T02": {
+          "score_per_move": 1.7657342657342658,
+          "score_per_match": 18.703703703703702,
+          "total_score": 505,
+          "total_rounds": 286,
+          "matches_played": 27
+        },
+        "Mistral-Large_T07": {
+          "score_per_move": 2.0562130177514795,
+          "score_per_match": 25.74074074074074,
+          "total_score": 695,
+          "total_rounds": 338,
+          "matches_played": 27
+        },
+        "Mistral-Large_T12": {
+          "score_per_move": 2.1367924528301887,
+          "score_per_match": 16.77777777777778,
+          "total_score": 453,
+          "total_rounds": 212,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T02": {
+          "score_per_move": 2.7662835249042144,
+          "score_per_match": 26.74074074074074,
+          "total_score": 722,
+          "total_rounds": 261,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T07": {
+          "score_per_move": 2.7393939393939393,
+          "score_per_match": 33.48148148148148,
+          "total_score": 904,
+          "total_rounds": 330,
+          "matches_played": 27
+        },
+        "Gemini25Pro_T12": {
+          "score_per_move": 2.6846153846153844,
+          "score_per_match": 25.85185185185185,
+          "total_score": 698,
+          "total_rounds": 260,
+          "matches_played": 27
+        }
+      },
+      "evolutionary_metrics": {
+        "TitForTat": {
+          "fitness": 2.819277108433735,
+          "relative_fitness": 1.1756700199967258,
+          "raw_count": 1.1756700199967258,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "GrimTrigger": {
+          "fitness": 2.8545454545454545,
+          "relative_fitness": 1.2052685919288106,
+          "raw_count": 1.2052685919288106,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "WinStayLoseShift": {
+          "fitness": 2.8469750889679717,
+          "relative_fitness": 1.1988842305836036,
+          "raw_count": 1.1988842305836036,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "GenerousTitForTat": {
+          "fitness": 2.673015873015873,
+          "relative_fitness": 1.0568491173444194,
+          "raw_count": 1.0568491173444194,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "SuspiciousTitForTat": {
+          "fitness": 2.5942028985507246,
+          "relative_fitness": 0.9954462023480352,
+          "raw_count": 0.9954462023480352,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Prober": {
+          "fitness": 2.734246575342466,
+          "relative_fitness": 1.1058221054674704,
+          "raw_count": 1.1058221054674704,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Random": {
+          "fitness": 2.490706319702602,
+          "relative_fitness": 0.9176032836122042,
+          "raw_count": 0.9176032836122042,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Gradual": {
+          "fitness": 2.5441176470588234,
+          "relative_fitness": 0.9573798760524059,
+          "raw_count": 0.9573798760524059,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Alternator": {
+          "fitness": 2.4879227053140096,
+          "relative_fitness": 0.9155534021262951,
+          "raw_count": 0.9155534021262951,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Bayesian": {
+          "fitness": 2.7219917012448134,
+          "relative_fitness": 1.0959317455691133,
+          "raw_count": 1.0959317455691133,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "ForgivingGrimTrigger": {
+          "fitness": 2.9477611940298507,
+          "relative_fitness": 1.2852704069580445,
+          "raw_count": 1.2852704069580445,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Detective": {
+          "fitness": 2.4703557312252964,
+          "relative_fitness": 0.9026697857238726,
+          "raw_count": 0.9026697857238726,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "SoftGrudger": {
+          "fitness": 2.6953846153846155,
+          "relative_fitness": 1.0746113023152326,
+          "raw_count": 1.0746113023152326,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "QLearning": {
+          "fitness": 2.16600790513834,
+          "relative_fitness": 0.6939528891699759,
+          "raw_count": 0.6939528891699759,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "ThompsonSampling": {
+          "fitness": 2.411764705882353,
+          "relative_fitness": 0.8603591548767253,
+          "raw_count": 0.8603591548767253,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "GradientMetaLearner": {
+          "fitness": 2.950413223140496,
+          "relative_fitness": 1.2875841003786972,
+          "raw_count": 1.2875841003786972,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "o3_T1": {
+          "fitness": 2.803448275862069,
+          "relative_fitness": 1.1625054804963457,
+          "raw_count": 1.1625054804963457,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "GPT4o_T1": {
+          "fitness": 2.630901287553648,
+          "relative_fitness": 1.0238091829526412,
+          "raw_count": 1.0238091829526412,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "GPT5_T1": {
+          "fitness": 2.7154471544715446,
+          "relative_fitness": 1.0906681334783281,
+          "raw_count": 1.0906681334783281,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Claude4-Sonnet_T02": {
+          "fitness": 2.759375,
+          "relative_fitness": 1.126241079481093,
+          "raw_count": 1.126241079481093,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Claude4-Sonnet_T05": {
+          "fitness": 2.625,
+          "relative_fitness": 1.0192213891460047,
+          "raw_count": 1.0192213891460047,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Claude4-Sonnet_T08": {
+          "fitness": 2.711743772241993,
+          "relative_fitness": 1.087695211223415,
+          "raw_count": 1.087695211223415,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Mistral-Large_T02": {
+          "fitness": 1.7657342657342658,
+          "relative_fitness": 0.46116952824857005,
+          "raw_count": 0.46116952824857005,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Mistral-Large_T07": {
+          "fitness": 2.0562130177514795,
+          "relative_fitness": 0.6253830730657948,
+          "raw_count": 0.6253830730657948,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Mistral-Large_T12": {
+          "fitness": 2.1367924528301887,
+          "relative_fitness": 0.675358850747032,
+          "raw_count": 0.675358850747032,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Gemini25Pro_T02": {
+          "fitness": 2.7662835249042144,
+          "relative_fitness": 1.1318875788501557,
+          "raw_count": 1.1318875788501557,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Gemini25Pro_T07": {
+          "fitness": 2.7393939393939393,
+          "relative_fitness": 1.109989561917877,
+          "raw_count": 1.109989561917877,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        },
+        "Gemini25Pro_T12": {
+          "fitness": 2.6846153846153844,
+          "relative_fitness": 1.0660413802465942,
+          "raw_count": 1.0660413802465942,
+          "total_fitness_pool": 72.80363682233616,
+          "mean_fitness": 2.6001298865120055
+        }
+      },
+      "match_statistics": {
+        "total_matches": 378,
+        "total_rounds": 3808,
+        "avg_rounds_per_match": 10.074074074074074,
+        "unique_match_ids": 378
+      },
+      "detailed_agent_info": [
+        {
+          "agent_name": "Prober_p5i1",
+          "agent_type": "Classical",
+          "strategy": "Prober",
+          "clean_name": "Prober",
+          "score_per_move": 2.734246575342466,
+          "score_per_match": 36.96296296296296,
+          "total_score": 998,
+          "total_rounds": 365,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.734246575342466,
+          "relative_fitness": 1.1058221054674704,
+          "raw_count": 1.1058221054674704
+        },
+        {
+          "agent_name": "TitForTat_p5i1",
+          "agent_type": "Classical",
+          "strategy": "TitForTat",
+          "clean_name": "TitForTat",
+          "score_per_move": 2.819277108433735,
+          "score_per_match": 26.0,
+          "total_score": 702,
+          "total_rounds": 249,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.819277108433735,
+          "relative_fitness": 1.1756700199967258,
+          "raw_count": 1.1756700199967258
+        },
+        {
+          "agent_name": "WinStayLoseShift_p5i1",
+          "agent_type": "Classical",
+          "strategy": "WinStayLoseShift",
+          "clean_name": "WinStayLoseShift",
+          "score_per_move": 2.8469750889679717,
+          "score_per_match": 29.62962962962963,
+          "total_score": 800,
+          "total_rounds": 281,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.8469750889679717,
+          "relative_fitness": 1.1988842305836036,
+          "raw_count": 1.1988842305836036
+        },
+        {
+          "agent_name": "SuspiciousTitForTat_p5i1",
+          "agent_type": "Classical",
+          "strategy": "SuspiciousTitForTat",
+          "clean_name": "SuspiciousTitForTat",
+          "score_per_move": 2.5942028985507246,
+          "score_per_match": 19.88888888888889,
+          "total_score": 537,
+          "total_rounds": 207,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5942028985507246,
+          "relative_fitness": 0.9954462023480352,
+          "raw_count": 0.9954462023480352
+        },
+        {
+          "agent_name": "GenerousTitForTat_p5i1",
+          "agent_type": "Classical",
+          "strategy": "GenerousTitForTat",
+          "clean_name": "GenerousTitForTat",
+          "score_per_move": 2.673015873015873,
+          "score_per_match": 31.185185185185187,
+          "total_score": 842,
+          "total_rounds": 315,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.673015873015873,
+          "relative_fitness": 1.0568491173444194,
+          "raw_count": 1.0568491173444194
+        },
+        {
+          "agent_name": "Ministral-Large_T02_p5i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T02",
+          "clean_name": "Ministral-Large_T02",
+          "score_per_move": 1.7657342657342658,
+          "score_per_match": 18.703703703703702,
+          "total_score": 505,
+          "total_rounds": 286,
+          "matches_played": 27,
+          "evolutionary_fitness": 1.7657342657342658,
+          "relative_fitness": 0.46116952824857005,
+          "raw_count": 0.46116952824857005
+        },
+        {
+          "agent_name": "ThompsonSampling_p5i1",
+          "agent_type": "Adaptive",
+          "strategy": "ThompsonSampling",
+          "clean_name": "ThompsonSampling",
+          "score_per_move": 2.411764705882353,
+          "score_per_match": 22.77777777777778,
+          "total_score": 615,
+          "total_rounds": 255,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.411764705882353,
+          "relative_fitness": 0.8603591548767253,
+          "raw_count": 0.8603591548767253
+        },
+        {
+          "agent_name": "Alternator_p5i1",
+          "agent_type": "Classical",
+          "strategy": "Alternator",
+          "clean_name": "Alternator",
+          "score_per_move": 2.4879227053140096,
+          "score_per_match": 19.074074074074073,
+          "total_score": 515,
+          "total_rounds": 207,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.4879227053140096,
+          "relative_fitness": 0.9155534021262951,
+          "raw_count": 0.9155534021262951
+        },
+        {
+          "agent_name": "GrimTrigger_p5i1",
+          "agent_type": "Classical",
+          "strategy": "GrimTrigger",
+          "clean_name": "GrimTrigger",
+          "score_per_move": 2.8545454545454545,
+          "score_per_match": 23.25925925925926,
+          "total_score": 628,
+          "total_rounds": 220,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.8545454545454545,
+          "relative_fitness": 1.2052685919288106,
+          "raw_count": 1.2052685919288106
+        },
+        {
+          "agent_name": "Ministral-Large_T12_p5i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T12",
+          "clean_name": "Ministral-Large_T12",
+          "score_per_move": 2.1367924528301887,
+          "score_per_match": 16.77777777777778,
+          "total_score": 453,
+          "total_rounds": 212,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.1367924528301887,
+          "relative_fitness": 0.675358850747032,
+          "raw_count": 0.675358850747032
+        },
+        {
+          "agent_name": "Random_p5i1",
+          "agent_type": "Classical",
+          "strategy": "Random",
+          "clean_name": "Random",
+          "score_per_move": 2.490706319702602,
+          "score_per_match": 24.814814814814813,
+          "total_score": 670,
+          "total_rounds": 269,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.490706319702602,
+          "relative_fitness": 0.9176032836122042,
+          "raw_count": 0.9176032836122042
+        },
+        {
+          "agent_name": "Gemini25Pro_T02_p5i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T02",
+          "clean_name": "Gemini25Pro_T02",
+          "score_per_move": 2.7662835249042144,
+          "score_per_match": 26.74074074074074,
+          "total_score": 722,
+          "total_rounds": 261,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7662835249042144,
+          "relative_fitness": 1.1318875788501557,
+          "raw_count": 1.1318875788501557
+        },
+        {
+          "agent_name": "Gradual_p5i1",
+          "agent_type": "Classical",
+          "strategy": "Gradual",
+          "clean_name": "Gradual",
+          "score_per_move": 2.5441176470588234,
+          "score_per_match": 25.62962962962963,
+          "total_score": 692,
+          "total_rounds": 272,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.5441176470588234,
+          "relative_fitness": 0.9573798760524059,
+          "raw_count": 0.9573798760524059
+        },
+        {
+          "agent_name": "SoftGrudger_p5i1",
+          "agent_type": "Behavioral",
+          "strategy": "SoftGrudger",
+          "clean_name": "SoftGrudger",
+          "score_per_move": 2.6953846153846155,
+          "score_per_match": 32.44444444444444,
+          "total_score": 876,
+          "total_rounds": 325,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6953846153846155,
+          "relative_fitness": 1.0746113023152326,
+          "raw_count": 1.0746113023152326
+        },
+        {
+          "agent_name": "Gemini25Pro_T07_p5i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T07",
+          "clean_name": "Gemini25Pro_T07",
+          "score_per_move": 2.7393939393939393,
+          "score_per_match": 33.48148148148148,
+          "total_score": 904,
+          "total_rounds": 330,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7393939393939393,
+          "relative_fitness": 1.109989561917877,
+          "raw_count": 1.109989561917877
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T05_p5i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T05",
+          "clean_name": "Claude4-Sonnet_T05",
+          "score_per_move": 2.625,
+          "score_per_match": 21.0,
+          "total_score": 567,
+          "total_rounds": 216,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.625,
+          "relative_fitness": 1.0192213891460047,
+          "raw_count": 1.0192213891460047
+        },
+        {
+          "agent_name": "o3_T1_p5i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "o3_T1",
+          "clean_name": "o3_T1",
+          "score_per_move": 2.803448275862069,
+          "score_per_match": 30.11111111111111,
+          "total_score": 813,
+          "total_rounds": 290,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.803448275862069,
+          "relative_fitness": 1.1625054804963457,
+          "raw_count": 1.1625054804963457
+        },
+        {
+          "agent_name": "GPT4o_T1_p5i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT4o_T1",
+          "clean_name": "GPT4o_T1",
+          "score_per_move": 2.630901287553648,
+          "score_per_match": 22.703703703703702,
+          "total_score": 613,
+          "total_rounds": 233,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.630901287553648,
+          "relative_fitness": 1.0238091829526412,
+          "raw_count": 1.0238091829526412
+        },
+        {
+          "agent_name": "GPT5_T1_p5i1",
+          "agent_type": "LLM_OpenAI",
+          "strategy": "GPT5_T1",
+          "clean_name": "GPT5_T1",
+          "score_per_move": 2.7154471544715446,
+          "score_per_match": 24.74074074074074,
+          "total_score": 668,
+          "total_rounds": 246,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7154471544715446,
+          "relative_fitness": 1.0906681334783281,
+          "raw_count": 1.0906681334783281
+        },
+        {
+          "agent_name": "Gemini25Pro_T12_p5i1",
+          "agent_type": "LLM_Gemini",
+          "strategy": "Gemini25Pro_T12",
+          "clean_name": "Gemini25Pro_T12",
+          "score_per_move": 2.6846153846153844,
+          "score_per_match": 25.85185185185185,
+          "total_score": 698,
+          "total_rounds": 260,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.6846153846153844,
+          "relative_fitness": 1.0660413802465942,
+          "raw_count": 1.0660413802465942
+        },
+        {
+          "agent_name": "Detective_p5i1",
+          "agent_type": "Behavioral",
+          "strategy": "Detective",
+          "clean_name": "Detective",
+          "score_per_move": 2.4703557312252964,
+          "score_per_match": 23.14814814814815,
+          "total_score": 625,
+          "total_rounds": 253,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.4703557312252964,
+          "relative_fitness": 0.9026697857238726,
+          "raw_count": 0.9026697857238726
+        },
+        {
+          "agent_name": "Bayesian_p5i1",
+          "agent_type": "Adaptive",
+          "strategy": "Bayesian",
+          "clean_name": "Bayesian",
+          "score_per_move": 2.7219917012448134,
+          "score_per_match": 24.296296296296298,
+          "total_score": 656,
+          "total_rounds": 241,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.7219917012448134,
+          "relative_fitness": 1.0959317455691133,
+          "raw_count": 1.0959317455691133
+        },
+        {
+          "agent_name": "Ministral-Large_T07_p5i1",
+          "agent_type": "LLM_Mistral",
+          "strategy": "Mistral-Large_T07",
+          "clean_name": "Ministral-Large_T07",
+          "score_per_move": 2.0562130177514795,
+          "score_per_match": 25.74074074074074,
+          "total_score": 695,
+          "total_rounds": 338,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.0562130177514795,
+          "relative_fitness": 0.6253830730657948,
+          "raw_count": 0.6253830730657948
+        },
+        {
+          "agent_name": "ForgivingGrimTrigger_p5i1",
+          "agent_type": "Behavioral",
+          "strategy": "ForgivingGrimTrigger",
+          "clean_name": "ForgivingGrimTrigger",
+          "score_per_move": 2.9477611940298507,
+          "score_per_match": 29.25925925925926,
+          "total_score": 790,
+          "total_rounds": 268,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.9477611940298507,
+          "relative_fitness": 1.2852704069580445,
+          "raw_count": 1.2852704069580445
+        },
+        {
+          "agent_name": "GradientMetaLearner_p5i1",
+          "agent_type": "Adaptive",
+          "strategy": "GradientMetaLearner",
+          "clean_name": "GradientMetaLearner",
+          "score_per_move": 2.950413223140496,
+          "score_per_match": 39.666666666666664,
+          "total_score": 1071,
+          "total_rounds": 363,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.950413223140496,
+          "relative_fitness": 1.2875841003786972,
+          "raw_count": 1.2875841003786972
+        },
+        {
+          "agent_name": "QLearning_p5i1",
+          "agent_type": "Adaptive",
+          "strategy": "QLearning",
+          "clean_name": "QLearning",
+          "score_per_move": 2.16600790513834,
+          "score_per_match": 20.296296296296298,
+          "total_score": 548,
+          "total_rounds": 253,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.16600790513834,
+          "relative_fitness": 0.6939528891699759,
+          "raw_count": 0.6939528891699759
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T08_p5i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T08",
+          "clean_name": "Claude4-Sonnet_T08",
+          "score_per_move": 2.711743772241993,
+          "score_per_match": 28.22222222222222,
+          "total_score": 762,
+          "total_rounds": 281,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.711743772241993,
+          "relative_fitness": 1.087695211223415,
+          "raw_count": 1.087695211223415
+        },
+        {
+          "agent_name": "Claude4-Sonnet_T02_p5i1",
+          "agent_type": "LLM_Anthropic",
+          "strategy": "Claude4-Sonnet_T02",
+          "clean_name": "Claude4-Sonnet_T02",
+          "score_per_move": 2.759375,
+          "score_per_match": 32.7037037037037,
+          "total_score": 883,
+          "total_rounds": 320,
+          "matches_played": 27,
+          "evolutionary_fitness": 2.759375,
+          "relative_fitness": 1.126241079481093,
+          "raw_count": 1.126241079481093
+        }
+      ],
+      "total_unique_agents": 28
+    }
+  },
+  "experiment_metadata": {
+    "shadow_condition": "0.1",
+    "timestamp": "2025-08-18T11:46:07.942185"
+  }
+}
