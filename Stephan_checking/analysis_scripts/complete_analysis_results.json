@@ -1,0 +1,13 @@
+{
+  "summary": {
+    "experiments": {
+      "experiment_20250811_131553": {
+        "phases": {
+          "1": {
+            "experiment": "experiment_20250811_131553",
+            "phase": 1,
+            "shadow": 0.75,
+            "n_agents": 28,
+            "n_llm_agents": 12,
+            "n_matches": 512,
+            "n_rounds": 
