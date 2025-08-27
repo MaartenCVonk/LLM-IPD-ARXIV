@@ -9,6 +9,15 @@ This analysis reveals fundamental flaws in the tournament design that render it 
 
 **Key Finding**: The tournament's shadow probability of 0.75 (termination) created an expected game length of 1.33 rounds, not the 4.0 rounds claimed in the PDF—a 3x mathematical error that invalidates the core premise.
 
+### 🔴 BREAKING: New Experiments Confirm the Problem
+
+The repository author has now run additional experiments with lower shadow values:
+- **Shadow 0.75** (original): 1.35 avg rounds, 74% single-round matches ❌
+- **Shadow 0.25** (new): 3.81 avg rounds, 25% single-round matches ⚠️
+- **Shadow 0.10** (new): **10.47 avg rounds, only 9.5% single-round, 37% go 10+ rounds** ✅
+
+The shadow 0.10 experiment FINALLY achieves meaningful iteration! This confirms our analysis: the original tournament was fundamentally broken.
+
 ---
 
 ## 1. Complete Tournament Analysis

@@ -1,0 +1,9 @@
+[
+  {
+    "shadow": 0.75,
+    "expected_rounds": 4.0,
+    "total_matches": 378,
+    "total_rounds": 512,
+    "avg_rounds": 1.3544973544973544,
+    "median_rounds": 1.0,
+    "max_rounds": 
