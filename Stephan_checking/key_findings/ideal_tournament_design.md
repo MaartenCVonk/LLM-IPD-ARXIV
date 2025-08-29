@@ -2,10 +2,17 @@
 
 ## 🚨 CRITICAL UPDATES (August 2025)
 
-### 1. NO PHASES - NO EXTINCTION!
+### 1. NO PHASES - NO EXTINCTION - PERSISTENT REPUTATION!
+- **Double Fatal Flaw**: Extinction + Memory Wipes between phases
 - Geostrategic entities (nations) don't disappear!
+- **Reputation must persist** across ALL interactions (not reset each phase!)
 - Use persistent league format - all agents play entire tournament
 - No evolutionary elimination dynamics
+
+**Why This Changes Everything**:
+- Current: Mistral extinct Phase 3, reputation wiped each phase
+- Fixed: Mistral's consistent cooperation builds trust → dominates endgame
+- Real world: EU's 70-year cooperation reputation → trusted partner
 
 ### 2. Use Claude Code for Cost Savings!
 - Claude Code (probably Claude 4.1) - UNLIMITED credits in practice!

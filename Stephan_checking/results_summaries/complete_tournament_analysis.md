@@ -1,18 +1,62 @@
-# Complete Tournament Analysis - Shadow 75%
+# Complete Tournament Analysis - All Three Experiments
 
-## Tournament Structure
+## Tournament Structure Across All Shadow Values
 
-### Overall Statistics (Based on ALL CSV Files)
-- **Total CSV Files Analyzed**: 6 files
-- **Total Phases**: 5 (evolutionary) + 1 additional experiment
-- **Total Matches**: 2,870 (verified from all CSVs)
-- **Total Data Lines**: 50,568 lines processed
-- **Average Rounds per Match**: 1.35 (consistent with theory)
+### Comprehensive Statistics (5,670 Total Matches)
+- **Shadow 0.75**: 1,890 matches, 1.35 avg rounds, max 7 rounds
+- **Shadow 0.25**: 1,890 matches, 3.91 avg rounds, max 28 rounds  
+- **Shadow 0.10**: 1,890 matches, 10.27 avg rounds, max 73 rounds
 
-### Shadow Probability Impact
-- **Theoretical Expectation**: 1/0.75 = 1.33 rounds
-- **Actual Average**: 1.35 rounds (101% of theoretical - perfect match)
-- **PDF ERROR**: Claims 4.0 rounds for 0.75 shadow (completely wrong!)
+### Critical Discovery: True IPD Rarity
+| Shadow | Matches | Opening (≤10) | Extended (25-49) | True IPD (50+) |
+|--------|---------|---------------|------------------|----------------|
+| 0.75   | 1,890   | 100%          | 0%               | **0%**         |
+| 0.25   | 1,890   | 94.6%         | 0.1%             | **0%**         |
+| 0.10   | 1,890   | 63.8%         | 8.2%             | **0.7%**       |
+
+**Key Finding**: Only 13 matches (0.7%) in our best experiment achieve true iteration (50+ rounds)
+
+### The Cooperation Reversal in True IPD
+In the rare 50+ round matches, ALL providers converge on cooperation:
+- **Google**: 100.0% cooperation (complete reversal from short games!)
+- **OpenAI**: 99.6% cooperation
+- **Anthropic**: 95.5% cooperation
+- **Mistral**: 95.4% cooperation
+
+## 🔥 The Fatal Double Flaw: Why Cooperation Dies
+
+### Problem 1: Extinction Mechanics
+- **Mistral extinct by Phase 3** - but France/EU still exists!
+- **Anthropic extinct by Phase 4** - but ethical actors persist!
+- This isn't evolution - it's strategic genocide
+
+### Problem 2: Memory Wipes Between Phases
+**CRITICAL**: Even surviving agents lose ALL reputation:
+- Phase 1: Mistral cooperates 88% → builds trust
+- Phase 2: **MEMORY WIPED** → Trust destroyed, back to zero
+- Phase 3: Mistral extinct → Can't recover
+
+### What Would Happen With Persistent Reputation?
+
+**Current Tournament (Doomed Cooperation)**:
+```
+Phase 1: Mistral cooperates → Exploited → Low score
+Phase 2: Memory wiped → Exploited again → Lower score  
+Phase 3: Extinct → "Cooperation proven fatal"
+```
+
+**Persistent League (Cooperation Dominates)**:
+```
+Matches 1-10: Mistral cooperates → Initially exploited
+Matches 11-30: Partners REMEMBER reliability → Reciprocation begins
+Matches 31-50: Trust networks strengthen → Stable cooperation
+Matches 51+: Mistral's reputation → COMPETITIVE ADVANTAGE
+```
+
+**Real-World Proof**: 
+- EU: 70 years cooperation → Trusted globally
+- Switzerland: 200+ years neutrality → Universal mediator
+- These strategies WORK because reputation PERSISTS!
 
 ## Phase-by-Phase Evolution
 

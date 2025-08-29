@@ -1,8 +1,16 @@
 # Complete Tournament Analysis Summary
 
+## 🔥 Fatal Double Flaw Discovery
+
+The tournament has TWO design flaws that doom cooperation:
+1. **Extinction**: Cooperative agents eliminated (Mistral dies Phase 3)
+2. **Memory Wipes**: Reputation resets between phases (trust destroyed)
+
+With persistent reputation (like real geopolitics), Mistral's 88% cooperation could build trust networks that dominate - but the tournament design made this impossible to test.
+
 ## Analysis Verification ✅
 
-This analysis is based on **ALL 6 CSV files** found in the results directory:
+This analysis is based on **5,670 total matches** across THREE experiments:
 1. `evolutionary_shadow75_phase1.csv` - 512 matches
 2. `evolutionary_shadow75_phase2.csv` - 512 matches  
 3. `evolutionary_shadow75_phase3.csv` - 499 matches

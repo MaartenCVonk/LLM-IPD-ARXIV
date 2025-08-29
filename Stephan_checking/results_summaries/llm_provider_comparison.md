@@ -1,11 +1,52 @@
-# LLM Provider Comparison - Detailed Analysis
+# LLM Provider Comparison - Complete Analysis Across All Experiments
 
-**Based on Complete Analysis of ALL 2,870 Matches from 6 CSV Files**
+**Based on 5,670 Total Matches Across Three Shadow Values**
 
-## Provider Rankings (Shadow 75%)
+## 🔥 CRITICAL DISCOVERY: Google's Complete Transformation in True IPD
 
-### 1. Google Gemini 🥇
-**Performance**: Best overall
+### The Cooperation Reversal by Match Length
+| Provider | 1 Round | 2-5 Rounds | 6-10 Rounds | 25-49 Rounds | **50+ Rounds** |
+|----------|---------|------------|-------------|--------------|----------------|
+| Google   | 100%*   | 83.9%      | 80.4%       | 91.1%        | **100.0%**     |
+| OpenAI   | 100%*   | 87.0%      | 83.8%       | 86.7%        | **99.6%**      |
+| Anthropic| 100%*   | 90.6%      | 84.4%       | 88.1%        | **95.5%**      |
+| Mistral  | 94.9%   | 95.8%      | 93.9%       | 95.1%        | **95.4%**      |
+
+*Single-round rates can be misleading due to small samples
+
+**Key Insight**: Google achieves PERFECT COOPERATION in true IPD (50+ rounds), completely reversing its "ruthless" reputation from short games. This reveals sophisticated game-theoretic understanding: defect when rational (short games), cooperate when rational (long games).
+
+### True IPD Statistics (Only 0.7% of Shadow 0.10 Matches)
+- **Total matches reaching 50+ rounds**: 13 out of 1,890 (0.7%)
+- **Google in true IPD**: 100% cooperation, 176 avg score
+- **OpenAI in true IPD**: 99.6% cooperation, 173.5 avg score
+- **Anthropic in true IPD**: 95.5% cooperation, 156.3 avg score
+- **Mistral in true IPD**: 95.4% cooperation, 61.7 avg score (still lowest)
+
+## 🔥 THE RANKING REVERSAL: How Persistent Reputation Changes Everything
+
+### Current Rankings (With Fatal Flaws)
+1. **Google** 🥇 - Wins by exploiting before memory wipes
+2. **OpenAI** 🥈 - Mixed strategy survives phases
+3. **Mistral** 💀 - Dies Phase 3 (cooperation "fatal")
+4. **Anthropic** 💀 - Dies Phase 4 (ethics "fatal")
+
+### Possible Rankings (With Persistent Reputation)
+1. **Mistral** ❓ - 88% cooperation → Could build trust → Might thrive
+2. **Anthropic** ❓ - Ethical consistency → Could form reliable alliances
+3. **OpenAI** ❓ - Inconsistency → Reputation volatility
+4. **Google** ❓ - Early defection → Might create trust deficit OR adapt
+
+**The Untested Possibility**: Our 0.7% true IPD data shows ALL providers converge on 95-100% cooperation in long games. With persistent reputation:
+- Mistral's early cooperation MIGHT become an asset (like EU's strategy)
+- Google's sophistication MIGHT lead to adaptive cooperation
+- We simply don't know - the tournament design prevented testing this
+- Real world examples (EU, Switzerland) suggest consistent cooperation CAN work
+
+## Provider Rankings Across All Shadow Values (Current Flawed Tournament)
+
+### 1. Google Gemini 🥇 (Benefits from Fatal Flaws)
+**Performance**: Best overall in flawed design
 - **Average Score**: 2.075 (highest)
 - **Cooperation Rate**: 4.2% (most aggressive)
 - **Survival**: All 3 temperature variants survived all 5 phases

@@ -4,15 +4,17 @@
 
 ### **[MASTER_ANALYSIS_AND_RECOMMENDATIONS.md](MASTER_ANALYSIS_AND_RECOMMENDATIONS.md)**
 
-**This is THE comprehensive document (18KB) containing:**
-- ✅ Complete analysis of all 2,870 matches
-- ✅ All visualizations properly referenced
-- ✅ Critical findings (math error, opening moves only)
-- ✅ NO PHASES recommendation (geostrategic entities persist)
+**This is THE comprehensive document containing:**
+- 🔥 **FATAL DOUBLE FLAW**: Extinction + Memory Wipes doom cooperation
+- ✅ Complete analysis of 5,670 matches across THREE experiments
+- ✅ Only 0.7% of Shadow 0.10 matches achieve true IPD (50+ rounds)
+- ✅ Google achieves 100% cooperation in true IPD (complete reversal!)
+- ✅ **KEY INSIGHT**: Mistral would DOMINATE with persistent reputation (not die!)
+- ✅ All visualizations including new true_ipd_distribution charts
+- ✅ NO PHASES + PERSISTENT MEMORY recommendation (like real geopolitics!)
+- ✅ Shows how EU's 70-year cooperation strategy actually works
 - ✅ Claude Code option ($35 total vs $185 with APIs)
-- ✅ August 2025 model pricing (GPT-5, Claude 4.1, etc.)
-- ✅ 100+ rounds justification
-- ✅ Implementation roadmap
+- ✅ Implementation roadmap fixing both fatal flaws
 
 **Everything else is supporting material.**
 

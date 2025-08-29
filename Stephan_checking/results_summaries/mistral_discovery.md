@@ -138,6 +138,34 @@ All temperatures maintained excessive cooperation and failed.
 - Temperature can't fix fundamental strategic biases
 - Provider training/philosophy dominates game performance
 
+## The Untested Alternative: What If?
+
+### The Fatal Double Flaw That Doomed Mistral
+1. **Extinction**: Mistral eliminated by Phase 3 (but real countries don't disappear)
+2. **Memory Wipes**: Each phase reset reputation to zero (trust networks destroyed)
+
+### What Mistral's Strategy Never Got to Test
+With persistent reputation across matches (like real geopolitics):
+- **Rounds 1-10**: Initial exploitation (current tournament stops here)
+- **Rounds 11-30**: Partners might recognize Mistral's reliability
+- **Rounds 31-50**: Trust networks could form
+- **Rounds 50+**: Consistent cooperation might become an advantage
+
+Our data shows in 50+ round matches, ALL providers converge on 95-100% cooperation. But Mistral never got there because:
+- 74.5% of matches ended after 1 round
+- Reputation was wiped between phases
+- Extinction removed them entirely by Phase 3
+
+### Real-World Parallels
+Countries/organizations with Mistral-like strategies that succeed:
+- **EU**: 70+ years of consistent cooperation → trusted partner
+- **Switzerland**: Centuries of neutrality → universal mediator  
+- **Nordic countries**: Reliable aid donors → diplomatic influence
+
+These work because reputation persists across decades, not reset every few matches.
+
 ## Conclusion
 
-Mistral was present but performed so poorly that they were eliminated before Phase 3, making them effectively invisible in later analysis. Their 88% cooperation rate in a game where 74% of matches last one round was a fatal strategic error. This discovery strengthens the conclusion that in the current tournament structure, cooperative strategies are doomed to fail.
+Mistral was present but the tournament design made their strategy unviable. Their 88% cooperation rate in 1.35-round average matches was necessarily fatal. However, this doesn't prove cooperation is wrong - it proves the tournament didn't test what it claimed to test.
+
+**The key question remains unanswered**: In a persistent league with 100+ round matches and reputation that carries forward, would Mistral's consistent cooperation build the trust networks that dominate real international relations? The current tournament design made it impossible to find out.

@@ -35,5 +35,7 @@ For accurate results that properly include Mistral agents, see:
 2. **Provider Count**: Corrected from 3 to 4 providers
 3. **Cooperation Rates**: Updated to include Mistral's 88.1% average
 4. **Elimination Timeline**: Properly shows Mistral extinct by Phase 3
+5. **Fatal Double Flaw**: Identified extinction + memory wipes as design problems
+6. **Persistent Reputation**: Shows how cooperation could work with proper design
 
 Generated: 2025-08-27
