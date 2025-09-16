@@ -1,0 +1,94 @@
+\section{Experimental Design}
+
+The experimental framework follows and extends the experimental setup from \cite{payne2025strategic}, implementing a comprehensive evolutionary tournament system to investigate strategic behavior in the Iterated Prisoner's Dilemma (IPD). Our experiments employ 28 agents representing 13 rule-based, 3 adaptive learning, and 12 Large Language Model (LLM) strategies across multiple evolutionary phases and shadow conditions.
+
+\subsection{Evolutionary Tournament Architecture}
+
+We exclusively employed an evolutionary tournament framework where populations of strategies compete across sequential phases. Each experiment proceeds over five distinct evolutionary phases, denoted as $\mathcal{P} = \{P_1, P_2, P_3, P_4, P_5\}$. In every phase $P_t$, the current population composition $\mathbf{n}_t = (n_{1,t}, n_{2,t}, \ldots, n_{28,t})$ engages in a complete round-robin tournament, where $n_{i,t}$ represents the count of strategy $i$ in phase $t$.
+
+Following each tournament, population shares are updated according to fitness-proportional selection based on per-move performance. This iterative process models evolutionary selection dynamics, where strategies that underperform are gradually eliminated while higher-performing strategies increase their representation in subsequent phases.
+
+\subsection{Tournament Structure and Matching Protocol}
+
+In each phase, all $N = 28$ agent types face one another in pairwise matches. The total number of unique match combinations per phase is:
+\[
+M = \binom{28}{2} = \frac{28 \times (28 - 1)}{2} = 378
+\]
+
+When multiple instances of strategies exist in the population, the actual number of matches scales with population composition. Each match consists of a repeated game that continues according to a stochastic termination rule implementing the \emph{shadow of the future} mechanism. The game terminates after each round with probability $\delta$, where $\delta \in \{0.02, 0.05, 0.10, 0.25, 0.75\}$ represents our tested shadow conditions.
+
+These termination probabilities correspond to expected game lengths of:
+\[
+\mathbb{E}[\text{rounds}] = \frac{1}{\delta} \in \{50, 20, 10, 4, 1.33\} \text{ rounds per match}
+\]
+
+\subsection{Population Evolution Dynamics}
+
+The population evolution follows a fitness-proportional selection mechanism with enhanced selective pressure. After each tournament phase $t$, strategy fitness is calculated as the average score per move:
+\[
+f_{i,t} = \frac{\sum_{j} S_{i,j,t}}{R_{i,t}}
+\]
+where $S_{i,j,t}$ is the total score of strategy $i$ against all opponents $j$ in phase $t$, and $R_{i,t}$ is the total number of rounds played by strategy $i$.
+
+The population composition for the subsequent phase is determined by:
+\[
+n_{i,t+1} = \max\left(0, \left\lfloor \left(\frac{f_{i,t}}{\bar{f}_t}\right)^2 \cdot n_{i,t} + 0.5 \right\rfloor\right)
+\]
+where $\bar{f}_t = \frac{1}{N}\sum_{i=1}^{N} f_{i,t}$ is the mean fitness across all strategies in phase $t$. The quadratic fitness amplification $\left(\frac{f_{i,t}}{\bar{f}_t}\right)^2$ enhances selective pressure, accelerating the elimination of poorly performing strategies.
+
+Population size is maintained constant across phases through iterative adjustment procedures that preferentially increase counts of high-fitness strategies and decrease counts of low-fitness strategies when normalization is required.
+
+\subsection{Memory and Opponent Tracking Mechanisms}
+
+Our experimental design implements two distinct memory preservation mechanisms to investigate the impact of historical information on strategic behavior:
+
+\subsubsection{Anonymous Memory Mechanism}
+In the anonymous condition, LLM agents maintain records of all previous encounters but with opponent identities anonymized. Each opponent is assigned a unique anonymous identifier (e.g., "Opponent\_001") that remains consistent across phases, allowing agents to recognize repeated encounters without knowledge of the opponent's strategic type or identity.
+
+\subsubsection{Opponent Tracking Mechanism}
+In the opponent tracking condition, LLM agents receive complete cross-references to their previous encounters with specific opponents. This mechanism enables agents to build detailed behavioral models of individual opponents across phases, potentially allowing for more sophisticated adaptive strategies.
+
+The memory structure for LLM agents consists of match histories containing:
+\begin{itemize}
+    \item Round-by-round move sequences: $\{(m_{\text{self},r}, m_{\text{opp},r})\}_{r=1}^{R}$
+    \item Opponent identifier (anonymous or explicit)
+    \item Phase and match context information
+    \item Cross-references to previous encounters (tracking condition only)
+\end{itemize}
+
+\subsection{Shadow Condition Coverage}
+
+We conduct experiments across five shadow conditions to examine strategic behavior under varying game lengths:
+
+\begin{itemize}
+    \item $\delta = 0.75$: Short games (expected 1.33 rounds) - emphasizing immediate payoffs
+    \item $\delta = 0.25$: Medium games (expected 4 rounds) - balancing cooperation and exploitation
+    \item $\delta = 0.10$: Long games (expected 10 rounds) - enabling complex reciprocal strategies  
+    \item $\delta = 0.05$: Very long games (expected 20 rounds) - supporting sophisticated learning
+    \item $\delta = 0.02$: Extended games (expected 50 rounds) - allowing full strategy expression
+\end{itemize}
+
+Each shadow condition is evaluated under both memory mechanisms (anonymous and opponent tracking), resulting in a total of $5 \times 2 = 10$ experimental configurations per complete run.
+
+\subsection{Computational Implementation}
+
+To manage computational scale and mitigate latency from external API calls to LLM providers, tournaments are executed with up to 50 concurrent matches. This concurrency architecture ensures efficient utilization of computational resources while maintaining match integrity through asynchronous coordination of game states.
+
+The experimental framework implements comprehensive checkpointing mechanisms that preserve population states, match histories, and evolutionary trajectories after each phase. This enables robust experiment resumption and detailed post-hoc analysis of evolutionary dynamics across all tested conditions.
+
+\subsection{Agent Composition and Scale}
+
+Our experimental agent pool comprises 28 distinct strategic approaches distributed across three categories:
+\begin{itemize}
+    \item \textbf{Rule-based strategies (13 agents)}: Including canonical strategies (Tit-for-Tat, Grim Trigger, Win-Stay-Lose-Shift) and LLM-generated synthetic strategies
+    \item \textbf{Adaptive learning strategies (3 agents)}: Q-Learning, Thompson Sampling, and Gradient Meta-Learning agents with parameters optimized for expected game lengths
+    \item \textbf{Large Language Model agents (12 agents)}: Four LLM providers with distinct model configurations:
+    \begin{itemize}
+        \item OpenAI: 3 models (GPT-5-Mini, GPT-5-Nano, GPT-4.1-Mini) at temperature 1.0
+        \item Anthropic: Claude-Sonnet-4 at temperatures [0.2, 0.5, 0.8]
+        \item Mistral: Mistral-Medium-2508 at temperatures [0.2, 0.7, 1.2]
+        \item Google: Gemini-2.0-Flash at temperatures [0.2, 0.7, 1.2]
+    \end{itemize}
+\end{itemize}
+
+This comprehensive agent composition enables systematic investigation of strategic interactions between algorithmic approaches and emergent reasoning strategies across varying temporal horizons and memory conditions.

@@ -1,0 +1,22 @@
+% Section 3.3: LLM Agents - Updated based on actual models used in run_experiments.py
+
+\subsection{LLM Agents}
+We selected state-of-the-art large language models from four leading companies to balance performance quality with computational costs. Our selection criteria prioritized models that demonstrate strong reasoning capabilities on established benchmarks while maintaining reasonable API costs for extensive tournament simulations.
+
+\paragraph{OpenAI Models.}
+We employ three distinct OpenAI models: \texttt{gpt-5-mini}, \texttt{gpt-5-nano}, and \texttt{gpt-4.1-mini}. These models represent different performance-efficiency trade-offs within OpenAI's latest generation. All OpenAI agents operate at temperature 1.0 to ensure diverse strategic reasoning while maintaining consistency across model variants.
+
+\paragraph{Anthropic Claude.}
+We utilize \texttt{claude-sonnet-4-20250514}, which delivers strong performance on complex reasoning tasks while maintaining computational efficiency. Claude agents are configured with three temperature settings: 0.2 (conservative), 0.5 (balanced), and 0.8 (exploratory) to capture a range of decision-making styles from deterministic to more stochastic approaches.
+
+\paragraph{Mistral.}
+We employ the \texttt{mistral-medium-2508} model, which offers a compelling balance between performance and efficiency. Mistral agents operate at temperatures 0.2, 0.7, and 1.2, taking advantage of Mistral's extended temperature range to explore more diverse strategic behaviors, with the highest temperature setting enabling highly exploratory decision-making.
+
+\paragraph{Google Gemini.}
+We utilize \texttt{gemini-2.0-flash}, which represents Google's latest multimodal capabilities adapted for text-based strategic reasoning. Gemini agents are configured with temperatures 0.2, 0.7, and 1.2, leveraging Gemini's support for higher temperature values to investigate the full spectrum of strategic exploration and exploitation behaviors.
+
+\subsubsection{Temperature Parameter Configuration}
+Temperature parameters critically influence LLM behavior by controlling the randomness of token selection during generation. Lower temperatures (0.2) produce more deterministic, conservative responses, while higher temperatures (1.0-1.2) encourage more exploratory and varied strategic approaches. This temperature diversity allows us to examine how different levels of strategic exploration affect cooperation and competition patterns in the IPD framework.
+
+\subsubsection{Implementation Details}
+Each LLM agent receives identical game information: the complete history of moves in the current match, the opponent's previous actions, and the current game state. The agents generate strategic reasoning before selecting their move, allowing us to analyze both behavioral outcomes and the underlying decision-making processes that drive strategic choices.
